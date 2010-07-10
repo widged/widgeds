@@ -1,0 +1,40 @@
+:focus { -moz-outline-style: none; }
+.tile { 
+	width: 75px; 
+	height: 75px;
+	padding: 0px; margin: 0px; 
+	border-style: none; 
+	text-align: center;
+}
+.gridimg { 
+	margin: 0px; 
+	padding: 0px; 
+	border-style: none; 
+}
+.gridtxt { 
+	color: green;
+	font-size: 16px;
+	border: 1px solid #C3C3C3;
+	padding: 3px;
+}
+div#feedback {
+	position: relative;
+	top: -910px;
+	left: 550px;
+	width: 200px;
+	font-family: Verdana;
+	font-size: 9pt;
+}
+
+#picked_y {
+	color: green;
+}
+#picked_n {
+	color: red;
+}
+
+.picked {
+	visibility: hidden;
+	font-size: 18pt;
+	padding: 10px;
+}
