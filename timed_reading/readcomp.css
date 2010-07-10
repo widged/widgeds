@@ -1,0 +1,113 @@
+body{
+	font-family: Geneva,Arial;
+	background-color: #ffffff;
+	color: #000000;
+ 
+	padding-left: 5%;
+	padding-right: 5%;
+	font-size: small;
+}
+
+p{
+	text-align: justify;
+	margin: 0px;
+	margin-top: 20px;
+	font-size: small;
+}
+
+table,tr,td,div,span{
+	font-size: small;
+}
+
+div.Titles{
+	padding-top: 10px;
+	text-align: center;
+	margin-bottom: 4px;
+	color: #000033;
+}
+
+.EtivityTitle{
+	font-size: large;
+	color: #000033;
+}
+
+.EtivitySubtitle{
+	color: #000033;
+
+}
+
+
+div.LeftContainer{
+	border-style: none;
+	padding: 2px 0px 2px 0px;
+	float: left;
+	width: 99%;
+	margin-bottom: 0px;
+}
+
+div.RightContainer{
+	border-style: none;
+	padding: 2px 0px 2px 0px;
+	float: right;
+	width: 49.8%;
+	margin-bottom: 0px;
+}
+
+.ReadingText{
+
+}
+
+
+div.StdDiv{
+	background-color: #FFFEA8;
+	text-align: center;
+	color: #000000;
+	padding: 1em;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+	margin: 1px 0px 0px 0px;
+	font-size: small;
+}
+
+
+.FunctionButton {
+	background-color: #FFFEA8;
+	color: #000000;
+	text-align: center;
+	border-style: solid;
+	border-color: #bbbbee;
+	border-width: 2px;
+	padding: 3px 6px 3px 6px;
+	cursor: pointer;
+}
+
+div.NavButtonBar{
+	background-color: #000066;
+	text-align: center;
+	margin: 2px 0px 2px 0px;
+	clear: both;
+	font-size: small;
+}
+
+div.NavButtonBar button {
+	border-style: solid;
+	border-color: orange;
+	background-color: orange;
+	border-width: 2px;
+	padding: 2px 2px 2px 2px;
+	color: #ffffff;
+	cursor: pointer;	
+}
+
+a{
+	color: #0000ff;
+}
+
+a:visited{
+	color: #0000cc;
+}
+
+a:hover{
+	color: #0000ff;
+}
