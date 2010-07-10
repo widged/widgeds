@@ -1,0 +1,74 @@
+body {
+	font-family: "Verdana";
+}
+
+
+.QuestionText{
+
+}
+
+.AnswerText{
+
+}
+
+.QNum{
+	font-weight: bold;
+}
+
+.FeedbackText{
+
+}	
+
+div.Feedback {
+	background-color: #ffffff;
+	left: 1px;
+	top: 33%;
+	z-index: 1;
+	border-style: solid;
+	border-width: 1px;
+	padding: 5px;
+	text-align: center;
+	color: #000033;
+	position: absolute;
+	display: none;
+	font-size: small;
+}
+
+ol {
+	font-size: 14px;
+}
+
+li {
+	padding-left: 20px;
+	font-size: 0.95em;
+	margin-top: 5px;
+}
+
+.qst_item {
+	margin-bottom: 50px;
+}
+
+.qcm .questions {
+	margin-left: 50px;
+}
+
+.qcm {
+	font-family: "Verdana";
+	margin-top: 20px;
+	margin-left: 20px;
+	margin-right: 50px;
+}
+
+.qcm .top {
+	border: 2px solid #BAD6FD;
+	margin: 0px;
+	padding: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	
+}
+
+.instructions{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
