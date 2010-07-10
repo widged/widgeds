@@ -1,0 +1,2 @@
+A script to play different activity types. Able to play any learning activity that falls within the specifications at: 
+http://widged.com/wiki/doku.php?id=en:projects:exercist:documentation:structure-of-an-activity
