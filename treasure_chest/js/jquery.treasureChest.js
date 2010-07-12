@@ -14,6 +14,7 @@
 */
 
 (function($) {
+
     /**
      * Creates a treasure chest activity
      *
@@ -293,8 +294,8 @@
              this.srcTile[x][y] = avatar.up;
 
             // Position Target for next move
-            avatar.seek.x = x,
-            avatar.seek.y = x,
+            avatar.seek.x = x;
+            avatar.seek.y = y;
           },         
      
        /**
