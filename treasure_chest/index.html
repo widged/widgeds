@@ -1,46 +1,55 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
 <head>
-	<link rel="stylesheet" type="text/css" href="etc/css/styles.css">
+  <title>Treasure Chest Widged</title>
+  <link href="etc/css/styles.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../../jquery-1.4.2.min.js"></script>
+  <script type="text/javascript" src="js/jquery.timers-1.2.js"></script>
+  <script type="text/javascript" src="js/jquery.treasureChest.js"></script>
+
 </head>
 <body>
+<div id="wrap">
+  <h1>Treasure Chest</h1>
+  <h2>Interactive Learning Activity with jQuery</h2>
 
-<noscript>
-<div style="color:#CC0000; text-align:center">
-  <strong>Warning: Treasurechest requires javascript. <br />
-  If your browser supports JavaScript, be sure it is enabled.</strong>
-</div>
-<hr>
-</noscript>
+  <h3>Find the Count Nouns</h3>
 
+  <noscript>
+    <div style="color:#CC0000; text-align:center">
+      <strong>Warning: Treasurechest requires javascript. <br />
+      If your browser supports JavaScript, be sure it is enabled.</strong>
+    </div>
+  </noscript>
 
-<div class="activitycontent">
+  Click somewhere within the labyrinth to move the character. <br /><br />
 
-<h1>Treasure Chest Activity</h1>
-<h2>Find the Count Nouns</h2>
-
-Click somewhere within the labyrinth to move the character. <br /><br />
-
-
-<div id="javascript">if you see this, there is a problem with javascript</div>
-
-<table id="room" style="border : 5px solid #C3C3C3;"></table>
-
-<div id="feedbacks">
-Score: <span id="score">0</span>
-<br />
-Remaining to Pick: <span id="nbtopick">0</span>
-</div>
-<div id="warning">
-	feedback will appear here
-</div>
-<div id="picked_y">picked items appear here.</div>
-<div id="picked_n">picked items appear here.</div>
+  <div id="myTreasureChest" class="treasure-chest">
+    <div class="treasure-chest-room">if you see this, there is a problem with javascript</div>
 
 
-<script src="js/treasurechest.js" type="text/javascript"></script>
-
-</div>
-
-
+    <div class="treasure-chest-feedback">
+      <div>Score: <span class="treasure-chest-score">Score will appear here</span></div>
+      <div>Remaining to Pick: <span class="treasure-chest-to-pick">Number of items to pick will appear here.</span></div>
+      <div class="treasure-chest-warning">
+        warning messages will appear here
+      </div>
+      <!--
+      <div id="picked_y">picked items appear here.</div>
+      <div id="picked_n">picked items appear here.</div>
+      -->
+    </div>
+  </div>
+  
+  
+  
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+<!--
+  $(".treasure-chest").wgTreasureChest();
+//-->
+//]]>
+</script>  
 </body>
 </html>
