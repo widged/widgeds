@@ -17,29 +17,17 @@
  http://widgeds.wikispaces.com/TreasureChestWidged
 -->
 
-<script type="text/javascript" src="../jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="http://widged.com/widgeds/js/jquery.timers-1.2.js">
-</script><script type="text/javascript" src="http://widged.com/widgeds/js/jquery.treasureChest.js">
-</script>
-<div id="myTreasureChest" class="treasure-chest">
-<div class="treasure-chest-room">if you see this, there is a problem with javascript</div>
-<div class="treasure-chest-feedback">
-<div>Score: <span class="treasure-chest-score">Score will appear here</span></div>
-<div>Remaining to Pick: <span class="treasure-chest-to-pick">Number of items to pick will appear here.</span></div>
-<div class="treasure-chest-warning">warning messages will appear here</div>
-<!--
-      <div id="picked_y">picked items appear here.</div>
-      <div id="picked_n">picked items appear here.</div>
-      --></div>
-</div>
+<!-- <script type="text/javascript" src="../jquery-1.4.2.min.js"></script> -->
+<script type="text/javascript" src="http://widged.com/widgeds/js/jquery.timers-1.2.js"></script>
+<script type="text/javascript" src="http://widged.com/widgeds/js/jquery.treasureChest.js"></script>
+<div id="myTreasureChest" class="treasure-chest"></div>
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
 <!--
-
   jQuery(".treasure-chest").wgTreasureChest(
 {
 tiles: {
-   gameOver: "<img src='file/view/gameover.gif'>",
+   gameOver: "<img src='file/view/gameover.gif' width='80'>",
    blank: "<img src='file/view/blank.gif'>",
    obstacle: {
      dirH: "<img src='file/view/obstacleh.gif'>",
@@ -48,32 +36,32 @@ tiles: {
    }
 },
 avatar:  {
-       loc:  {x: 6, y: 5},
-       up:      "<img src='file/view/avatar.gif' class='gridimg'>",
-       down: "<img src='file/view/avatar.gif' class='gridimg'>",
-       left:    "<img src='file/view/avatar.gif' class='gridimg'>",
+       loc:   {x: 6, y: 5},
+       up:    "<img src='file/view/avatar.gif' class='gridimg'>",
+       down:  "<img src='file/view/avatar.gif' class='gridimg'>",
+       left:  "<img src='file/view/avatar.gif' class='gridimg'>",
        right: "<img src='file/view/avatar.gif' class='gridimg'>",
      },
 items: {
    targetPoints: 100,
    distractorPoints: -100,
    targets: [
-      "<img src='file/view/apple.gif'>",
-      "<img src='file/view/banana.gif'>",
-      "<img src='file/view/steak.gif'>",
-      "<img src='file/view/fish.gif'>"
-    ], 
-    distractors: [
-       "<img src='file/view/sugar.gif'>",
-       "<img src='file/view/cereal.gif'>",
-       "<img src='file/view/milk.gif'>",
-       "<img src='file/view/butter.gif'>",
-       "<img src='file/view/water.gif'>",
-       "<img src='file/view/rice.gif'>"
+     "<img src='file/view/apple.gif'  width='80'>",
+     "<img src='file/view/banana.gif' width='80'>",
+     "<img src='file/view/steak.gif'  width='80'>",
+     "<img src='file/view/fish.gif'   width='80'>"
+   ], 
+   distractors: [
+      "<img src='file/view/sugar.gif'  width='80'>",
+      "<img src='file/view/cereal.gif' width='80'>",
+      "<img src='file/view/milk.gif'   width='80'>",
+      "<img src='file/view/butter.gif' width='80'>",
+      "<img src='file/view/water.gif'  width='80'>",
+      "<img src='file/view/rice.gif'   width='80'>"
     ]
-}
+   }
  }      
-  );
+);
 //-->
 //]]>
 </script>

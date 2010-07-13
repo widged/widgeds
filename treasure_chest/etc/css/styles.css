@@ -1,12 +1,8 @@
 :focus { -moz-outline-style: none; }
 
-.treasure-chest-tile { 
-	width: 90px; 
-	height: 70px;
-	padding: 0px; margin: 0px; 
-	border-style: none; 
-	text-align: center;
-}
+/* to merge within the code so that the widged can be embedded within any page, even the ones where we have no access to the head part 
+of the html page */
+
 .gridimg { 
 	margin: 0px; 
 	padding: 0px; 
@@ -18,7 +14,6 @@
 	border: 1px solid #C3C3C3;
 	padding: 3px;
 }
-
 
 #picked_y {
 	color: green;
@@ -33,22 +28,3 @@
 	padding: 10px;
 }
 
-
-.treasure-chest-room {
-   background-color: #FFFFFF;
-}
-
-.treasure-chest-table {
-   border: 5px solid #C3C3C3;
-}
-
-.treasure-chest-feedback {
-   padding: 10px;
-   background-color: #FFFFD0;
-	font-family: Verdana;
-	font-size: 12pt;
-	line-height: 2;
-}
-
-.treasure-chest-warning {
-}

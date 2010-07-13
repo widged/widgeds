@@ -73,18 +73,18 @@
           targetPoints: 100,
           distractorPoints: -100,
           targets: [
-             "<img src='etc/pix/tags/apple.gif'>",
-             "<img src='etc/pix/tags/banana.gif'>",
-             "<img src='etc/pix/tags/steak.gif'>",
-             "<img src='etc/pix/tags/fish.gif'>"
+             "<img src='etc/pix/tags/apple.gif'  width='80'>",
+             "<img src='etc/pix/tags/banana.gif' width='80'>",
+             "<img src='etc/pix/tags/steak.gif'  width='80'>",
+             "<img src='etc/pix/tags/fish.gif'   width='80'>"
            ], 
            distractors: [
-              "<img src='etc/pix/tags/sugar.gif'>",
-              "<img src='etc/pix/tags/cereal.gif'>",
-              "<img src='etc/pix/tags/milk.gif'>",
-              "<img src='etc/pix/tags/butter.gif'>",
-              "<img src='etc/pix/tags/water.gif'>",
-              "<img src='etc/pix/tags/rice.gif'>"
+              "<img src='etc/pix/tags/sugar.gif'   width='80'>",
+              "<img src='etc/pix/tags/cereal.gif'  width='80'>",
+              "<img src='etc/pix/tags/milk.gif'    width='80'>",
+              "<img src='etc/pix/tags/butter.gif'  width='80'>",
+              "<img src='etc/pix/tags/water.gif'   width='80'>",
+              "<img src='etc/pix/tags/rice.gif'    width='80'>"
            ]
        }       
     };
@@ -101,17 +101,39 @@
     $.wgTreasureChest = function(e, o) {
         this.options    = $.extend({}, defaults, o || {});
 
-        this.container  = e;
-        this.roomBox    = $(e).find(".treasure-chest-room")[0];
-        this.feedback   = $(e).find(".treasure-chest-feedback")[0];  // score, remaining to pick, warning, picked_y, picked_n
-        this.warningBox = $(e).find(".treasure-chest-warning")[0];
-        this.scoreBox   = $(e).find(".treasure-chest-score")[0]; 
-        this.pickQtyBox = $(e).find(".treasure-chest-to-pick")[0]; 
-        this.table      = null;
+        this.container  = $(e);
+        
+        this.roomBox = $('<div class="treasure-chest-room">if you see this, there is a problem with javascript</div>');
+        this.container.append(this.roomBox);
+
+        this.feedback = $('<div class="treasure-chest-feedback">');
+        this.feedback.css({'padding': '10px', 'background-color': '#FFFFD0', 'font-family': 'Verdana', 'font-size': '12pt', 'line-height': '2' });
+        // score
+        scoreDiv    = $('<div>Score:</div>');
+        this.scoreBox   = $('<span class="treasure-chest-score"/>');
+        scoreDiv.append(this.scoreBox);
+        
+        // pickQty
+        pickQtyDiv = $('<div>Remaining to Pick:</div>');
+        this.pickQtyBox = $('<span class="treasure-chest-to-pick"/>')
+        pickQtyDiv.append(this.pickQtyBox);
+        
+        this.warningBox = $('<div class="treasure-chest-warning" />');
+        this.feedback.append(scoreDiv);
+        this.feedback.append(pickQtyDiv);
+        this.feedback.append(this.warningBox);
+        this.container.append(this.feedback);
+
+        /*          
+          <!--
+          <div id="picked_y">picked items appear here.</div>
+          <div id="picked_n">picked items appear here.</div>
+          -->
+        </div>
+        */
         
         this.setup();
         this.startActivity();
-        
     };
     
     
@@ -216,6 +238,7 @@
          */
        drawRoom: function(e, dimW, dimH) {
            var html = $('<table class="treasure-chest-table"/>');
+           html.css({'border': '5px solid #C3C3C3'});
            for (y = 0; (y < dimH); y++) {
               var row = $('<tr/>');
               html.append(row);
@@ -223,7 +246,15 @@
                  // We link the image to a silly URL,
                  // which is never actually reached because
                  // our onClick handler returns false.
-                 var cell = $("<td class='treasure-chest-tile' id='grid" + x + "-" + y + "' valign='middle'>aaaaa</td>");
+                 var cell = $("<td id='grid" + x + "-" + y + "' valign='middle'>aaaaa</td>");
+                 cell.css({
+                  'min-width': '5px', 'min-height': '5px', 
+                  'max-width': '80px', 'max-height': '60px', 
+                  'width': '80px', 'height': '60px',
+                  'padding': '0px', 'margin': '0px', 
+                  'border-style': 'none', 
+                  'text-align': 'center'
+                 });
                  cell.bind( 
                    'click', // bind to multiple events 
                    { script: this, loc: {x: x, y: y} }, // pass in data
@@ -356,9 +387,10 @@
           * @return undefined
           */
          updateFeedback: function() {
-            this.scoreBox.innerHTML   = this.score;
-            this.pickQtyBox.innerHTML = this.pickQty;
-            this.warningBox.innerHTML = '';
+            
+            this.scoreBox.html(this.score);
+            this.pickQtyBox.html(this.pickQty);
+            this.warningBox.html('');
          },
 
 
