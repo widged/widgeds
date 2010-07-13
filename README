@@ -2,6 +2,6 @@ Widgeds are modules for the Exercist project.
 
 Widged stands for a widget for education, with a widget defined as "portable chunk of code that can be installed and executed within any separate HTML-based web page by an end user without requiring additional compilation" (Wikipedia).
 
-For now, we provide example of activities written in javascript. They still need to be rewritten as widged modules.
+For now, we provide example of activities written in javascript. Look at treasure chest for an activity rewritten as a jquery plugin.Extra information still needs to be added to transform them into widged modules.
 
 By default, unless specified otherwise, all content is under a MIT license. 
