@@ -103,18 +103,15 @@
 
         this.container  = $(e);
         
-        this.roomBox = $('<div class="treasure-chest-room">if you see this, there is a problem with javascript</div>');
-        this.container.append(this.roomBox);
-
         this.feedback = $('<div class="treasure-chest-feedback">');
         this.feedback.css({'padding': '10px', 'background-color': '#FFFFD0', 'font-family': 'Verdana', 'font-size': '12pt', 'line-height': '2' });
         // score
-        scoreDiv    = $('<div>Score:</div>');
+        scoreDiv    = $('<div>Score:&nbsp;&nbsp;</div>');
         this.scoreBox   = $('<span class="treasure-chest-score"/>');
         scoreDiv.append(this.scoreBox);
         
         // pickQty
-        pickQtyDiv = $('<div>Remaining to Pick:</div>');
+        pickQtyDiv = $('<div>Remaining to Pick:&nbsp;&nbsp;</div>');
         this.pickQtyBox = $('<span class="treasure-chest-to-pick"/>')
         pickQtyDiv.append(this.pickQtyBox);
         
@@ -123,6 +120,10 @@
         this.feedback.append(pickQtyDiv);
         this.feedback.append(this.warningBox);
         this.container.append(this.feedback);
+
+        this.roomBox = $('<div class="treasure-chest-room">if you see this, there is a problem with javascript</div>');
+        this.container.append(this.roomBox);
+
 
         /*          
           <!--
@@ -192,6 +193,9 @@
          */
         startActivity: function() {
 
+            // status
+            this.gameOverFlag   = false;
+            this.initialized    = false;
             // score and feedback
             this.score          = 0;
             this.pickQty        = this.options.items.targets.length;
@@ -201,7 +205,6 @@
          
             this.updateFeedback();
 
-            this.initialized = false;
             this.initRoom(this.roomW, this.roomH);
             this.drawRoom(this.roomBox, this.roomW, this.roomH);
             this.parseMap();
@@ -400,22 +403,23 @@
          // ################
          
          onTimerTick: function(tickCount) {
+            if(this.pickQty < 1) {
+               // 1-second wait before you can restart,
+               // so people don't instantly restart by mistake
+               setTimeout(this.onGameOver(), 1000);
+               return;
+            }
             if ((tickCount == 200) && (!this.playerHasMoved)) {
                this.showWarning(this.options.warnings.delay, 0);
+               return;
             }
             if (tickCount == 400) {
                this.showWarning(this.options.warnings.longDelay, 0);
+               return;
             }
             if (!this.moveAvatar()) {
-               // 1-second wait before you can restart,
-               // so people don't instantly restart by mistake
-               // setTimeout(this.onGameOver(), 1000);
                return;
             }
-            if (tickCount < 1) { 
-               // setTimeout(this.onGameOver(), 1000);
-               return;
-            } 
          },
          
          moveAvatar: function() {
@@ -523,7 +527,7 @@
                // return false;
             }
             if (this.gameOverFlag) {
-               this.startGame();
+               this.startActivity();
                return false;
             }
             this.options.avatar.seek = {x: loc.x, y: loc.y};
@@ -532,8 +536,9 @@
          },
 
          onGameOver: function() {
+           $(this).stopTime();   
            this.showWarning(this.options.warnings.congratulations, 1);
-           this.gameOverFlag = false;
+           this.gameOverFlag = true;
          },         
 
 
@@ -568,8 +573,7 @@
            if (idMode == 1) {
               alert(txt);
            } else {
-              var el = this.warningBox;
-              el.innerHTML = txt;
+              this.warningBox.html(txt);
            }
         }
 
