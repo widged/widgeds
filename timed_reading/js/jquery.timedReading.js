@@ -72,6 +72,7 @@
            this.controlBox.css({'margin-bottom' : '40px', 'text-align' : 'center'});
            
            var titleBox = this.container.find('.title');
+           titleBox.css({'font-weight': 'bold', 'text-align' : 'center'})
            this.contentBox = this.container.find('.content');
 
            var activityBox = $('<div />');

@@ -111,21 +111,33 @@
            var contentBox = $('<div/>'); contentBox.append(divHTML);
            // defaults
            var icon = this.options.styles['defaultNote'].icon;
-           iconBox.css({'float': 'left', 'padding': '10px', 'margin-right': '20px','margin-bottom': '20px', 'background-color': '#FFDD73' });
-           contentBox.css({'margin-left': '8px','padding': '10px', 'background-color': '#FFFFD0', 'font-family': 'Verdana', 'font-size': '12pt', 'line-height': '2' })
+           iconBox.css({'float': 'left', 'padding': '10px', 'margin-right': '16px','margin-bottom': '16px', 'background-color': '#FFDD73' });
+           contentBox.css({'margin-left': '8px','padding': '8px', 'border-style' : 'solid', 'border-width' : '2px' ,'font-family': 'Verdana', 'font-size': '12pt', 'line-height': '2' })
 
            // styles
            var styleList = ['tip', 'warning', 'information', 'notification','orientation','news'];
+           var hasStyle = false;
+           var style;
            for (i in styleList)
            {
               var name = styleList[i];
               if(this.container.hasClass(name))
               {
-                 var style = this.options.styles[name];
+                 hasStyle = true;
+                 style = this.options.styles[name];
                  icon = style.icon;
                  iconBox.css('background-color', style.iconBackground);
                  contentBox.css('background-color', style.contentBackground);
+                 contentBox.css('border-color', style.iconBackground);
               }
+           }
+           if(!hasStyle)
+           {
+              style = this.options.styles.defaultNote;
+              iconBox.css('background-color', style.iconBackground);
+              contentBox.css('background-color', style.contentBackground);
+              contentBox.css('border-color', style.iconBackground);
+              
            }
 
            iconBox.append('<img src="' + icon + '" />');
