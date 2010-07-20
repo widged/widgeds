@@ -18,8 +18,8 @@
     /**
      * Creates a treasure chest activity
      *
-     * @example $("#myactivity").wgTreasureChest();
-     * @before <ul id="myactivity" class="wgTreasureChest-skin-name"><li>First item</li><li>Second item</li></ul>
+     * @example $(".treasure-chest").wgTreasureChest();
+     * @before <div id="myTreasureChest" class="treasure-chest"></div>
      * @result  N/A
      * @return jQuery
      * @param o {Hash|String} A set of key/value pairs to set as configuration properties or a method name to call on a formerly created instance.
