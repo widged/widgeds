@@ -107,12 +107,12 @@
            this.styleName = this.options.styleName;
 
            var divHTML = this.container.html();
-           var iconBox = $('<div/>');
+           var iconBox = $('<strong/>');
            var contentBox = $('<div/>'); contentBox.append(divHTML);
            // defaults
            var icon = this.options.styles['defaultNote'].icon;
-           iconBox.css({'float': 'left', 'padding': '10px', 'margin-right': '16px','margin-bottom': '16px', 'background-color': '#FFDD73' });
-           contentBox.css({'margin-left': '8px','padding': '8px', 'border-style' : 'solid', 'border-width' : '2px' ,'font-family': 'Verdana', 'font-size': '12pt', 'line-height': '2' })
+           iconBox.css({'position' : 'absolute','float': 'left', 'left' : '-6px', 'top' : '0px', 'display': 'block','padding': '10px', 'background-color': '#FFDD73' });
+           contentBox.css({'margin-left': '8px', 'display': 'block', 'padding': '16px', 'padding-left': '50px', 'border-style' : 'solid', 'border-width' : '2px' ,'font-family': 'Verdana', 'font-size': '12pt', 'line-height': '2' })
 
            // styles
            var styleList = ['tip', 'warning', 'information', 'notification','orientation','news'];
@@ -141,7 +141,7 @@
            }
 
            iconBox.append('<img src="' + icon + '" />');
-           var newHTML = $('<div style="margin-bottom: 10px;margin-top: 10px"/>');
+           var newHTML = $('<div style="margin-bottom: 10px;margin-top: 10px;position:relative;left: 10px;margin-right: 16px"/>');
            newHTML.append(iconBox);
            newHTML.append(contentBox);
            newHTML.append('<div style="clear:both"/>');
