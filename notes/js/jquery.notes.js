@@ -16,7 +16,7 @@
      * Creates an activity
      *
      * @example $(".wg-note").wgNote();
-     * @before <ul id="myactivity" class="wgNote-skin-name"><li>First item</li><li>Second item</li></ul>
+     * @before <div class="wg-note information">This is an information</div>
      * @result  N/A
      * @return jQuery
      * @param o {Hash|String} A set of key/value pairs to set as configuration properties or a method name to call on a formerly created instance.
@@ -134,8 +134,7 @@
            newHTML.append(contentBox);
            newHTML.append('<div style="clear:both"/>');
            this.container.html(newHTML);
-        },
-
+        }
     });
 
     $wg.extend({
