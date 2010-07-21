@@ -117,7 +117,7 @@
            iconBox.append('<img src="' + style.icon + '" width="80" />');
            iconBox.css('background-color',style.borderColor);
 
-           contentBox.css({'display': 'block', 'padding': '10px', 'margin-left': '100px','min-height' : '60px'  })
+           contentBox.css({'display': 'block', 'padding': '10px', 'margin-left': '100px','min-height' : '70px'  })
            contentBox.css('background-color',style.backgroundColor);
 
            box.append(iconBox);

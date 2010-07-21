@@ -76,134 +76,7 @@
          */
          setup: function() {
 
-            this.itemList = [
-               { html: "4+4", options: [
-                     {html: "4"},
-                     {html: "3"},
-                     {html: "8", correct: true},
-                     {html: "6"}
-                  ]
-               },
-               { html: "4+8", options: [
-                     {html: "14"},
-                     {html: "12",correct: true},
-                     {html: "16"},
-                     {html: "24"}
-                  ]
-               },
-               { html: "4+4", options: [
-                     {html: "4"},
-                     {html: "3"},
-                     {html: "8", correct: true},
-                     {html: "6"}
-                  ]
-               },
-               { html: "4+8", options: [
-                     {html: "14"},
-                     {html: "12",correct: true},
-                     {html: "16"},
-                     {html: "24"}
-                  ]
-               },
-               { html: "4+4", options: [
-                     {html: "4"},
-                     {html: "3"},
-                     {html: "8", correct: true},
-                     {html: "6"}
-                  ]
-               },
-               { html: "4+8", options: [
-                     {html: "14"},
-                     {html: "12",correct: true},
-                     {html: "16"},
-                     {html: "24"}
-                  ]
-               },
-               { html: "4+4", options: [
-                     {html: "4"},
-                     {html: "3"},
-                     {html: "8", correct: true},
-                     {html: "6"}
-                  ]
-               },
-               { html: "4+8", options: [
-                     {html: "14"},
-                     {html: "12",correct: true},
-                     {html: "16"},
-                     {html: "24"}
-                  ]
-               },
-               { html: "4+4", options: [
-                     {html: "4"},
-                     {html: "3"},
-                     {html: "8", correct: true},
-                     {html: "6"}
-                  ]
-               },
-               { html: "4+8", options: [
-                     {html: "14"},
-                     {html: "12",correct: true},
-                     {html: "16"},
-                     {html: "24"}
-                  ]
-               },
-               { html: "4+4", options: [
-                     {html: "4"},
-                     {html: "3"},
-                     {html: "8", correct: true},
-                     {html: "6"}
-                  ]
-               },
-               { html: "4+8", options: [
-                     {html: "14"},
-                     {html: "12",correct: true},
-                     {html: "16"},
-                     {html: "24"}
-                  ]
-               },
-               { html: "4+4", options: [
-                     {html: "4"},
-                     {html: "3"},
-                     {html: "8", correct: true},
-                     {html: "6"}
-                  ]
-               },
-               { html: "4+8", options: [
-                     {html: "14"},
-                     {html: "12",correct: true},
-                     {html: "16"},
-                     {html: "24"}
-                  ]
-               },
-               { html: "4+4", options: [
-                     {html: "4"},
-                     {html: "3"},
-                     {html: "8", correct: true},
-                     {html: "6"}
-                  ]
-               },
-               { html: "4+8", options: [
-                     {html: "14"},
-                     {html: "12",correct: true},
-                     {html: "16"},
-                     {html: "24"}
-                  ]
-               },
-               { html: "4+4", options: [
-                     {html: "4"},
-                     {html: "3"},
-                     {html: "8", correct: true},
-                     {html: "6"}
-                  ]
-               },
-               { html: "4+8", options: [
-                     {html: "14"},
-                     {html: "12",correct: true},
-                     {html: "16"},
-                     {html: "24"}
-                  ]
-               }
-            ];
+            this.itemList = this.getItemListFromDom(this.container);
             
             var gameScreen = $('<div style="border-color:#000000;border-style:solid;padding:10px;font-family:Geneva,Arial"/>')
             var w = this.container.width() -20;
@@ -212,32 +85,58 @@
             this.controlBox = $('<div style="margin-bottom:40px;text-align:center;height:100px;width:100%;"/>'); // align center doesn't work as expected
             
             var spriteW = 90;
+            var spriteH = 76;
             var racingBox = $('<div class="racingBox" style="position:relative;"/>');
             racingBox.css('margin-right', spriteW + 'px')
             var carList = this.options.sprites; 
 
             var sprite;
-            this.spriteList = [];
+            spriteList = [];
             for(var i in carList)
             {
                var car = carList[i];
-               var track =  $('<div style="position:relative;display:block;background-color:#F4F4F4;margin:3px;min-height:76px"/>');
+               var track =  $('<div style="position:relative;display:block;background-color:#F4F4F4;margin:3px;padding:0px;"/>');
+               track.css('min-height', spriteH + 'px')
                sprite = $('<strong style="position:absolute;float:left;display:block;"><img src="' + car.image + '"/></strong><div>&nbsp;</div>');
-               this.spriteList.push({left: 0, sprite: sprite});
+               spriteList.push({left: 0, sprite: sprite});
                track.append(sprite);
                racingBox.append(track);
             }
             var stepQty = this.options.minimumQuestionQty;
             if(stepQty > this.itemList.length) { stepQty = this.itemList.length };
-            var trackW = w - 6 - spriteW
+            var trackW = w - 3 - spriteW;
             this.distanceMax = (trackW);
-            this.distanceStep = Math.floor(this.distanceMax / stepQty);
+            this.distanceStep = Math.round(this.distanceMax / stepQty);
+            this.spriteColl = spriteList;
             
             gameScreen.append(this.controlBox);
             gameScreen.append(racingBox);
             this.container.html(gameScreen);
             
             this.updateActivity('init');
+         },
+         
+         getItemListFromDom: function(el) {
+            var list = [];
+            var item, arr, itemHTML, options, optionList;
+            el.children('p').each(function(i) {
+               item = $(this).html();
+               arr = item.split("=");
+               itemHTML = arr[0].replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+               options = arr[1];
+               arr = options.split('|');
+               optionList = [];
+               for(var i = 0; i < arr.length; i++)
+               {
+                  optionList.push({
+                     html: arr[i].replace(/^\s\s*/, '').replace(/\s\s*$/, ''),
+                     correct: (i == 0) ? true : false,
+                  });
+               }
+               optionList.sort(function(a,b){ return 0.5 - Math.random()});
+               list.push({html: itemHTML, options: optionList});
+            });
+            return list;
          },
          
          // ################
@@ -294,7 +193,7 @@
                   // :TODO: add some screen with 'get ready' state, for instance counting down from 3 to 1
                   this.currentItem = 0;
                   this.score = {answered: [], correctIndices: [], incorrectIndices: []};
-                  this.resetSprites(this.spriteList);
+                  this.resetSprites(this.spriteColl);
                   this.refreshQuestion(this.itemList[this.currentItem],  Math.round(this.controlBox.width() / 2));
                break;
 
@@ -302,9 +201,9 @@
               case 'incorrect':
                 this.currentItem++;
                 var isPreviousCorrect = value == 'correct';
-                this.moveSprites(this.spriteList, this.distanceStep, isPreviousCorrect);
+                this.moveSprites(this.spriteColl, this.distanceStep, isPreviousCorrect);
                 var item = this.itemList[this.currentItem];
-                if(item != undefined && this.spriteList[0].left < this.distanceMax)
+                if(item != undefined && (this.spriteColl[0].left + 10) < this.distanceMax)
                 {
                    this.refreshQuestion(item,  Math.round(this.controlBox.width() / 2));
                 }
@@ -328,7 +227,7 @@
          */
         resetSprites: function(spriteList) {
            // position all sprites at start
-           for(var i in spriteList)
+           for(var i = 0; i < spriteList.length; i++)
            {
               sprite = spriteList[i];
               sprite.left  = 0;
@@ -348,7 +247,7 @@
            var sprite;
            var progress;
            var halfDist = defaultDist / 2;
-           for(var i in spriteList)
+           for(var i = 0; i < spriteList.length; i++)
            {
               sprite = spriteList[i];
               if(i == 0)
@@ -360,7 +259,7 @@
                  progress = Math.round(halfDist + Math.random() * halfDist);
               }
               sprite.left  += progress;
-              sprite.sprite.css("left", sprite.left + "px");
+              sprite.sprite.animate({"left": '+=' + progress}, 500);
            }
         },
         
@@ -372,15 +271,15 @@
          * @param item the question item
          */
         refreshQuestion: function(item, screenCenter) {
-           el = $('<div style="font-size:20px;width:260px;padding:5px;align:center;background-color:#E6E6E6;border-color:#555753;border-style:solid;border-width:5px;"/>');
-           el.css('marginLeft', screenCenter - 100 + 'px');
+           el = $('<div style="font-size:20px;width:300px;padding:5px;align:center;background-color:#E6E6E6;border-color:#555753;border-style:solid;border-width:5px;"/>');
+           el.css('marginLeft', screenCenter - 150 + 'px');
 
            var itemBox = $('<div style="padding-top:10px;padding-bottom:10px;"/>');
            itemBox.html(item.html);
            var optionBox = $('<div style="display:block;padding-top:10px;padding-bottom:10px" />'); 
            var option; 
            var optionList = item.options;
-           for(i in optionList)
+           for(var i = 0; i < optionList.length; i++)
            {
               option = optionList[i];
               optionButton = $('<span style="border-color:#C3C3C3;border-style:solid;border-width:2px;background-color:#BCBDC6;padding:5px;padding-left:12px;padding-right:12px;margin-left:10px">' + option.html + '</span>');
