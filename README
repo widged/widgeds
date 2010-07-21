@@ -6,7 +6,7 @@ For now, we provide example of activities written in javascript. Look at treasur
 
 By default, unless specified otherwise, all content is under a MIT license. 
 
-As jQuery plugin: Notes, Treasure Chest, Timed Reading, Dialog
+As jQuery plugin: Notes, Treasure Chest, Timed Reading, Dialog, Racing Game
 
 All other widgeds are still to be converted into jQuery plugins.
 
