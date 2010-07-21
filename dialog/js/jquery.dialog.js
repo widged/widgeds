@@ -100,7 +100,6 @@
                html.append(this.sentenceBox(sentences[i], avatarStyles[sentences[i].id]));
             }
             this.container.html(html);
-            console.log(avatarStyles);
          },
          
          sentenceBox: function(object, style) {

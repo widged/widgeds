@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<head>
+  <title>Racing Game Widged</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+</head>
+<body>
+  <h1>Racing Game</h1>
+  <h2>jQuery widged</h2>
+
+  <noscript>
+    <div style="color:#CC0000; text-align:center">
+      <strong>Warning: Racing Game requires javascript. <br />
+      If your browser supports JavaScript, be sure it is enabled.</strong>
+    </div>
+  </noscript>
+
+  <script type="text/javascript" src="js/jquery.racingCar.js"></script>
+  <div class="wg-racingCar">
+    <p class="item">4 + 4 = 8 | 3 | 5 | 6</p>
+  </div>
+  
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+<!--
+  $(".wg-racingCar").wgRacingCar(
+      {
+        avatars: {
+          morgana: {icon: "pix/FB01.png"},  
+          arthur: {icon: "pix/F04.png"}
+        }
+      }
+    );
+//-->
+//]]>
+</script>  
+</body>
+</html>

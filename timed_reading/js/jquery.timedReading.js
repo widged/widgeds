@@ -68,15 +68,13 @@
 
            // game parameters
            var divHTML = this.container.html();
-           this.controlBox = $('<div />');
-           this.controlBox.css({'margin-bottom' : '40px', 'text-align' : 'center'});
+           this.controlBox = $('<div style="margin-bottom:40px;text-align:center;"/>');
            
            var titleBox = this.container.find('.title');
            titleBox.css({'font-weight': 'bold', 'text-align' : 'center'})
            this.contentBox = this.container.find('.content');
 
-           var activityBox = $('<div />');
-           activityBox.css({'border-color': '#E69D00', 'border-style': 'solid', 'border-width': '1px', 'background-color': '#FFF4BF', 'padding' : '20px', 'font-family': 'Geneva,Arial'});
+           var activityBox = $('<div style="border-color:#E69D00;border-style:solid;border-width:1px;background-color:#FFF4BF;padding:20px;font-family:Geneva,Arial" />');
            
            activityBox.append(this.controlBox);
            activityBox.append(titleBox);
@@ -89,10 +87,6 @@
            this.updateActivity('init');
         },
         
-        startActivity: function() {
-
-           this.updateActivity('start');
-        },
 
         // ################
         // Interactivity
@@ -103,7 +97,7 @@
         },
 
         onStartClick: function() {
-           this.startActivity();
+           this.updateActivity('start');
         },
         
         // ################
@@ -125,9 +119,7 @@
                      buttonText = 'Start Reading';
                      feedback = '';
                   }
-                  el = $('<div><input id="startButton" type="submit" value="' + buttonText + '"/>' + feedback + '</div>');
-                  el.css({'font-size' : '11px'})
-                  el.find('#startButton').css({'border-color': '#E69D00', 'border-width': '1px', 'background-color': '#FFDD73', 'padding' : '8px'})
+                  el = $('<div style="font-size:11px"><input type="submit" value="' + buttonText + '" style="border-color:#E69D00;border-width:1px;background-color:#FFDD73;padding:8px;"/>' + feedback + '</div>');
                   el.bind( 
                     'click', // bind to multiple events 
                     { script: this }, // pass in data
@@ -135,11 +127,11 @@
                   );                 
                   this.contentBox.hide();
               break;
+
               case 'start':
                   this.timeBox = $('<input id="timeInput" type="input" value="' + '' + '" size="10"/>');
-                  el = $('<div>Remaining Time: </div>');
+                  el = $('<div style="font-size:10px:margin-top:11px">Remaining Time: </div>');
                   el.append(this.timeBox);
-                  el.css({'font-size' : '10px', 'margin-top' : '11px'})
                   timeElapsed = this.tickToTime(0)
                   this.timeBox.val(this.timeAsText(timeElapsed));
                   this.contentBox.show();
