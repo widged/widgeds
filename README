@@ -6,7 +6,8 @@ For now, we provide example of activities written in javascript. Look at treasur
 
 By default, unless specified otherwise, all content is under a MIT license. 
 
-As jQuery plugin: Notes, Treasure Chest, Timed Reading, Dialog, Racing Game
+As jQuery plugin: Notes, Treasure Chest, Timed Reading, Dialog, Racing Game, Content Slider.
 
 All other widgeds are still to be converted into jQuery plugins.
 
+Check widgeds@wikispaces for live demos: http://widgeds.wikispaces.com/
