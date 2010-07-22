@@ -30,7 +30,7 @@
     var defaults = {
        styles: [
           {
-             icon: 'pix/pencil.png',
+             icon: 'pix/pen.png',
           },
           {
              icon: 'pix/graph.png',
