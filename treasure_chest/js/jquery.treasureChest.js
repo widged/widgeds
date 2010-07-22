@@ -54,37 +54,37 @@
           congratulations: "Game Over\n\nCongratulations, you have picked all target words",
        },
        tiles: {
-          gameOver: "<img src='etc/pix/room/gameover.gif'>",
-          blank: "<img src='etc/pix/room/blank.gif'>",
+          gameOver: "<img src='pix/room/gameover.gif'>",
+          blank: "<img src='pix/room/blank.gif'>",
           obstacle: {
-            dirH: "<img src='etc/pix/room/obstacleh.gif'>",
-            dirV: "<img src='etc/pix/room/obstaclev.gif'>",
-            dirC: "<img src='etc/pix/room/roomplant.gif'>"
+            dirH: "<img src='pix/room/arctic-landscape.png'>",
+            dirV: "<img src='pix/room/arctic-landscape.png'>",
+            dirC: "<img src='pix/room/igloo.png'>"
           }
        },
        avatar:  {
          loc:  {x: 6, y: 5},
-         up:   "<img src='etc/pix/avatar.gif' class='gridimg'>",
-         down: "<img src='etc/pix/avatar.gif' class='gridimg'>",
-         left: "<img src='etc/pix/avatar.gif' class='gridimg'>",
-         right: "<img src='etc/pix/avatar.gif' class='gridimg'>",
+         up:   "<img src='pix/penguin.png' class='gridimg'>",
+         down: "<img src='pix/penguin.png' class='gridimg'>",
+         left: "<img src='pix/penguin.png' class='gridimg'>",
+         right: "<img src='pix/penguin.png' class='gridimg'>",
        },
        items: {
           targetPoints: 100,
           distractorPoints: -100,
           targets: [
-             "<img src='etc/pix/tags/apple.gif'  width='80'>",
-             "<img src='etc/pix/tags/banana.gif' width='80'>",
-             "<img src='etc/pix/tags/steak.gif'  width='80'>",
-             "<img src='etc/pix/tags/fish.gif'   width='80'>"
+             "<img src='pix/tags/apple.gif'  width='80'>",
+             "<img src='pix/tags/banana.gif' width='80'>",
+             "<img src='pix/tags/steak.gif'  width='80'>",
+             "<img src='pix/tags/fish.gif'   width='80'>"
            ], 
            distractors: [
-              "<img src='etc/pix/tags/sugar.gif'   width='80'>",
-              "<img src='etc/pix/tags/cereal.gif'  width='80'>",
-              "<img src='etc/pix/tags/milk.gif'    width='80'>",
-              "<img src='etc/pix/tags/butter.gif'  width='80'>",
-              "<img src='etc/pix/tags/water.gif'   width='80'>",
-              "<img src='etc/pix/tags/rice.gif'    width='80'>"
+              "<img src='pix/tags/sugar.gif'   width='80'>",
+              "<img src='pix/tags/cereal.gif'  width='80'>",
+              "<img src='pix/tags/milk.gif'    width='80'>",
+              "<img src='pix/tags/butter.gif'  width='80'>",
+              "<img src='pix/tags/water.gif'   width='80'>",
+              "<img src='pix/tags/rice.gif'    width='80'>"
            ]
        }       
     };
