@@ -1,6 +1,6 @@
 /*
  timedReading - Timed Reading Widged with jQuery
- http://github.com/widged/exercist-widgeds
+ http://github.com/widged/widgeds
 
  Created: Marielle Lange, 2010
  Distributed under the MIT (http://www.opensource.org/licenses/mit-license.php) license
