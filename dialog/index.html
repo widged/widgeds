@@ -1,48 +1,40 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<!doctype html>
+<html lang="en">
 <head>
-  <title>Dialog Widged</title>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<title>A jQuery Drag-and-Drop Number Cards Game</title>
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 </head>
 <body>
-  <h1>Dialog</h1>
-  <h2>jQuery widged</h2>
 
-  <noscript>
-    <div style="color:#CC0000; text-align:center">
-      <strong>Warning: Dialog requires javascript. <br />
-      If your browser supports JavaScript, be sure it is enabled.</strong>
-    </div>
-  </noscript>
-
-  <script type="text/javascript" src="js/jquery.dialog.js"></script>
-  <div class="wg-dialog">
-    <p class="morgana">You must stop Owain from fighting.</p>
-    <p class="arthur">(annoyed - a sense that he also feels some guilt)<br/>It's his damn fault. He shouldn't have picked up the gauntlet!</p>
-    <p class="morgana">So put an end to it.</p>
-    <p class="arthur">The challenge has been taken up. The fight cannot be stopped.</p>
-    <p class="morgana">So fight in his place. Much as it pains me to say it, you're the man for this job, not him.</p>
-    <p class="arthur">I can't!</p>
-    <p class="morgana">Why not?</p>
-    <p class="arthur">Owain picked up the gauntlet, Owain is the one who must fight. That is the Knight's code. He knew that.</p>
-    <p class="morgana">But he's just a boy.</p>
-    <p class="arthur">(a heavy sigh)<br/>I know.</p>
-  </div>
-  
-<script language="JavaScript" type="text/javascript">
+<div class="wg-dialog" id="a-0">
+<p class="morgana">You must stop Owain from fighting.</p>
+<p class="arthur">(annoyed - a sense that he also feels some guilt)<br />
+It's his damn fault. He shouldn't have picked up the gauntlet!</p>
+<p class="morgana">So put an end to it.</p>
+<p class="arthur">The challenge has been taken up. The fight cannot be stopped.</p>
+<p class="morgana">So fight in his place. Much as it pains me to say it, you're the man for this job, not him.</p>
+<p class="arthur">I can't!</p>
+<p class="morgana">Why not?</p>
+<p class="arthur">Owain picked up the gauntlet, Owain is the one who must fight. That is the Knight's code. He knew that.</p>
+<p class="morgana">But he's just a boy.</p>
+<p class="arthur">(a heavy sigh)<br />
+I know.</p>
+</div>
+<script type="text/javascript" src="libs/jquery.dialog.js">
+</script><script language="JavaScript" type="text/javascript">
 //<![CDATA[
 <!--
-  $(".wg-dialog").wgDialog(
+  jQuery(".wg-dialog#a-0").wgDialog(
       {
         avatars: {
-          morgana: {icon: "pix/FB01.png"},  
-          arthur: {icon: "pix/F04.png"}
+          morgana: {icon: "assets/FB01.png"},  
+          arthur: {icon: "assets/F04.png"}
         }
       }
     );
 //-->
 //]]>
-</script>  
+</script>
 </body>
 </html>

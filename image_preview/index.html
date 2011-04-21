@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<head>
+  <title>Image Preview Widged</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+  <div class="wg-imagePreview">
+    <ul id="second">
+          <li><a href="http://james.padolsey.com/demos/imgPreview/full/img/1.jpg" class="preview">The Sun</a></li>
+          <li><a href="http://james.padolsey.com/demos/imgPreview/full/img/2.jpg" class="preview">New York</a></li>
+          <li><a href="http://james.padolsey.com/demos/imgPreview/full/img/3.jpg" class="preview">Office Meeting</a></li>
+          <li><a href="http://james.padolsey.com/demos/imgPreview/full/img/4.jpg" class="preview">A Beach</a></li>
+          <li><a href="http://james.padolsey.com/demos/imgPreview/full/img/5.jpg" class="preview">Global Technology</a></li>
+      </ul>
+  </div>
+  
+<script type="text/javascript" src="libs/jquery.imgpreview.min.0.22.js"></script>
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+<!--
+  jQuery('a.preview').imgPreview({
+      containerID: 'imgPreviewWithStyles',
+      imgCSS: { width: 200 }
+  });
+  jQuery('#imgPreviewWithStyles').css('cssText','display: none; position: absolute;background-color:#222;padding:15px;-moz-border-radius:10px;-webkit-border-radius:10px;z-index:999;border:none;');
+/*
+  jQuery('#imgPreviewWithStyles').css('background-color','#222');
+  jQuery('#imgPreviewWithStyles').css('padding','15px');
+
+  */
+//-->
+//]]>
+</script>  
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<head>
+  <title>Bar Graph Widged</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="a-0" class="wg-bargraph">
+<p>Jan=4203</p>
+<p>Feb=5015</p>
+<p>Mar=5503</p>
+<p>Apr=4983</p>
+<p>May=5352</p>
+<p>Jun=5870</p>
+</div>
+
+<script type="text/javascript" src="libs/jquery.barGraph.1.1.min.js"></script>
+<script language="JavaScript" type="text/javascript">
+
+$(".wg-bargraph#a-0").jqBarGraph({
+	width: 500,
+	colors: ['#122A47','#1B3E69'],
+	color: '#1A2944',
+	barSpace: 5,
+	title: '<h3>Number of visitors per month<br /><small>simple bar graph</small></h3>'
+});
+
+
+
+</script>  
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>A jQuery Drag-and-Drop Number Cards Game</title>
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+
+  <div class="wg-dragDrop" style="width:300px;padding: 9px 0px;">
+		<p class="item"><img src="assets/img1.png" width="100"/>==je suis rouge|j'ai de longues jambes</p>
+		<p class="item"><img src="assets/img2.png" width="100"/>==je porte des vetements|j'ai deux pattes</p>
+		<p class="item"><img src="assets/img3.png" width="100"/>==je suis vert|j'ai des jambes courtes</p>
+	</div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="libs/jquery.dragDrop.js"></script>
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+<!--
+  jQuery(".wg-dragDrop").wgDragDrop(
+      {
+			answerMarker: '==',
+			questionBackgroundColor: '#E6FFB3',
+			questionBorderColor: '#C4E67F',
+			answerBackgroundColor: '#F4CFE8',
+			answerBorderColor: '#F492D4'
+      }
+    );
+//-->
+//]]>
+</script>
+
+</body>
+</html>

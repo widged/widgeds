@@ -31,10 +31,10 @@
  		// constants
  		minimumQuestionQty: 10,
  		sprites: [
- 		  {image: 'pix/blue.png'},
- 		  {image: 'pix/red.png'},
- 		  {image: 'pix/green.png'},
- 		  {image: 'pix/silver.png'}
+ 		  {image: 'assets/blue.png'},
+ 		  {image: 'assets/red.png'},
+ 		  {image: 'assets/green.png'},
+ 		  {image: 'assets/silver.png'}
  		]
     };
     
@@ -76,17 +76,23 @@
          */
          setup: function() {
 
-            this.itemList = this.getItemListFromDom(this.container);
+            var str, item, list = [];
+            var wg = this;
+            this.container.children('p').each(function(i) {
+               str = $(this).html();
+               list.push(wg.parseActivityItem(str));
+            });
+            this.itemList = list;
             
-            var gameScreen = $('<div style="border-color:#000000;border-style:solid;padding:10px;font-family:Geneva,Arial"/>')
-            var w = this.container.width() -20;
+            var gameScreen = $('<div style="border-color:#000000;border-style:solid;margin:0px;padding:0px;font-family:Geneva,Arial"/>')
+            var w = this.container.width() - 20;
             gameScreen.width(w);
             
-            this.controlBox = $('<div style="margin-bottom:40px;text-align:center;height:100px;width:100%;"/>'); // align center doesn't work as expected
+            this.controlBox = $('<div style="margin-top:10px;margin-bottom:40px;text-align:center;height:100px;width:100%;"/>'); // align center doesn't work as expected
             
             var spriteW = 90;
             var spriteH = 76;
-            var racingBox = $('<div class="racingBox" style="position:relative;"/>');
+            var racingBox = $('<div class="racingBox" style="position:relative;margin:10px;"/>');
             racingBox.css('margin-right', spriteW + 'px')
             var carList = this.options.sprites; 
 
@@ -97,7 +103,7 @@
                var car = carList[i];
                var track =  $('<div style="position:relative;display:block;background-color:#F4F4F4;margin:3px;padding:0px;"/>');
                track.css('min-height', spriteH + 'px')
-               sprite = $('<strong style="position:absolute;float:left;display:block;"><img src="' + car.image + '"/></strong><div>&nbsp;</div>');
+               sprite = $('<strong style="position:absolute;float:left;display:block;"><img src="' + car.image + '" height="66"/></strong><div>&nbsp;</div>');
                spriteList.push({left: 0, sprite: sprite});
                track.append(sprite);
                racingBox.append(track);
@@ -116,27 +122,22 @@
             this.updateActivity('init');
          },
          
-         getItemListFromDom: function(el) {
-            var list = [];
-            var item, arr, itemHTML, options, optionList;
-            el.children('p').each(function(i) {
-               item = $(this).html();
-               arr = item.split("=");
-               itemHTML = arr[0].replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-               options = arr[1];
-               arr = options.split('|');
-               optionList = [];
-               for(var i = 0; i < arr.length; i++)
-               {
-                  optionList.push({
-                     html: arr[i].replace(/^\s\s*/, '').replace(/\s\s*$/, ''),
-                     correct: (i == 0) ? true : false,
-                  });
-               }
-               optionList.sort(function(a,b){ return 0.5 - Math.random()});
-               list.push({html: itemHTML, options: optionList});
-            });
-            return list;
+         parseActivityItem: function(str) {
+            var arr, itemHTML, options, optionList;
+            arr = str.split("=");
+            itemHTML = arr[0].replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+            options = arr[1];
+            arr = options.split('|');
+            optionList = [];
+            for(var i = 0; i < arr.length; i++)
+            {
+               optionList.push({
+                  html: arr[i].replace(/^\s\s*/, '').replace(/\s\s*$/, ''),
+                  correct: (i == 0) ? true : false,
+               });
+            }
+            optionList.sort(function(a,b){ return 0.5 - Math.random()});
+            return {html: itemHTML, options: optionList};
          },
          
          // ################

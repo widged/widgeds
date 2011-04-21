@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<head>
+  <title>mcq Widged</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="wg-mcq" id="a-0">
+    <p class="item">UN + DEUX = 3 | 4 | 2 | 8</p>
+    <p class="item">8 + 4 = 12 | 16 | 14 | 24</p>
+    <p class="item">2 + 7 = 9 | 5 | 10 | 11</p>
+</div>
+
+<br /><br />
+
+<div class="wg-mcq" id="a-1">
+    <p class="item">UN + DEUX = 3 | 4 | 2 | 8</p>
+    <p class="item">8 + 4 = 12 | 16 | 14 | 24</p>
+    <p class="item">2 + 7 = 9 | 5 | 10 | 11</p>
+</div>
+
+<br /><br />
+<div class="wg-gapfill" id="a-2">
+We earn our {{livelihood|oups#living|life|lived}} in America today in peaceful {{competition#competing|competed|competes}} 
+with people all across the Earth. Profound and {{powerful#powerless|empowering|powered}} forces are shaking and 
+{{remaking#made|unmaking|unmade}} our world, and the urgent question of our time is whether we can make change our 
+friend and not our enemy. This new world has already {{enriched#richen|riches|enriching}} the lives of millions of 
+Americans who are able to {{compete#competed|competition|competing}} and win in it. But when most people are working 
+harder for less, when others cannot work at all, when the cost of health care devastates families and threatens to 
+{{bankrupt#embank|banked|banking}} our enterprises, great and small, when the fear of crime robs law abiding citizens 
+of their {{freedom#freeing|freed|free}} and when millions of poor children cannot even imagine the lives we are calling 
+them to lead, we have not made change our friend.
+</div>
+  
+<script type="text/javascript" src="libs/jquery.quiz.js"></script>
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+<!--
+  jQuery(".wg-mcq#a-0").wgQuiz(
+      {
+			itemParser: "simpleList",
+			itemRender: "block",
+			mode: "option"
+      }
+    );
+
+  jQuery(".wg-mcq#a-1").wgQuiz(
+      {
+          itemParser: "simpleList",
+          itemRender: "block",
+          mode: "list"
+      }
+    );
+
+  jQuery(".wg-gapfill#a-2").wgQuiz(
+      {
+			itemParser: "gapfill",
+			itemRender: "inline",
+			mode: "options"
+      }
+    );
+
+//-->
+//]]>
+</script>  
+</body>
+</html>

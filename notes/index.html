@@ -1,37 +1,62 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<!doctype html>
+<html lang="en">
 <head>
-  <title>Note Widged</title>
-  <link href="etc/css/style.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<title>A jQuery Drag-and-Drop Number Cards Game</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 </head>
 <body>
-  <h1>Notes</h1>
-  <h2>jQuery widged</h2>
 
-  <noscript>
-    <div style="color:#CC0000; text-align:center">
-      <strong>Warning: Note requires javascript. <br />
-      If your browser supports JavaScript, be sure it is enabled.</strong>
-    </div>
-  </noscript>
+<div class="wg-note information">This is an information note</div>
+<div class="wg-note notification">This is a notification note</div>
+<div class="wg-note orientation">This is an orientation note</div>
+<div class="wg-note warning">This is a warning note</div>
+<div class="wg-note tip">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut arcu libero, sit amet tristique risus. Duis viverra neque vitae metus hendrerit eget sodales ipsum fringilla. Integer accumsan dui ac odio facilisis vel scelerisque elit facilisis. Mauris non augue lectus, in dictum neque. Ut arcu diam, hendrerit ut convallis ac, fringilla ac metus. In mollis semper sodales. Ut commodo pulvinar lorem, et pulvinar quam porttitor in. Curabitur dictum risus ut mi vehicula aliquam. Maecenas libero dui, viverra id sagittis in, dictum a turpis. Aliquam erat volutpat. Ut volutpat accumsan augue eget commodo. Maecenas id molestie metus. Integer cursus mauris vel lorem congue bibendum. Ut in orci tortor. Pellentesque imperdiet pretium consectetur. Vestibulum egestas, tellus sit amet tristique accumsan, nulla tellus fringilla massa, sit amet euismod ligula erat et nisi. Morbi non urna nunc, non gravida risus.</div>
 
-  <script type="text/javascript" src="js/jquery.notes.js"></script>
-  <div class="wg-note tip">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut arcu libero, sit amet tristique risus. Duis viverra neque vitae metus hendrerit eget sodales ipsum fringilla. Integer accumsan dui ac odio facilisis vel scelerisque elit facilisis. Mauris non augue lectus, in dictum neque. Ut arcu diam, hendrerit ut convallis ac, fringilla ac metus. In mollis semper sodales. Ut commodo pulvinar lorem, et pulvinar quam porttitor in. Curabitur dictum risus ut mi vehicula aliquam. Maecenas libero dui, viverra id sagittis in, dictum a turpis. Aliquam erat volutpat. Ut volutpat accumsan augue eget commodo. Maecenas id molestie metus. Integer cursus mauris vel lorem congue bibendum. Ut in orci tortor. Pellentesque imperdiet pretium consectetur. Vestibulum egestas, tellus sit amet tristique accumsan, nulla tellus fringilla massa, sit amet euismod ligula erat et nisi. Morbi non urna nunc, non gravida risus.
-  </div>
-  <div class="wg-note information">This is an information</div>
-  <div class="wg-note notification">This is a notification</div>
-  <div class="wg-note orientation">This is an orientation</div>
-  <div class="wg-note warning">This is a warning</div>
-  <div class="wg-note">This is a default note</div>
-  
+<script type="text/javascript" src="http://widged.com/widgeds/js/jquery.notes.js"></script>
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
 <!--
-  $(".wg-note").wgNote();
+  jQuery(".wg-note").wgNote({styles: {
+   defaultNote: {
+      icon: 'assets/pen.png',
+      contentBackground: '#FFF4BF',
+      iconBackground: '#FFDD73'
+   },
+   tip: {
+      icon: 'assets/lamp.png',
+      contentBackground: '#FFF4BF',
+      iconBackground: '#FFDD73',
+   },
+   information: {
+      icon: 'assets/note.png',
+      contentBackground: '#CEF',
+      iconBackground: '#9DF'
+   },
+   news: {
+      icon: 'assets/news.png',
+      contentBackground: '#FFF4BF',
+      iconBackground: '#FFDD73'
+   },
+   orientation: {
+      icon: 'assets/map.png',
+      contentBackground: '#E6FFB3',
+      iconBackground: '#C4E67F'
+   },
+   notification: {
+      icon: 'assets/alarm.png',
+      contentBackground: '#FFDACC',
+      iconBackground: '#FFB499'
+   },
+   warning: {
+      icon: 'assets/alert.png',
+      contentBackground: '#FFD9DD',
+      iconBackground: '#FFA6AE'
+   }
+   }
+});
 //-->
 //]]>
-</script>  
+</script>
 </body>
 </html>
