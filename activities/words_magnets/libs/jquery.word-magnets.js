@@ -1,15 +1,18 @@
-/*
- Magnets - Fridge Magnets with jQuery
- http://github.com/widged/widgeds
-
- Created: Marielle Lange, 2011
- Distributed under the MIT (http://www.opensource.org/licenses/mit-license.php)
-
- Built on top of the jQuery library
-   http://jquery.com
-*/
-
-(function($) {
+/**
+ * Word Magnets, Firdge Mangets with jQuery
+ * @version: 0.2 (2011/04/28)
+ * @requires jQuery v1.4.2 or later 
+ * @author Marielle Lange
+ * Source: http://github.com/widged/widgeds
+ *  
+ * Built on top of the jQuery library
+ *   http://jquery.com
+ * 
+ * Dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
+ */
+ (function($) {
 
     /**
      * Creates an activity
@@ -26,12 +29,18 @@
          });
     };
 
+    var version = '0.2';
+
     // Default configuration properties.
     var defaults = {
  		width: 600,
       height: 400
     };
-    
+
+    // ##############################################
+    // <<<  Plugin logic, shared by all widgets
+    //      (no modifications required, leave on top)
+    // ##############################################
     /**
      * The widged object.
      *
@@ -41,21 +50,21 @@
      * @param o {Object} A set of key/value pairs to set as configuration properties.
      * @cat Plugins/widged
      */
-    $.widged = function(e, o) {
+    $wg = function(e, o) {
         this.options    = $.extend({}, defaults, o || {});
         this.container   = $(e);
         this.setup();
     };
-    
-
-    // Create shortcut for internal use
-    var $wg = $.widged;
 
     $wg.fn = $wg.prototype = {
-        version: '0.0.1'
+        version: this.version
     };
 
     $wg.fn.extend = $wg.extend = $.extend;
+
+    // ##############################################
+    //      End of plugin logic >>>
+    // ##############################################
 
     $wg.fn.extend({
         /**
@@ -111,17 +120,5 @@
  
     });
 
-    $wg.extend({
-        /**
-         * Gets/Sets the global default configuration properties.
-         *
-         * @return {Object}
-         * @param d {Object} A set of key/value pairs to set as configuration properties.
-         */
-        defaults: function(d) {
-            return $.extend(defaults, d || {});
-        }
-   
-    });
 
 })(jQuery);

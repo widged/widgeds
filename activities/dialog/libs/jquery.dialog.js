@@ -1,14 +1,17 @@
-/*
- Dialog - Dialog formatting with jQuery
- http://github.com/widged/widgeds
-
- Created: Marielle Lange, 2010
- Distributed under the MIT (http://www.opensource.org/licenses/mit-license.php)
-
- Built on top of the jQuery library
-   http://jquery.com
-*/
-
+/**
+ * Dialog formatting, a widged plugin
+ * @version: 0.2 (2011/04/28)
+ * @requires jQuery v1.4.2 or later 
+ * @author Marielle Lange
+ * Source: http://github.com/widged/widgeds
+ *  
+ * Built on top of the jQuery library
+ *   http://jquery.com
+ * 
+ * Dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
+ */
 (function($) {
 
     /**
@@ -26,6 +29,8 @@
          });
     };
 
+    var version = '0.2';
+
     // Default configuration properties.
     var defaults = {
        styles: [
@@ -41,33 +46,37 @@
           }
        ]
     };
-    
+
+    // ##############################################
+    // <<<  Plugin logic, shared by all widgets
+    //      (no modifications required, leave on top)
+    // ##############################################
     /**
-     * The wgDialog object.
+     * The widged object.
      *
      * @constructor
-     * @class wgDialog
+     * @class widged
      * @param e {HTMLElement} The element to create the widged for.
      * @param o {Object} A set of key/value pairs to set as configuration properties.
-     * @cat Plugins/wgDialog
+     * @cat Plugins/widged
      */
-    $.wgDialog = function(e, o) {
+    $wg = function(e, o) {
         this.options    = $.extend({}, defaults, o || {});
-
-        this.container  = $(e);
+        this.container   = $(e);
         this.setup();
     };
     
-
-    // Create shortcut for internal use
-    var $wg = $.wgDialog;
-
     $wg.fn = $wg.prototype = {
-        wgDialog: '0.0.1'
+        version: this.version
     };
 
     $wg.fn.extend = $wg.extend = $.extend;
 
+    // ##############################################
+    //      End of plugin logic >>>
+    // ##############################################
+    
+  
     $wg.fn.extend({
         /**
          * Setups the widged.
@@ -126,17 +135,5 @@
         }
     });
 
-    $wg.extend({
-        /**
-         * Gets/Sets the global default configuration properties.
-         *
-         * @return {Object}
-         * @param d {Object} A set of key/value pairs to set as configuration properties.
-         */
-        defaults: function(d) {
-            return $.extend(defaults, d || {});
-        }
-   
-    });
 
 })(jQuery);

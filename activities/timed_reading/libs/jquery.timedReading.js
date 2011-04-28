@@ -1,15 +1,18 @@
-/*
- timedReading - Timed Reading Widged with jQuery
- http://github.com/widged/widgeds
-
- Created: Marielle Lange, 2010
- Distributed under the MIT (http://www.opensource.org/licenses/mit-license.php) license
-
- Built on top of the jQuery library
-   http://jquery.com
-*/
-
-(function($) {
+/**
+ * Timed REading, a learning activity with jQuery
+ * @version: 0.2 (2011/04/28)
+ * @requires jQuery v1.4.2 or later 
+ * @author Marielle Lange
+ * Source: http://github.com/widged/widgeds
+ *  
+ * Built on top of the jQuery library
+ *   http://jquery.com
+ * 
+ * Dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
+ */
+ (function($) {
 
     /**
      * Creates an activity
@@ -26,37 +29,41 @@
          });
     };
 
+    var version = '0.2';
+
     // Default configuration properties.
     var defaults = {
        timeLimit: 10000
     };
-    
+
+    // ##############################################
+    // <<<  Plugin logic, shared by all widgets
+    //      (no modifications required, leave on top)
+    // ##############################################
     /**
-     * The wgTimedReading object.
+     * The widged object.
      *
      * @constructor
-     * @class wgTimedReading
+     * @class widged
      * @param e {HTMLElement} The element to create the widged for.
      * @param o {Object} A set of key/value pairs to set as configuration properties.
-     * @cat Plugins/wgTimedReading
+     * @cat Plugins/widged
      */
-    $.wgTimedReading = function(e, o) {
+    $wg = function(e, o) {
         this.options    = $.extend({}, defaults, o || {});
-
-        this.container  = $(e);
+        this.container   = $(e);
         this.setup();
     };
-    
-    
-
-    // Create shortcut for internal use
-    var $wg = $.wgTimedReading;
 
     $wg.fn = $wg.prototype = {
-        wgTimedReading: '0.0.1'
+        version: this.version
     };
 
     $wg.fn.extend = $wg.extend = $.extend;
+
+    // ##############################################
+    //      End of plugin logic >>>
+    // ##############################################
 
     $wg.fn.extend({
         /**

@@ -1,14 +1,17 @@
-/*
- Memory Game - Memory Game
- http://github.com/widged/widgeds
-
- Created: Marielle Lange, 2011
- Distributed under the MIT (http://www.opensource.org/licenses/mit-license.php)
-
- Built on top of the jQuery library
-   http://jquery.com
-*/
-
+/**
+ * Memory game, a widged with jQuery
+ * @version: 0.2 (2011/04/28)
+ * @requires jQuery v1.4.2 or later 
+ * @author Marielle Lange
+ * Source: http://github.com/widged/widgeds
+ *  
+ * Built on top of the jQuery library
+ *   http://jquery.com
+ * 
+ * Dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
+ */
 (function($, undefined) {
 
     /**
@@ -26,7 +29,7 @@
         });
     };
 
-    var version = '0.0.2';
+    var version = '0.2';
 
     // Default configuration properties.
     var defaults = {

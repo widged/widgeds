@@ -1,18 +1,20 @@
-/*
- jTreasurechest - Treasure Chest Learning Activity with jQuery
- http://github.com/widged/exercist-widgeds
-
- Created: Marielle Lange, 2010
- Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
- and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
-
- Built on top of the jQuery library
-   http://jquery.com
-
- Loosely adapted from a script written by Thomas Boutell
-   http://vader.boutell.com/~boutell/geek.cgi
-*/
-
+/**
+ * Pick the Labels mini-game with jQuery
+ * @version: 0.2 (2011/04/28)
+ * @requires jQuery v1.4.2 or later 
+ * @author Marielle Lange
+ * Source: http://github.com/widged/widgeds
+ * 
+ * Built on top of the jQuery library
+ *   http://jquery.com
+ * 
+ * Loosely adapted from a script written by Thomas Boutell
+ *   http://vader.boutell.com/~boutell/geek.cgi
+ * 
+ * Dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
+ */ 
 (function($) {
 
     /**
@@ -29,6 +31,8 @@
             $(this).data('wgTreasureChest', new $wg(this, o));
          });
     };
+
+    var version = '0.2';
 
     // Default configuration properties.
     var defaults = {
@@ -88,65 +92,35 @@
            ]
        }       
     };
-    
+
+    // ##############################################
+    // <<<  Plugin logic, shared by all widgets
+    //      (no modifications required, leave on top)
+    // ##############################################
     /**
-     * The wgTreasureChest object.
+     * The widged object.
      *
      * @constructor
-     * @class wgTreasureChest
+     * @class widged
      * @param e {HTMLElement} The element to create the widged for.
      * @param o {Object} A set of key/value pairs to set as configuration properties.
-     * @cat Plugins/wgTreasureChest
+     * @cat Plugins/widged
      */
-    $.wgTreasureChest = function(e, o) {
+    $wg = function(e, o) {
         this.options    = $.extend({}, defaults, o || {});
-
-        this.container  = $(e);
-        
-        this.feedback = $('<div class="treasure-chest-feedback">');
-        this.feedback.css({'padding': '10px', 'background-color': '#FFFFD0', 'font-family': 'Verdana', 'font-size': '12pt', 'line-height': '2' });
-        // score
-        scoreDiv    = $('<div>Score:&nbsp;&nbsp;</div>');
-        this.scoreBox   = $('<span class="treasure-chest-score"/>');
-        scoreDiv.append(this.scoreBox);
-        
-        // pickQty
-        pickQtyDiv = $('<div>Remaining to Pick:&nbsp;&nbsp;</div>');
-        this.pickQtyBox = $('<span class="treasure-chest-to-pick"/>')
-        pickQtyDiv.append(this.pickQtyBox);
-        
-        this.warningBox = $('<div class="treasure-chest-warning" />');
-        this.feedback.append(scoreDiv);
-        this.feedback.append(pickQtyDiv);
-        this.feedback.append(this.warningBox);
-        this.container.append(this.feedback);
-
-        this.roomBox = $('<div class="treasure-chest-room">if you see this, there is a problem with javascript</div>');
-        this.container.append(this.roomBox);
-
-
-        /*          
-          <!--
-          <div id="picked_y">picked items appear here.</div>
-          <div id="picked_n">picked items appear here.</div>
-          -->
-        </div>
-        */
-        
+        this.container   = $(e);
         this.setup();
-        this.startActivity();
     };
     
-    
-
-    // Create shortcut for internal use
-    var $wg = $.wgTreasureChest;
-
     $wg.fn = $wg.prototype = {
-        wgTreasureChest: '0.0.1'
+        version: this.version
     };
 
     $wg.fn.extend = $wg.extend = $.extend;
+
+    // ##############################################
+    //      End of plugin logic >>>
+    // ##############################################
 
     $wg.fn.extend({
         /**
@@ -155,6 +129,36 @@
          * @return undefined
          */
         setup: function() {
+
+           this.feedback = $('<div class="treasure-chest-feedback">');
+           this.feedback.css({'padding': '10px', 'background-color': '#FFFFD0', 'font-family': 'Verdana', 'font-size': '12pt', 'line-height': '2' });
+           // score
+           scoreDiv    = $('<div>Score:&nbsp;&nbsp;</div>');
+           this.scoreBox   = $('<span class="treasure-chest-score"/>');
+           scoreDiv.append(this.scoreBox);
+
+           // pickQty
+           pickQtyDiv = $('<div>Remaining to Pick:&nbsp;&nbsp;</div>');
+           this.pickQtyBox = $('<span class="treasure-chest-to-pick"/>')
+           pickQtyDiv.append(this.pickQtyBox);
+
+           this.warningBox = $('<div class="treasure-chest-warning" />');
+           this.feedback.append(scoreDiv);
+           this.feedback.append(pickQtyDiv);
+           this.feedback.append(this.warningBox);
+           this.container.append(this.feedback);
+
+           this.roomBox = $('<div class="treasure-chest-room">if you see this, there is a problem with javascript</div>');
+           this.container.append(this.roomBox);
+
+
+           /*          
+             <!--
+             <div id="picked_y">picked items appear here.</div>
+             <div id="picked_n">picked items appear here.</div>
+             -->
+           </div>
+           */
 
            // game parameters
            this.avatar        = this.options.avatar;
@@ -175,6 +179,8 @@
            
            this.roomW = this.options.room.dimW;
            this.roomH = this.options.room.dimH;
+
+           this.startActivity();
         },
 
         /**
@@ -579,17 +585,5 @@
 
     });
 
-    $wg.extend({
-        /**
-         * Gets/Sets the global default configuration properties.
-         *
-         * @return {Object}
-         * @param d {Object} A set of key/value pairs to set as configuration properties.
-         */
-        defaults: function(d) {
-            return $.extend(defaults, d || {});
-        }
-   
-    });
 
 })(jQuery);
