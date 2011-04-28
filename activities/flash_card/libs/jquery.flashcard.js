@@ -30,7 +30,8 @@
 
     // Default configuration properties.
     var defaults = {
- 		width: 210,
+      parser: {uid: 'parseItem'},
+      width: 210,
       height: 120,
       questionCardColor: '#F9F9F9',
       answerCardColor: '#999'
@@ -71,7 +72,6 @@
         defaults: function(d) {
             return $.extend(defaults, d || {});
         }
-   
     });
 
     // ##############################################
@@ -87,23 +87,27 @@
          setup: function() {
             
             this.container.css({'width':this.options.width,'height':this.options.height,'margin':'4px','position':'relative','cursor':'pointer'});
-
             var wg = this;
             var text = this.container.html();
-            var arr = text.split("|");
-            var question = arr[0];
-            var answer = arr[1];
-            wg.clickToFlip = '<div style="position:absolute;bottom: 0px;width:100%;font-size:0.7em;text-align:center">click to flip</div>';
+            this.container.bind("parseResult", function(e,data){ wg.parserResult(data); });
+            $(document).trigger('parser.run',[{eventTarget:this.container, parser: this.options.parser, text: this.container.html()}]);
+         },
+          
+         parserResult: function(data) {
+            var question = data.html;
+            var answer = data.options[0].html;
+            this.clickToFlip = '<div style="position:absolute;bottom: 0px;width:100%;font-size:0.7em;text-align:center">click to flip</div>';
 
             var boxEl = $('<div/>');
             boxEl.css({'position':'absolute','left':'0','top':'0','width':'100%','height':'100%','border':'1px solid #ddd','background':' no-repeat center center ' + this.options.questionCardColor});
             var htmlEl = $('<p style="padding: 10px 20px;">' + question + '</p>');
             boxEl.append(htmlEl);
-            boxEl.append(wg.clickToFlip)
+            boxEl.append(this.clickToFlip)
          	
          	this.container.html('');
             this.container.append(boxEl);
             
+            var wg = this
             boxEl.bind("click",function(){
          		var elem = boxEl;
          		if(elem.data('flipped'))

@@ -79,6 +79,7 @@
     //      End of plugin logic >>>
     // ##############################################
 
+
     $.wg.fn.extend({
         /**
          * Setups the widged.
@@ -88,7 +89,8 @@
          setup: function() {
             var wg = this;
             var pairs = this.options.cards;
-            this.container.bind("result", function(e, status){ wg.listResult(status.data); });
+            this.container.bind("parseError", function(e, error){ alert(error.msg) });
+            this.container.bind("parseResult", function(e, data){ wg.listResult(data.list); });
             $(document).trigger('parser.run',[{eventTarget:this.container, parser: this.options.parser, itemList: pairs}]);
          },
          
@@ -165,11 +167,18 @@
             card2.find('.back').delay(250).animate({ visibility: 'show' }, 'slow');
          },
          
+         // ##############################################
+         // <<<  Events Broadcasting
+         // ##############################################
+
          broadcastScore: function() {
             var msElapsed = (new Date).getTime() - this.gameData.timeStart;
             $(document).trigger('score.update',[{board: this.options.scoreBoard ,answerQty: this.gameData.answerQty, answeredQty: this.gameData.answeredQty, timeElapsed: msElapsed}]);
          }
  
+         // ##############################################
+         //    broadcasting >>>
+         // ##############################################
     });
 
 

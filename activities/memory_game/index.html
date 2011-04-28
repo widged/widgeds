@@ -22,16 +22,14 @@
 <div id="memory-scoreboard" style="background-color: #F9F9f9;border: 1px solid #999;position:relative;clear:both;padding:9px;width:' + maxX + 'px"></div>
 </div>
 
-<script type="text/javascript" src="libs/jquery.memory.js"></script>
 <script type="text/javascript" src="../../core/widged.js"></script>
-<script type="text/javascript" src="../../core/parser.js"></script>
-<script type="text/javascript" src="../../core/scoreboard.js"></script>
-
+<script type="text/javascript" src="libs/jquery.memory.js"></script>
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
 <!--
 
-  widged.init();
+  widged.parser.init();
+  widged.scoreboard.init();
   jQuery(".wg-memory#a-0").wgMemory(
       {
 		   parser: {uid: 'memoryGame'},

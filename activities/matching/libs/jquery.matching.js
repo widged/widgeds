@@ -1,5 +1,5 @@
 /*
- CardFlip - Fridge CardFlip with jQuery
+ Matching game
  http://github.com/widged/widgeds
 
  Created: Marielle Lange, 2011
@@ -88,15 +88,13 @@
          * @return undefined
          */
          setup: function() {
-            console.log('[matching.setup]');
             var wg = this;
-            this.container.bind("result", function(e, data){ wg.listResult(data); });
+            this.container.bind("parseError", function(e, error){ alert(error.msg) });
+            this.container.bind("parseResult", function(e, data){ wg.listResult(data.list); });
             $(document).trigger('parser.run',{eventTarget:this.container, parser: this.options.parser});
          },
          
-         listResult: function(data) {
-            var list = data.list;
-            console.log('[matching.listResult]');
+         listResult: function(list) {
             this.gameData = {timeStart: null, answeredQty: 0, answerQty: list.length};
             this.draw(list);
          },
@@ -171,7 +169,6 @@
            },
          
            broadcastScore: function() {
-              console.log("[matching.broadcastScore]");
               var msElapsed = (new Date).getTime() - this.gameData.timeStart;
               $(document).trigger('score.update',[{board: this.options.scoreBoard ,answerQty: this.gameData.answerQty, answeredQty: this.gameData.answeredQty, timeElapsed: msElapsed}]);
            }

@@ -18,13 +18,10 @@
 
 <script type="text/javascript" src="libs/jquery.barGraph.1.1.min.js"></script>
 <script type="text/javascript" src="../../core/widged.js"></script>
-<script type="text/javascript" src="../../core/parser.js"></script>
 <script language="JavaScript" type="text/javascript">
-
-
-widged.init();
+widged.parser.init();
 var container = jQuery(".wg-bargraph#a-0");
-container.bind("result", function(e, status){ listResult(status.list); });
+container.bind("parseResult", function(e, data){ listResult(data.list); });
 $(document).trigger('parser.run',[{eventTarget: container, parser: {uid: "dataSerie", answerNumeric: true}}]);
 
 function listResult(list) {

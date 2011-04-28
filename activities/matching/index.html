@@ -17,13 +17,13 @@
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="../../core/widged.js"></script>
-<script type="text/javascript" src="../../core/parser.js"></script>
-<script type="text/javascript" src="../../core/scoreboard.js"></script>
 <script type="text/javascript" src="libs/jquery.matching.js"></script>
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
 <!--
-  widged.init();
+
+	widged.parser.init();
+	widged.scoreboard.init();
   jQuery(".wg-dragDrop").wgDragDrop(
       {
 			parser: {uid: 'parseItems', answerMarker: '=='},
