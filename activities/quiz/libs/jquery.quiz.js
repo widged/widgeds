@@ -22,43 +22,59 @@
      */
     $.fn.wgQuiz = function(o) {
          return this.each(function() {
-            $(this).data('wgQuiz', new $wg(this, o));
+            $(this).data('wg', new $wg(this, o));
          });
     };
+
+    var version = '0.0.1';
 
     // Default configuration properties.
     var defaults = {
  		mode: 'gaps',
       feedbackCorrect: "Correct"
     };
-    
+
+    // ##############################################
+    // <<<  Plugin logic, shared by all widgets
+    //      (no modifications required, leave on top)
+    // ##############################################
     /**
-     * The wgQuiz object.
+     * The widged object.
      *
      * @constructor
-     * @class wgQuiz
+     * @class widged
      * @param e {HTMLElement} The element to create the widged for.
      * @param o {Object} A set of key/value pairs to set as configuration properties.
-     * @cat Plugins/wgQuiz
+     * @cat Plugins/widged
      */
-    $.wgQuiz = function(e, o) {
+    $wg = function(e, o) {
         this.options    = $.extend({}, defaults, o || {});
-
         this.container   = $(e);
-        this.itemList = [];
-        this.score = {answered: [], correctIndices: [], incorrectIndices: []};
         this.setup();
     };
     
-
-    // Create shortcut for internal use
-    var $wg = $.wgQuiz;
-
     $wg.fn = $wg.prototype = {
-        wgQuiz: '0.0.1'
+        version: this.version
     };
 
     $wg.fn.extend = $wg.extend = $.extend;
+
+    $wg.extend({
+        /**
+         * Gets/Sets the global default configuration properties.
+         *
+         * @return {Object}
+         * @param d {Object} A set of key/value pairs to set as configuration properties.
+         */
+        defaults: function(d) {
+            return $.extend(defaults, d || {});
+        }
+   
+    });
+
+    // ##############################################
+    //      End of plugin logic >>>
+    // ##############################################
 
     $wg.fn.extend({
         /**
@@ -67,6 +83,8 @@
          * @return undefined
          */
          setup: function() {
+            this.itemList = [];
+            this.score = {answered: [], correctIndices: [], incorrectIndices: []};
 
             var wg = this;
             this.container.bind("parseError", function(e, error){ alert(error.msg) });
@@ -334,17 +352,5 @@
         }
     });
 
-    $wg.extend({
-        /**
-         * Gets/Sets the global default configuration properties.
-         *
-         * @return {Object}
-         * @param d {Object} A set of key/value pairs to set as configuration properties.
-         */
-        defaults: function(d) {
-            return $.extend(defaults, d || {});
-        }
-   
-    });
 
 })(jQuery);

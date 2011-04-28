@@ -22,7 +22,7 @@
      */
     $.fn.wgMemory = function(o) { 
        return this.each(function() {
-           $(this).data('wg', new $.wg(this, o));
+           $(this).data('wg', new $wg(this, o));
         });
     };
 
@@ -63,24 +63,24 @@
      * @param o {Object} A set of key/value pairs to set as configuration properties.
      * @cat Plugins/widged
      */
-    $.wg = function(e, o) {
+    $wg = function(e, o) {
         this.options    = $.extend({}, defaults, o || {});
         this.container   = $(e);
         this.setup();
     };
     
-    $.wg.fn = $.wg.prototype = {
+    $wg.fn = $wg.prototype = {
         version: this.version
     };
 
-    $.wg.fn.extend = $.wg.extend = $.extend;
+    $wg.fn.extend = $wg.extend = $.extend;
 
     // ##############################################
     //      End of plugin logic >>>
     // ##############################################
 
 
-    $.wg.fn.extend({
+    $wg.fn.extend({
         /**
          * Setups the widged.
          *
