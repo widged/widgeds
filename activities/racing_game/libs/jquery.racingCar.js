@@ -31,7 +31,7 @@
     // Default configuration properties.
     var defaults = {
  		// constants
-      parser: {uid: "parseItems"},
+      parser: {uid: "itemList"},
  		minimumQuestionQty: 10,
  		sprites: [
  		  {image: 'assets/blue.png'},

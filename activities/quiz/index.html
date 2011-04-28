@@ -23,7 +23,7 @@
 
 <br /><br />
 <div class="wg-gapfill" id="a-2">
-We earn our {{livelihood|oups#living|life|lived}} in America today in peaceful {{competition#competing|competed|competes}} 
+We earn our {{livelihood#living|life|lived}} in America today in peaceful {{competition#competing|competed|competes}} 
 with people all across the Earth. Profound and {{powerful#powerless|empowering|powered}} forces are shaking and 
 {{remaking#made|unmaking|unmade}} our world, and the urgent question of our time is whether we can make change our 
 friend and not our enemy. This new world has already {{enriched#richen|riches|enriching}} the lives of millions of 
@@ -34,13 +34,15 @@ of their {{freedom#freeing|freed|free}} and when millions of poor children canno
 them to lead, we have not made change our friend.
 </div>
   
+<script type="text/javascript" src="../../core/widged.js"></script>
 <script type="text/javascript" src="libs/jquery.quiz.js"></script>
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
 <!--
+  widged.parser.init();
   jQuery(".wg-mcq#a-0").wgQuiz(
       {
-			itemParser: "simpleList",
+			itemParser: "itemList",
 			itemRender: "block",
 			mode: "option"
       }
@@ -48,7 +50,7 @@ them to lead, we have not made change our friend.
 
   jQuery(".wg-mcq#a-1").wgQuiz(
       {
-          itemParser: "simpleList",
+          itemParser: "itemList",
           itemRender: "block",
           mode: "list"
       }
@@ -56,7 +58,7 @@ them to lead, we have not made change our friend.
 
   jQuery(".wg-gapfill#a-2").wgQuiz(
       {
-			itemParser: "gapfill",
+			itemParser: "inlineList",
 			itemRender: "inline",
 			mode: "options"
       }

@@ -28,7 +28,6 @@
 
     // Default configuration properties.
     var defaults = {
- 		// constants
  		mode: 'gaps',
       feedbackCorrect: "Correct"
     };
@@ -69,24 +68,27 @@
          */
          setup: function() {
 
-            // parse items in the activity division
-            switch (this.options.itemParser)
-            {
-               case 'gapfill':
-                  this.itemList = this.parseInlineList();
-                  break;
-               default:
-                  this.itemList = this.parseSimpleList();
-                  break;
-            }
+            var wg = this;
+            this.container.bind("parseError", function(e, error){ alert(error.msg) });
+            this.container.bind("parseResult", function(e, data){ wg.listResult(data.list); });
+            $(document).trigger('parser.run',{eventTarget:this.container, parser: {uid: this.options.itemParser}});
+         },
+
+         listResult: function(list) {
+            this.gameData = {timeStart: null, answeredQty: 0, answerQty: list.length};
+            this.itemList = list;
+            this.draw(list);
+         },
+
+         draw: function(list) {
             // Build the html
             var html = '';
             var el;
             this.container.html('');
             this.container.css({'line-height': 1.5});
-            for(var i in this.itemList)
+            for(var i in list)
             {
-               var item = this.itemList[i];
+               var item = list[i];
                // items
                switch (this.options.itemRender)
                {
@@ -276,7 +278,7 @@
 
         optionsAsMenu: function(list) {
            // options
-           if(list == undefined) { return; }
+           if(list == undefined || list.length == 0) { return; }
            var selectHtml = '';
            for (var o in list)
            {

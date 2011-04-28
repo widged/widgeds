@@ -92,8 +92,11 @@
                case 'memoryGame':
                   data = {list: parser.memoryGame(itemList)};
                   break;
-               case 'parseItems':
+               case 'itemList':
                   data = {list: parser.parseItemList(itemList, settings)};
+                  break;
+            case 'inlineList':
+                  data = {list: parser.parseInlineList(eventTarget.html(), settings)};
                   break;
                case 'parseItem':
                   data = parser.parseItem(params.text, 0, settings);
@@ -121,6 +124,12 @@
          return list;
        },
 
+       // ################
+       // ### Parsers
+       // ################
+
+       // ### memory Game
+
        memoryGame: function (itemList) {
            var pairItem, list = [];
            for(var i = 0; i < itemList.length; i++)
@@ -133,6 +142,8 @@
            return list;
        },
 
+       // ### data series
+
        parseDataSerie: function(itemList, parserSettings) {
           var list = [];
           var item, arr, itemHTML, options, optionList;
@@ -144,10 +155,23 @@
           return list;
        },
        
+       // ### in-line List
+       parseInlineList: function(text, settings) {
+          var arr = text.split("}}");
+          var list = [], item = '';
+          for(var i = 0; i < arr.length; i++)
+          {
+             item = arr[i];
+             if(item == undefined) { continue; }
+             settings.answerMarker = "{{";
+             list.push(widged.parser.parseItem(item, "i_" + i, settings));
+          }
+          return list;
+       },
+
        // ################
-       // Items Parsers
+       // ### Items Parsers
        // ################
-       
        parseItemList: function(itemList, parserSettings) {
           var settings = jQuery.extend({answerMarker: '=', optionMarker: "#"}, parserSettings);
           var str, item, list = [];
@@ -160,8 +184,6 @@
           };
           return list;
        },
-
-
 
        /**
         * Transform an item as specified by the user into an internal item object.
@@ -178,6 +200,7 @@
           arr = String(arr[1]).split("#");
           if(arr[0]) { item.options = item.options.concat(this.parseItemOptions(arr[0], true, settings)) };
           if(arr[1]) { item.options = item.options.concat(this.parseItemOptions(arr[1], false, settings)) };
+          item.options.sort(function(a,b){ return 0.5 - Math.random()});
           return item;
        },
        
@@ -198,6 +221,9 @@
           return list;
        },         
        
+       // ################
+       // ### Utilities
+       // ################
        trim: function(str) {
           return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
        }  
