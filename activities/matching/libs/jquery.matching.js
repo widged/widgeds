@@ -30,6 +30,8 @@
 
     // Default configuration properties.
     var defaults = {
+         parser: "parseItems",
+         scoreBoard: false,
 			answerMarker: '=',
 			questionBackgroundColor: '#E6FFB3',
 			questionBorderColor: '#C4E67F',
@@ -86,17 +88,22 @@
          * @return undefined
          */
          setup: function() {
-            this.itemList = this.parseItemList(this.container.html());
-            this.gameData = {timeStart: null, matchQty: 0, answerQty: this.itemList.length};
-            this.draw();
+            console.log('[matching.setup]');
+            var wg = this;
+            this.container.bind("result", function(e, data){ wg.listResult(data); });
+            $(document).trigger('parser.run',[{eventTarget:this.container, parser: this.options.parser, answerMarker: this.options.answerMarker}]);
          },
          
-         draw: function() {
+         listResult: function(data) {
+            var list = data.list;
+            console.log('[matching.listResult]');
+            this.gameData = {timeStart: null, answeredQty: 0, answerQty: list.length};
+            this.draw(list);
+         },
+         
+         draw: function(list) {
 
             this.container.html('');
-            
-            
-            var list = this.itemList
             list.sort( function() { return Math.random() - .5 } );
             var item;
             var answerBox = $('<div id="cardPile" style="background-color:#FFFFFF;border: 1px dashed #999;width:300px"></div>');
@@ -120,7 +127,6 @@
                
             }
             
-            
             answerBox.append('<div style="clear:both"/>');
             this.gameData.answerQty = answerList.length;
             list.sort( function() { return Math.random() - .5 } );
@@ -137,12 +143,10 @@
                  } );                
                  dropEl.appendTo( questionBox);
               }     
-              this.feedbackBox = $('<div id="dragDrop-feedback" style="background-color:#F9F9F9;border: 1px solid #999;margin: 6px 0px;padding:6px;">Feedback shows up here</div>');
               
-              this.container.append(this.feedbackBox);
               this.container.append(questionBox);
               this.container.append(answerBox);
-              this.updateFeedback();
+              this.broadcastScore();
          },
 
          handleCardDrop: function( event, ui, el) {
@@ -156,84 +160,21 @@
               // again
 
               if ( slotNumber == cardNumber ) {
-                this.gameData.matchQty++;
+                this.gameData.answeredQty++;
 //                ui.draggable.addClass( 'correct' );
                 ui.draggable.draggable( 'disable' );
                 ui.draggable.position( { of: $(el), my: 'right top', at: 'right top' } );
                 ui.draggable.draggable( 'option', 'revert', false );
-              ui.draggable.delay(250).animate({ opacity: 0}, 'slow');
-                this.updateFeedback();
+                ui.draggable.delay(250).animate({ opacity: 0}, 'slow');
+                this.broadcastScore();
               } 
            },
          
-           updateFeedback: function() {
-              var msg = 'Matches: ' + this.gameData.matchQty + "/" + this.gameData.answerQty;
-              if(this.gameData.matchQty == this.gameData.answerQty)
-              {
-                 var t = (new Date).getTime();
-                 var s = Math.floor((t- this.gameData.timeStart) / 1000);
-                 // format time like hh:mm:ss
-                 var h = parseInt(s / 3600), m = parseInt((s - h * 3600) / 60); s = s % 60;
-                 var formatted = (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
-                 msg += '&nbsp;-&nbsp;Time: ' + formatted;
-
-              }
-             this.feedbackBox.html(msg);
-           },
-
-         // ################
-         // Items Parsers
-         // ################
-         parseItemList: function(str) {
-            var str, item, list = [];
-            var wg = this;
-            var itemIdx = 0;
-            this.container.children('p').each(function(i) {
-               str = $(this).html();
-               list.push(wg.parseItem(str, itemIdx));
-               itemIdx++;
-            });
-            return list;
-         },
-
-         /**
-          * Transform an item as specified by the user into an internal item object.
-          *
-          * @return {Object}
-          * @param str String An item string that follows the following conventions - question = options   
-          */
-         parseItem: function(str, id) {
-            var item = {id: id, html: '', options: []};
-            var arr = str.split(this.options.answerMarker);
-            if(arr[0]) { item.html = this.trim(arr[0]); }
-            if(!arr[0] || !arr[1]) { return item }
-            arr = String(arr[1]).split("#");
-            if(arr[0]) { item.options = item.options.concat(this.parseItemOptions(arr[0], true)) };
-            if(arr[1]) { item.options = item.options.concat(this.parseItemOptions(arr[1], false)) };
-            return item;
-         },
-         
-         /**
-          * Transform the options part of an item as specified by the user into an internal item object.
-          *
-          * @return {Object}
-          * @param str String An item string that follows the following conventions - correct1 | correct2 | correct3 # distractor1 | distractor2 | distractor3   
-          */
-         parseItemOptions: function(str, isCorrect) 
-         {
-            var arr = str.split("|");
-            var list = [];
-            for(var i = 0; i < arr.length; i++)
-            {
-               list.push({html: arr[i], correct: isCorrect});
-            }
-            return list;
-         },         
-         
-         trim: function(str) {
-            return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-         }  
- 
+           broadcastScore: function() {
+              console.log("[matching.broadcastScore]");
+              var msElapsed = (new Date).getTime() - this.gameData.timeStart;
+              $(document).trigger('score.update',[{board: this.options.scoreBoard ,answerQty: this.gameData.answerQty, answeredQty: this.gameData.answeredQty, timeElapsed: msElapsed}]);
+           }
     });
 
 

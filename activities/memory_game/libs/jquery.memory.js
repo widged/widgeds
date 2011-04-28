@@ -66,7 +66,6 @@
     $.wg = function(e, o) {
         this.options    = $.extend({}, defaults, o || {});
         this.container   = $(e);
-        widged.init();
         this.setup();
     };
     
@@ -168,7 +167,7 @@
          
          broadcastScore: function() {
             var msElapsed = (new Date).getTime() - this.gameData.timeStart;
-            $(document).trigger('score.update',[{board: this.options.scoreBoard ,itemQty: this.gameData.pairQty, answeredQty: this.gameData.matchQty, timeElapsed: msElapsed}]);
+            $(document).trigger('score.update',[{board: this.options.scoreBoard ,answerQty: this.gameData.pairQty, answeredQty: this.gameData.matchQty, timeElapsed: msElapsed}]);
          }
  
     });
