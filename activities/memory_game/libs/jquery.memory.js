@@ -94,7 +94,7 @@
          
          listResult: function(list) {
             list.sort(function(a,b){ return 0.5 - Math.random()});
-            this.gameData = {listClicked: [], matchQty: 0, pairQty: (list.length / 2)};
+            this.gameData = {listClicked: [], answeredQty: 0, answerQty: (list.length / 2)};
             this.draw(list);
          },
          
@@ -156,7 +156,7 @@
                card2.unbind('click');
                card2.find('.card').animate({ visibility: 'toggle' }, 'slow');
                card2.find('.back').hide();
-               this.gameData.matchQty++;
+               this.gameData.answeredQty++;
                this.broadcastScore();
                return;
             } 
@@ -167,7 +167,7 @@
          
          broadcastScore: function() {
             var msElapsed = (new Date).getTime() - this.gameData.timeStart;
-            $(document).trigger('score.update',[{board: this.options.scoreBoard ,answerQty: this.gameData.pairQty, answeredQty: this.gameData.matchQty, timeElapsed: msElapsed}]);
+            $(document).trigger('score.update',[{board: this.options.scoreBoard ,answerQty: this.gameData.answerQty, answeredQty: this.gameData.answeredQty, timeElapsed: msElapsed}]);
          }
  
     });

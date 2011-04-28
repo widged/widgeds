@@ -16,7 +16,7 @@
        updateFeedback: function(params) {
           console.log("[scoreBoard.updateFeedback]")
           var boardEl = params.board;
-          var msg = 'Matches: ' + params.answeredQty + "/" + params.answerQty;
+          var msg = 'Answered: ' + params.answeredQty + "/" + params.answerQty;
           if(params.answeredQty == params.answerQty)
           {
              var s = Math.floor(params.timeElapsed / 1000);
