@@ -3,18 +3,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
 <head>
   <title>Memory Game Widged</title>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="../../../editors/jQuery/jquery-1.5.1.min.js"></script>
 </head>
 <body>
+  <h1>Memory Game</h1>
+  <h2>jQuery widged</h2>
 
+  <noscript>
+    <div style="color:#CC0000; text-align:center">
+      <strong>Warning: This activity requires javascript. <br />
+      If your browser supports JavaScript, be sure it is enabled.</strong>
+    </div>
+  </noscript>
+
+
+<div style="width:420px">
 <div class="wg-memory" id="a-0"></div>
+<div id="memory-scoreboard" style="background-color: #F9F9f9;border: 1px solid #999;position:relative;clear:both;padding:9px;width:' + maxX + 'px"></div>
+</div>
 
 <script type="text/javascript" src="libs/jquery.memory.js"></script>
+<script type="text/javascript" src="../../../core/widged.js"></script>
+<script type="text/javascript" src="../../../core/parser.js"></script>
+<script type="text/javascript" src="../../../core/scoreboard.js"></script>
+
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
 <!--
+
   jQuery(".wg-memory#a-0").wgMemory(
       {
+		   parser: 'simple',
+			scoreBoard: '#memory-scoreboard',
          cardWidth: 100,
          cardHeight: 100,
          columnQty: 4,
