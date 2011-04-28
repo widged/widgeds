@@ -91,7 +91,7 @@
             console.log('[matching.setup]');
             var wg = this;
             this.container.bind("result", function(e, data){ wg.listResult(data); });
-            $(document).trigger('parser.run',[{eventTarget:this.container, parser: this.options.parser, answerMarker: this.options.answerMarker}]);
+            $(document).trigger('parser.run',{eventTarget:this.container, parser: this.options.parser});
          },
          
          listResult: function(data) {

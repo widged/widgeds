@@ -26,9 +26,8 @@
   widged.init();
   jQuery(".wg-dragDrop").wgDragDrop(
       {
-			parser: 'parseItems',
+			parser: {uid: 'parseItems', answerMarker: '=='},
 			scoreBoard: "#a-0-scoreBox",
-			answerMarker: '==',
 			questionBackgroundColor: '#E6FFB3',
 			questionBorderColor: '#C4E67F',
 			answerBackgroundColor: '#F4CFE8',

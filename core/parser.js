@@ -1,16 +1,15 @@
 (function(){
     var parser = {
        init: function () {
-          $(document).bind("parser.run", function(e, status){
+          $(document).bind("parser.run", function(e, data){
              e.stopPropagation();
-             console.log("[parser.init]");
-             switch(status.parser)
+             switch(data.parser.uid)
              {
                 case 'memoryGame':
-                  parser.memoryGame(status.itemList, status.eventTarget);
+                  parser.memoryGame(data.itemList, data.eventTarget);
                   break;
                case 'parseItems':
-                 parser.parseItemList(status.eventTarget, status.answerMarker);
+                 parser.parseItemList(data.eventTarget, data.parser.answerMarker);
                  break;
              }
           });
@@ -34,7 +33,6 @@
        // Items Parsers
        // ################
        parseItemList: function(eventTarget, answerMarker) {
-          console.log('parseItemList');
           var str, item, list = [];
           var wg = this;
           var itemIdx = 0;
