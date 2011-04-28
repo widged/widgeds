@@ -1,5 +1,5 @@
 /*
- CardFlip - Fridge CardFlip with jQuery
+ Memory Game - Memory Game
  http://github.com/widged/widgeds
 
  Created: Marielle Lange, 2011
@@ -9,7 +9,7 @@
    http://jquery.com
 */
 
-(function($) {
+(function($, undefined) {
 
     /**
      * Creates an activity
@@ -26,10 +26,12 @@
         });
     };
 
-    var version = '0.0.1';
+    var version = '0.0.2';
 
     // Default configuration properties.
     var defaults = {
+         parser: false,
+         scoreBoard: false,
          cardWidth: 100,
          cardHeight: 100,
          columnQty: 4,
@@ -64,6 +66,7 @@
     $.wg = function(e, o) {
         this.options    = $.extend({}, defaults, o || {});
         this.container   = $(e);
+        widged.init();
         this.setup();
     };
     
@@ -72,19 +75,6 @@
     };
 
     $.wg.fn.extend = $.wg.extend = $.extend;
-
-    $.wg.extend({
-        /**
-         * Gets/Sets the global default configuration properties.
-         *
-         * @return {Object}
-         * @param d {Object} A set of key/value pairs to set as configuration properties.
-         */
-        defaults: function(d) {
-            return $.extend(defaults, d || {});
-        }
-   
-    });
 
     // ##############################################
     //      End of plugin logic >>>
@@ -97,24 +87,16 @@
          * @return undefined
          */
          setup: function() {
+            var wg = this;
             var pairs = this.options.cards;
-            var list = this.parseItems(pairs);
-            list.sort(function(a,b){ return 0.5 - Math.random()});
-
-            this.gameData = {listClicked: [], matchQty: 0, pairQty: (list.length / 2)};
-            this.draw(list);
+            this.container.bind("result", function(e, status){ wg.listResult(status.data); });
+            $(document).trigger('parser.run',[{eventTarget:this.container, parser: this.options.parser, itemList: pairs}]);
          },
          
-         parseItems: function(pairs) {
-            var pairItem, list = [];
-            for(var i = 0; i < pairs.length; i++)
-            {
-               pairItem = pairs[i];
-               if(pairItem.match == undefined) { pairItem.match = pairItem.card }
-               list.push({img: pairItem.card,  matchId: i});
-               list.push({img: pairItem.match, matchId: i});
-            }
-            return list;
+         listResult: function(list) {
+            list.sort(function(a,b){ return 0.5 - Math.random()});
+            this.gameData = {listClicked: [], matchQty: 0, pairQty: (list.length / 2)};
+            this.draw(list);
          },
          
          draw: function(list) {
@@ -142,15 +124,13 @@
                   script.cardClicked(event.data.el, event.data.matchId);
                });
                
-               this.feedbackBox = $('<div style="background-color: #F9F9f9;border: 1px solid #999;position:relative;clear:both;padding:9px;width:' + maxX + 'px"></div>');
                gameBox.append(slotEl);
                posX += cardWidth;
                if(posX >= maxX) { posX = 0; posY += cardHeight; }
             }
             this.container.html('');
             this.container.append(gameBox);
-            this.container.append(this.feedbackBox);
-            this.updateFeedback();
+            this.broadcastScore();
          },
          
          cardClicked: function(cardEl, matchId) {
@@ -178,7 +158,7 @@
                card2.find('.card').animate({ visibility: 'toggle' }, 'slow');
                card2.find('.back').hide();
                this.gameData.matchQty++;
-               this.updateFeedback();
+               this.broadcastScore();
                return;
             } 
 
@@ -186,22 +166,13 @@
             card2.find('.back').delay(250).animate({ visibility: 'show' }, 'slow');
          },
          
-         updateFeedback: function() {
-            var msg = 'Matches: ' + this.gameData.matchQty + "/" + this.gameData.pairQty;
-            if(this.gameData.matchQty == this.gameData.pairQty)
-            {
-               var t = (new Date).getTime();
-               var s = Math.floor((t- this.gameData.timeStart) / 1000);
-         		// format time like hh:mm:ss
-         		var h = parseInt(s / 3600), m = parseInt((s - h * 3600) / 60); s = s % 60;
-         		var formatted = (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
-               msg += '&nbsp;&nbsp;&nbsp;Completion time: ' + formatted;
-               
-            }
-            this.feedbackBox.html(msg);
+         broadcastScore: function() {
+            var msElapsed = (new Date).getTime() - this.gameData.timeStart;
+            $(document).trigger('score.update',[{board: this.options.scoreBoard ,itemQty: this.gameData.pairQty, answeredQty: this.gameData.matchQty, timeElapsed: msElapsed}]);
          }
  
     });
 
 
 })(jQuery);
+
