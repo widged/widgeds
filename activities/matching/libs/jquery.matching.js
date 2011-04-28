@@ -30,7 +30,7 @@
 
     // Default configuration properties.
     var defaults = {
-         parser: "parseItems",
+       parser: {uid: "parseItems"},
          scoreBoard: false,
 			answerMarker: '=',
 			questionBackgroundColor: '#E6FFB3',

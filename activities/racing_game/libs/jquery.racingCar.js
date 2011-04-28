@@ -22,13 +22,16 @@
      */
     $.fn.wgRacingCar = function(o) {
          return this.each(function() {
-            $(this).data('wgRacingCar', new $wg(this, o));
+            $(this).data('wg', new $.wg(this, o));
          });
     };
+
+    var version = '0.0.1';
 
     // Default configuration properties.
     var defaults = {
  		// constants
+      parser: {uid: "parseItems"},
  		minimumQuestionQty: 10,
  		sprites: [
  		  {image: 'assets/blue.png'},
@@ -38,58 +41,79 @@
  		]
     };
     
+    // ##############################################
+    // <<<  Plugin logic, shared by all widgets
+    //      (no modifications required, leave on top)
+    // ##############################################
     /**
-     * The wgRacingCar object.
+     * The widged object.
      *
      * @constructor
-     * @class wgRacingCar
+     * @class widged
      * @param e {HTMLElement} The element to create the widged for.
      * @param o {Object} A set of key/value pairs to set as configuration properties.
-     * @cat Plugins/wgRacingCar
+     * @cat Plugins/widged
      */
-    $.wgRacingCar = function(e, o) {
+    $.wg = function(e, o) {
         this.options    = $.extend({}, defaults, o || {});
-
         this.container   = $(e);
-        this.controlBox;
-        this.currentItem = 0;
-        this.itemList = [];
-        this.score = {answered: [], correctIndices: [], incorrectIndices: []};
         this.setup();
     };
-    
 
-    // Create shortcut for internal use
-    var $wg = $.wgRacingCar;
-
-    $wg.fn = $wg.prototype = {
-        wgRacingCar: '0.0.1'
+    $.wg.fn = $.wg.prototype = {
+        version: this.version
     };
 
-    $wg.fn.extend = $wg.extend = $.extend;
+    $.wg.fn.extend = $.wg.extend = $.extend;
 
-    $wg.fn.extend({
+    $.wg.extend({
+        /**
+         * Gets/Sets the global default configuration properties.
+         *
+         * @return {Object}
+         * @param d {Object} A set of key/value pairs to set as configuration properties.
+         */
+        defaults: function(d) {
+            return $.extend(defaults, d || {});
+        }
+    });
+
+
+    // ##############################################
+    //      End of plugin logic >>>
+    // ##############################################
+    $.wg.fn.extend({
         /**
          * Setups the widged.
          *
          * @return undefined
          */
          setup: function() {
+            this.controlBox;
+            this.currentItem = 0;
+            this.itemList = [];
+            this.score = {answered: [], correctIndices: [], incorrectIndices: []};
 
             var str, item, list = [];
             var wg = this;
-            this.container.children('p').each(function(i) {
-               str = $(this).html();
-               list.push(wg.parseActivityItem(str));
-            });
+            this.container.bind("parseError", function(e, error){ alert(error.msg) });
+            this.container.bind("parseResult", function(e, data){ wg.listResult(data.list); });
+            $(document).trigger('parser.run',{eventTarget:this.container, parser: this.options.parser});
+         },
+
+         listResult: function(list) {
             this.itemList = list;
-            
+            this.draw(list);
+         },
+
+         draw: function(list) {
+            this.gameData = {timeStart: null, answeredQty: 0, answerQty: list.length};
+
             var gameScreen = $('<div style="border-color:#000000;border-style:solid;margin:0px;padding:0px;font-family:Geneva,Arial"/>')
             var w = this.container.width() - 20;
             gameScreen.width(w);
             
             this.controlBox = $('<div style="margin-top:10px;margin-bottom:40px;text-align:center;height:100px;width:100%;"/>'); // align center doesn't work as expected
-            
             var spriteW = 90;
             var spriteH = 76;
             var racingBox = $('<div class="racingBox" style="position:relative;margin:10px;"/>');
@@ -120,24 +144,6 @@
             this.container.html(gameScreen);
             
             this.updateActivity('init');
-         },
-         
-         parseActivityItem: function(str) {
-            var arr, itemHTML, options, optionList;
-            arr = str.split("=");
-            itemHTML = arr[0].replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-            options = arr[1];
-            arr = options.split('|');
-            optionList = [];
-            for(var i = 0; i < arr.length; i++)
-            {
-               optionList.push({
-                  html: arr[i].replace(/^\s\s*/, '').replace(/\s\s*$/, ''),
-                  correct: (i == 0) ? true : false,
-               });
-            }
-            optionList.sort(function(a,b){ return 0.5 - Math.random()});
-            return {html: itemHTML, options: optionList};
          },
          
          // ################
@@ -297,17 +303,5 @@
         }      
     });
 
-    $wg.extend({
-        /**
-         * Gets/Sets the global default configuration properties.
-         *
-         * @return {Object}
-         * @param d {Object} A set of key/value pairs to set as configuration properties.
-         */
-        defaults: function(d) {
-            return $.extend(defaults, d || {});
-        }
-   
-    });
 
 })(jQuery);
