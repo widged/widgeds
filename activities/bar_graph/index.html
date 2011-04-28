@@ -17,15 +17,30 @@
 </div>
 
 <script type="text/javascript" src="libs/jquery.barGraph.1.1.min.js"></script>
+<script type="text/javascript" src="../../core/widged.js"></script>
+<script type="text/javascript" src="../../core/parser.js"></script>
 <script language="JavaScript" type="text/javascript">
 
-$(".wg-bargraph#a-0").jqBarGraph({
-	width: 500,
-	colors: ['#122A47','#1B3E69'],
-	color: '#1A2944',
-	barSpace: 5,
-	title: '<h3>Number of visitors per month<br /><small>simple bar graph</small></h3>'
-});
+
+widged.init();
+var container = jQuery(".wg-bargraph#a-0");
+container.bind("result", function(e, status){ listResult(status.list); });
+$(document).trigger('parser.run',[{eventTarget: container, parser: {uid: "dataSerie", answerNumeric: true}}]);
+
+function listResult(list) {
+	container.html('');
+	
+	jQuery(".wg-bargraph#a-0").jqBarGraph({
+		data: list,
+		width: 500,
+		colors: ['#122A47','#1B3E69'],
+		color: '#1A2944',
+		barSpace: 5,
+		title: '<h3>Number of visitors per month<br /><small>simple bar graph</small></h3>'
+	});
+	
+}
+
 
 
 
