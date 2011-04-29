@@ -1,5 +1,5 @@
 /*
- Rating for widgeds
+ Notifications for widgeds
 
  Created: Marielle Lange, 2011
  Distributed under the MIT (http://www.opensource.org/licenses/mit-license.php)
@@ -9,9 +9,10 @@
 */
 
 (function(){
-    var rating = {
+    var notification = {
+
 
     if(!window.widged){window.widged={};}//We create a shortcut for our framework, we can call the methods by $$.method();
-   $.extend(true, window.widged, {rating: rating});
+   $.extend(true, window.widged, {notification: notification});
 })();
 
