@@ -1,6 +1,6 @@
 /**
  * Memory game, a widged with jQuery
- * @version: 0.2 (2011/04/28)
+ * @version: 0.3 (2011/04/28)
  * @requires jQuery v1.4.2 or later 
  * @author Marielle Lange
  * Source: http://github.com/widged/widgeds
@@ -29,7 +29,7 @@
         });
     };
 
-    var version = '0.2';
+    var version = '0.3';
 
     // Default configuration properties.
     var defaults = {
