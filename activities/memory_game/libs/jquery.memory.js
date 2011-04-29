@@ -33,8 +33,6 @@
 
     // Default configuration properties.
     var defaults = {
-         parser: false,
-         scoreBoard: false,
          cardWidth: 100,
          cardHeight: 100,
          columnQty: 4,
@@ -91,19 +89,17 @@
          */
          setup: function() {
             var wg = this;
-            var pairs = this.options.cards;
             this.container.bind("parseError", function(e, error){ alert(error.msg) });
-            this.container.bind("parseResult", function(e, data){ wg.listResult(data.list); });
-            $(document).trigger('parser.run',[{eventTarget:this.container, parser: this.options.parser, itemList: pairs}]);
+            this.container.bind("parseResult", function(e, data){ wg.onDataChange(data.list); });
          },
          
-         listResult: function(list) {
+         onDataChange: function(list) {
             list.sort(function(a,b){ return 0.5 - Math.random()});
             this.gameData = {listClicked: [], answeredQty: 0, answerQty: (list.length / 2)};
-            this.draw(list);
+            this.render(list);
          },
          
-         draw: function(list) {
+         render: function(list) {
             var backImg    = this.options.cardBackImage;
             var matchImg   = this.options.cardMatchImage;
             var cardWidth  = this.options.cardWidth + 3;
@@ -176,7 +172,7 @@
 
          broadcastScore: function() {
             var msElapsed = (new Date).getTime() - this.gameData.timeStart;
-            $(document).trigger('score.update',[{board: this.options.scoreBoard ,answerQty: this.gameData.answerQty, answeredQty: this.gameData.answeredQty, timeElapsed: msElapsed}]);
+            this.container.trigger('score.change',[{board: this.options.scoreBoard ,answerQty: this.gameData.answerQty, answeredQty: this.gameData.answeredQty, timeElapsed: msElapsed}]);
          }
  
          // ##############################################

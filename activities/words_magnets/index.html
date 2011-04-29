@@ -4,22 +4,23 @@
 <head>
   <title>Word Magnets Widged</title>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js" type="text/javascript"></script>
 </head>
 <body>
 
-<div id="fridge" class="wg-magnet">
+<div id="a-0" class="wg-magnet">
 put these words in the right order.
 </div>
   
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../core/widged.js"></script>
 <script type="text/javascript" src="libs/jquery.word-magnets.js"></script>
 <script type="text/javascript">
     //make the magnets draggable and constrained to the fridge (their parent)
-    jQuery('.wg-magnet').wgMagnets({
+    jQuery('#a-0').wgMagnets({
 		width: 300,
 		height: 150
     });
+	widged.parser.run("#a-0", 'words');
 </script>
 </body>
 </html>

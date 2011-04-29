@@ -129,6 +129,10 @@
          * @return undefined
          */
         setup: function() {
+           this.render();
+        },
+
+        render: function() {
 
            this.feedback = $('<div class="treasure-chest-feedback">');
            this.feedback.css({'padding': '10px', 'background-color': '#FFFFD0', 'font-family': 'Verdana', 'font-size': '12pt', 'line-height': '2' });

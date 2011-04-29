@@ -33,9 +33,6 @@
 
     // Default configuration properties.
     var defaults = {
-       parser: {uid: "itemList"},
-         scoreBoard: false,
-			answerMarker: '=',
 			questionBackgroundColor: '#E6FFB3',
 			questionBorderColor: '#C4E67F',
 			answerBackgroundColor: '#F4CFE8',
@@ -67,8 +64,6 @@
 
     $wg.fn.extend = $wg.extend = $.extend;
 
-
-
     // ##############################################
     //      End of plugin logic >>>
     // ##############################################
@@ -82,16 +77,15 @@
          setup: function() {
             var wg = this;
             this.container.bind("parseError", function(e, error){ alert(error.msg) });
-            this.container.bind("parseResult", function(e, data){ wg.listResult(data.list); });
-            $(document).trigger('parser.run',{eventTarget:this.container, parser: this.options.parser});
+            this.container.bind("parseResult", function(e, data){ wg.onDataChange(data.list); });
          },
          
-         listResult: function(list) {
+         onDataChange: function(list) {
             this.gameData = {timeStart: null, answeredQty: 0, answerQty: list.length};
-            this.draw(list);
+            this.render(list);
          },
          
-         draw: function(list) {
+         render: function(list) {
 
             this.container.html('');
             list.sort( function() { return Math.random() - .5 } );
@@ -160,10 +154,17 @@
               } 
            },
          
+           // ##############################################
+           // <<<  Events Broadcasting
+           // ##############################################
            broadcastScore: function() {
               var msElapsed = (new Date).getTime() - this.gameData.timeStart;
-              $(document).trigger('score.update',[{board: this.options.scoreBoard ,answerQty: this.gameData.answerQty, answeredQty: this.gameData.answeredQty, timeElapsed: msElapsed}]);
+              this.container.trigger('score.change',[{answerQty: this.gameData.answerQty, answeredQty: this.gameData.answeredQty, timeElapsed: msElapsed}]);
            }
+           // ##############################################
+           //    broadcasting >>>
+           // ##############################################
+
     });
 
 

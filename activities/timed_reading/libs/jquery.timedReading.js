@@ -72,7 +72,10 @@
          * @return undefined
          */
         setup: function() {
+           this.render();
+        },
 
+        render: function() {
            // game parameters
            var divHTML = this.container.html();
            this.controlBox = $('<div style="margin-bottom:40px;text-align:center;"/>');

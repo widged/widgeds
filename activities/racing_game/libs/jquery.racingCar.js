@@ -34,7 +34,7 @@
     // Default configuration properties.
     var defaults = {
  		// constants
-      parser: {uid: "itemList"},
+      itemParser: "elementList",
  		minimumQuestionQty: 10,
  		sprites: [
  		  {image: 'assets/blue.png'},
@@ -88,16 +88,16 @@
             var str, item, list = [];
             var wg = this;
             this.container.bind("parseError", function(e, error){ alert(error.msg) });
-            this.container.bind("parseResult", function(e, data){ wg.listResult(data.list); });
-            $(document).trigger('parser.run',{eventTarget:this.container, parser: this.options.parser});
+            this.container.bind("parseResult", function(e, data){ wg.onDataChange(data.list); });
          },
 
-         listResult: function(list) {
+         onDataChange: function(list) {
             this.itemList = list;
-            this.draw(list);
+            this.render();
          },
 
-         draw: function(list) {
+         render: function() {
+            var list = this.itemList;
             this.gameData = {timeStart: null, answeredQty: 0, answerQty: list.length};
 
             var gameScreen = $('<div style="border-color:#000000;border-style:solid;margin:0px;padding:0px;font-family:Geneva,Arial"/>')

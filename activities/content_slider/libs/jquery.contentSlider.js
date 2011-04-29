@@ -77,6 +77,10 @@
          * @return undefined
          */
          setup: function() {
+            this.render();
+         },
+         
+         render: function() {
             panels = [];
 
             this.container.children('div').each(function(i) {

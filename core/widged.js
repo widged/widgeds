@@ -25,32 +25,38 @@
 
 (function(){
     var scoreboard = {
+       hookMap: {},
 
-       boardEl: null,
+       hook: function (boardSel, widgedSel) {
+          var widgedEl = jQuery(widgedSel);
+          if(!scoreboard.hookMap[widgedEl]) { scoreboard.hookMap[widgedEl] = [] }; 
+          scoreboard.hookMap[widgedEl].push(boardSel); 
 
-       init: function () {
-          $(document).bind("score.update", function(e, status){
-             scoreboard.updateFeedback(status);
+          widgedEl.bind("score.change", function(e, status){
+             scoreboard.updateFeedback(e.target, status);
           });
        },
        
-       hello: function(status) {
-          alert('status:' + status.answerQty)          
-       },
-       
-       updateFeedback: function(params) {
-          var boardEl = params.board;
-          var msg = 'Answered: ' + params.answeredQty + "/" + params.answerQty;
-          if(params.answeredQty == params.answerQty)
-          {
-             var s = Math.floor(params.timeElapsed / 1000);
-       		// format time like hh:mm:ss
-       		var h = parseInt(s / 3600), m = parseInt((s - h * 3600) / 60); s = s % 60;
-       		var formatted = (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
-             msg += '&nbsp;&nbsp;&nbsp;Completion time: ' + formatted;
+       updateFeedback: function(wgEl, params) {
+          // when using this.hookMap, the object content is lost after the binding. 
+          // coreboard.hookMap maintains the value over binding (static variable);
+          var wgEl = jQuery(wgEl);
+          var boardList = scoreboard.hookMap[wgEl];
+          for(var i = 0; i < boardList.length; i++) {
+             var boardEl = jQuery(boardList[i]);
              
-          }
-          jQuery(boardEl).html(msg);
+             var msg = 'Answered: ' + params.answeredQty + "/" + params.answerQty;
+             if(params.answeredQty == params.answerQty)
+             {
+                var s = Math.floor(params.timeElapsed / 1000);
+          		// format time like hh:mm:ss
+          		var h = parseInt(s / 3600), m = parseInt((s - h * 3600) / 60); s = s % 60;
+          		var formatted = (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
+                msg += '&nbsp;&nbsp;&nbsp;Completion time: ' + formatted;
+
+             }
+             jQuery(boardEl).html(msg);
+          };
        }
     };
    
@@ -74,35 +80,37 @@
              parser.run(data.eventTarget, data);
           });
        },
+       
+       run: function(eventTarget, parserId, settings) {
+          var itemList, itemText, data, error;
+          var eventTarget = jQuery(eventTarget);
 
-       run: function(eventTarget, params) {
-          var settings = params.parser;
-          var parserId = params.parser.uid;
-          var itemList, data, error;
 
-          if(params.itemList) {
-             itemList = params.itemList;
-          } else {
-             itemList = widged.parser.itemsInElement(eventTarget);
-          }
-          
-          
           switch(parserId)
           {
+                case 'singleItem':
+                   itemText = this.getItemText(eventTarget, settings);
+                   data = parser.parseItem(itemText, 0, settings);
+                   break;
                case 'memoryGame':
+                  itemList = this.getItemList(eventTarget, settings);
                   data = {list: parser.memoryGame(itemList)};
                   break;
                case 'itemList':
+                  itemList = this.getItemList(eventTarget, settings);
                   data = {list: parser.parseItemList(itemList, settings)};
                   break;
-            case 'inlineList':
-                  data = {list: parser.parseInlineList(eventTarget.html(), settings)};
+               case 'inlineList':
+                  itemText = this.getItemText(eventTarget, settings);
+                  data = {list: parser.parseInlineList(itemText, settings)};
                   break;
-               case 'parseItem':
-                  data = parser.parseItem(params.text, 0, settings);
-                  break;
-               case 'dataSerie':
+               case 'dataSeries':
+                  itemList = this.getItemList(eventTarget, settings);
                   data = {list: parser.parseDataSerie(itemList, settings)};
+                  break;
+               case 'words':
+                  itemText = this.getItemText(eventTarget, settings);
+                  data = {list: parser.parseWords(itemText, settings)};
                   break;
                default:
                   data = null;
@@ -116,12 +124,24 @@
           }          
        },
        
-       itemsInElement: function(eventTarget) {
+       getItemList: function(eventTarget, settings) {
+          if(settings && settings.itemList) {
+             return settings.itemList;
+          }
+
           var list = [];
           eventTarget.children('p').each(function(i) {
               list.push($(this).html());
          });
          return list;
+       },
+
+       getItemText: function(eventTarget, settings) {
+          if(settings && settings.text) {
+             return settings.text;
+          }
+
+         return eventTarget.html();
        },
 
        // ################
@@ -163,15 +183,28 @@
           {
              item = arr[i];
              if(item == undefined) { continue; }
+             if(!settings) { settings = {}; }
              settings.answerMarker = "{{";
              list.push(widged.parser.parseItem(item, "i_" + i, settings));
           }
           return list;
        },
 
-       // ################
-       // ### Items Parsers
-       // ################
+       // ### Words
+       parseWords: function(text) {
+          var arr = text.split(/[ \t\n]+/);
+          var list = [], item = '';
+          for(var i = 0; i < arr.length; i++)
+          {
+             item = arr[i];
+             if(item == undefined || !item.length) { continue; }
+             list.push({html: item});
+          }
+          return list;
+       },
+       
+
+       // ### element list
        parseItemList: function(itemList, parserSettings) {
           var settings = jQuery.extend({answerMarker: '=', optionMarker: "#"}, parserSettings);
           var str, item, list = [];
@@ -220,6 +253,8 @@
           }
           return list;
        },         
+       
+       
        
        // ################
        // ### Utilities

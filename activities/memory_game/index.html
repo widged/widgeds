@@ -19,7 +19,7 @@
 
 <div style="width:420px">
 <div class="wg-memory" id="a-0"></div>
-<div id="memory-scoreboard" style="background-color: #F9F9f9;border: 1px solid #999;position:relative;clear:both;padding:9px;width:' + maxX + 'px"></div>
+<div id="a-0-scoreboard" style="background-color: #F9F9f9;border: 1px solid #999;position:relative;clear:both;padding:9px;width:' + maxX + 'px"></div>
 </div>
 
 <script type="text/javascript" src="../../core/widged.js"></script>
@@ -28,29 +28,27 @@
 //<![CDATA[
 <!--
 
-  widged.parser.init();
-  widged.scoreboard.init();
   jQuery(".wg-memory#a-0").wgMemory(
       {
-		   parser: {uid: 'memoryGame'},
-			scoreBoard: '#memory-scoreboard',
          cardWidth: 100,
          cardHeight: 100,
          columnQty: 4,
          cardBackImage:     'assets/card_pattern.png',
          cardMatchImage:    'assets/card_done.png',
-         cards: [
-            {card: 'assets/apple_img.png',   match: 'assets/apple_txt.png'},
-            {card: 'assets/banana_img.png',  match: 'assets/banana_txt.png'},
-            {card: 'assets/burger_img.png',  match: 'assets/burger_txt.png'},
-            {card: 'assets/carrots_img.png', match: 'assets/carrots_txt.png'},
-            {card: 'assets/chicken_img.png', match: 'assets/chicken_txt.png'},
-            {card: 'assets/fish_img.png',    match: 'assets/fish_txt.png'},
-            {card: 'assets/grapes_img.png',  match: 'assets/grapes_txt.png'},
-            {card: 'assets/milk_img.png',    match: 'assets/milk_txt.png'}
-         ]
       }
     );
+	widged.scoreboard.hook("#a-0-scoreboard", "#a-0");
+	widged.parser.run("#a-0", 'memoryGame',  {itemList: [
+      {card: 'assets/apple_img.png',   match: 'assets/apple_txt.png'},
+      {card: 'assets/banana_img.png',  match: 'assets/banana_txt.png'},
+      {card: 'assets/burger_img.png',  match: 'assets/burger_txt.png'},
+      {card: 'assets/carrots_img.png', match: 'assets/carrots_txt.png'},
+      {card: 'assets/chicken_img.png', match: 'assets/chicken_txt.png'},
+      {card: 'assets/fish_img.png',    match: 'assets/fish_txt.png'},
+      {card: 'assets/grapes_img.png',  match: 'assets/grapes_txt.png'},
+      {card: 'assets/milk_img.png',    match: 'assets/milk_txt.png'}
+   ]
+   });
 //-->
 //]]>
 </script>

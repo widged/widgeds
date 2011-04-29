@@ -7,7 +7,7 @@
 </head>
 <body>
 
-  <div class="wg-racingCar">
+  <div class="wg-racingCar" id="a-0">
     <p class="item">UN + DEUX = 3 | 4 | 2 | 1</p>
     <p class="item">8 + 4 = 12 | 16 | 14 | 24</p>
     <p class="item">2 + 7 = 9 | 5 | 10 | 11</p>
@@ -40,7 +40,6 @@
 
 //<![CDATA[
 <!--
-  widged.parser.init();
   jQuery(".wg-racingCar").wgRacingCar(
       {
      		minimumQuestionQty: 10,
@@ -52,6 +51,7 @@
      		]
       }
     );
+	widged.parser.run("#a-0", 'itemList');
 //-->
 //]]>
 </script>  

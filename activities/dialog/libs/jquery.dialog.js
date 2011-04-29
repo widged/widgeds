@@ -84,6 +84,11 @@
          * @return undefined
          */
          setup: function() {
+            this.render();
+         },
+         
+         render: function() {
+         
             sentences = [];
 
             var avatarList = [];

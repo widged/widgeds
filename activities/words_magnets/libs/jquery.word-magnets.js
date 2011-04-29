@@ -33,6 +33,7 @@
 
     // Default configuration properties.
     var defaults = {
+      parser: {uid: "words"},
  		width: 600,
       height: 400
     };
@@ -73,18 +74,28 @@
          * @return undefined
          */
          setup: function() {
-
             // parse items in the activity division
-            this.itemList = this.parseWords();
+            var wg = this;
+            this.container.bind("parseError", function(e, error){ alert(error.msg) });
+            this.container.bind("parseResult", function(e, data){ wg.onDataChange(data.list); });
+         },
 
+         onDataChange: function(list) {
+            this.itemList = list;
+            this.render();
+         },
+
+         render: function() {
+
+            var list = this.itemList;
             // Build the html
             var html = '';
             var el;
             this.container.html('');
             this.container.css({'border':'1px solid black', 'width': this.options.width + 'px', 'height':this.options.height+'px', 'position':'relative'});
-            for(var i in this.itemList)
+            for(var i in list)
             {
-               var item = this.itemList[i];
+               var item = list[i];
                // items
                itemEl = $('<div class="magnet" style="left: 10px; top: 10px;">' + item.html + '</div>');
                itemEl.css({'border': '1px solid black', 'border-right': '2px solid black', 'border-bottom': '2px solid black', 'font-family': '"courier new",veranda,arial', 'float': 'left', 'padding': '0 3px 0 3px', 'background': 'white', 'cursor': 'pointer', 'position': 'absolute'});
@@ -99,23 +110,6 @@
                this.container.append(itemEl);
             }
             
-         },
-
-         // ################
-         // Itemps Parsers
-         // ################
-         
-         parseWords: function(str) {
-            var text = this.container.html();
-            var arr = text.split(/[ \t\n]+/);
-            var list = [], item = '';
-            for(var i = 0; i < arr.length; i++)
-            {
-               item = arr[i];
-               if(item == undefined || !item.length) { continue; }
-               list.push({html: item});
-            }
-            return list;
          }
  
     });

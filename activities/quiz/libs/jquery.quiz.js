@@ -33,6 +33,7 @@
 
     // Default configuration properties.
     var defaults = {
+		itemRender: "block",
  		mode: 'gaps',
       feedbackCorrect: "Correct"
     };
@@ -79,18 +80,18 @@
 
             var wg = this;
             this.container.bind("parseError", function(e, error){ alert(error.msg) });
-            this.container.bind("parseResult", function(e, data){ wg.listResult(data.list); });
-            $(document).trigger('parser.run',{eventTarget:this.container, parser: {uid: this.options.itemParser}});
+            this.container.bind("parseResult", function(e, data){ wg.onDataChange(data.list); });
          },
 
-         listResult: function(list) {
+         onDataChange: function(list) {
             this.gameData = {timeStart: null, answeredQty: 0, answerQty: list.length};
             this.itemList = list;
-            this.draw(list);
+            this.render();
          },
 
-         draw: function(list) {
+         render: function() {
             // Build the html
+            var list = this.itemList;
             var html = '';
             var el;
             this.container.html('');

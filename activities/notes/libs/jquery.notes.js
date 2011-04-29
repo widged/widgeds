@@ -108,7 +108,10 @@
          * @return undefined
          */
         setup: function() {
-
+           this.render();
+          },
+          
+       render: function() {
            // game parameters
            this.styleName = this.options.styleName;
 

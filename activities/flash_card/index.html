@@ -19,7 +19,6 @@
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
 <!--
-  widged.parser.init()
   jQuery(".wg-cardflip").wgCardFlip(
       {
 			width: '210px',
@@ -28,6 +27,8 @@
 			answerCardColor: '#FFE180'
       }
     );
+	widged.parser.run("#a-0", 'singleItem');
+	widged.parser.run("#a-1", 'singleItem');
 //-->
 //]]>
 </script>

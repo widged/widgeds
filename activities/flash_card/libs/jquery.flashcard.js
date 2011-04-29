@@ -32,7 +32,6 @@
 
     // Default configuration properties.
     var defaults = {
-      parser: {uid: 'parseItem'},
       width: 210,
       height: 120,
       questionCardColor: '#F9F9F9',
@@ -79,13 +78,14 @@
             this.container.css({'width':this.options.width,'height':this.options.height,'margin':'4px','position':'relative','cursor':'pointer'});
             var wg = this;
             var text = this.container.html();
-            this.container.bind("parseResult", function(e,data){ wg.parserResult(data); });
-            $(document).trigger('parser.run',[{eventTarget:this.container, parser: this.options.parser, text: this.container.html()}]);
+            this.container.bind("parseResult", function(e,data){ wg.onDataChange(data); });
          },
           
-         parserResult: function(data) {
-            var question = data.html;
-            var answer = data.options[0].html;
+         onDataChange: function(data) {
+           this.render(data.html, data.options[0].html); 
+         },
+         
+         render: function(question, answer) {
             this.clickToFlip = '<div style="position:absolute;bottom: 0px;width:100%;font-size:0.7em;text-align:center">click to flip</div>';
 
             var boxEl = $('<div/>');

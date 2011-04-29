@@ -39,30 +39,29 @@ them to lead, we have not made change our friend.
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
 <!--
-  widged.parser.init();
   jQuery(".wg-mcq#a-0").wgQuiz(
       {
-			itemParser: "itemList",
 			itemRender: "block",
 			mode: "option"
       }
     );
+	widged.parser.run("#a-0", 'itemList');
 
   jQuery(".wg-mcq#a-1").wgQuiz(
       {
-          itemParser: "itemList",
           itemRender: "block",
           mode: "list"
       }
     );
+	widged.parser.run("#a-1", 'itemList');
 
   jQuery(".wg-gapfill#a-2").wgQuiz(
       {
-			itemParser: "inlineList",
 			itemRender: "inline",
 			mode: "options"
       }
     );
+	widged.parser.run("#a-2", 'inlineList');
 
 //-->
 //]]>
