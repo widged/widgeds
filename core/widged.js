@@ -85,17 +85,12 @@
           var itemList, itemText, data, error;
           var eventTarget = jQuery(eventTarget);
 
-
           switch(parserId)
           {
                 case 'singleItem':
                    itemText = this.getItemText(eventTarget, settings);
                    data = parser.parseItem(itemText, 0, settings);
                    break;
-               case 'memoryGame':
-                  itemList = this.getItemList(eventTarget, settings);
-                  data = {list: parser.memoryGame(itemList)};
-                  break;
                case 'itemList':
                   itemList = this.getItemList(eventTarget, settings);
                   data = {list: parser.parseItemList(itemList, settings)};
@@ -147,20 +142,6 @@
        // ################
        // ### Parsers
        // ################
-
-       // ### memory Game
-
-       memoryGame: function (itemList) {
-           var pairItem, list = [];
-           for(var i = 0; i < itemList.length; i++)
-           {
-              pairItem = itemList[i];
-              if(pairItem.match == undefined) { pairItem.match = pairItem.card }
-              list.push({img: pairItem.card,  matchId: i});
-              list.push({img: pairItem.match, matchId: i});
-           }
-           return list;
-       },
 
        // ### data series
 

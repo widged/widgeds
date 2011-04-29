@@ -17,10 +17,17 @@
   </noscript>
 
 
-<div style="width:420px">
-<div class="wg-memory" id="a-0"></div>
-<div id="a-0-scoreboard" style="background-color: #F9F9f9;border: 1px solid #999;position:relative;clear:both;padding:9px;width:' + maxX + 'px"></div>
+<div class="wg-memory" id="a-0" style="height:420px;">
+	<p class="item"><img src="assets/apple_img.png"/>==<img src="assets/apple_txt.png"/></p>
+	<p class="item"><img src="assets/banana_img.png"/>==<img src="assets/banana_txt.png"/></p>
+	<p class="item"><img src="assets/burger_img.png"/>==<img src="assets/burger_txt.png"/></p>
+	<p class="item"><img src="assets/carrots_img.png"/>==<img src="assets/carrots_txt.png"/></p>
+	<p class="item"><img src="assets/chicken_img.png"/>==<img src="assets/chicken_txt.png"/></p>
+	<p class="item"><img src="assets/fish_img.png"/>==<img src="assets/fish_txt.png"/></p>
+	<p class="item"><img src="assets/grapes_img.png"/>==<img src="assets/grapes_txt.png"/></p>
+	<p class="item"><img src="assets/milk_img.png"/>==<img src="assets/milk_txt.png"/></p>
 </div>
+<div id="a-0-scoreboard" style="background-color: #F9F9f9;width:390px;border: 1px solid #999;position:relative;clear:both;padding:9px;"></div>
 
 <script type="text/javascript" src="../../core/widged.js"></script>
 <script type="text/javascript" src="libs/jquery.memory.js"></script>
@@ -33,22 +40,12 @@
          cardWidth: 100,
          cardHeight: 100,
          columnQty: 4,
-         cardBackImage:     'assets/card_pattern.png',
-         cardMatchImage:    'assets/card_done.png',
+         cardBack:     '<img src="assets/card_pattern.png"/>',
+         cardMatch:    '<img src="assets/card_done.png"/>',
       }
     );
 	widged.scoreboard.hook("#a-0-scoreboard", "#a-0");
-	widged.parser.run("#a-0", 'memoryGame',  {itemList: [
-      {card: 'assets/apple_img.png',   match: 'assets/apple_txt.png'},
-      {card: 'assets/banana_img.png',  match: 'assets/banana_txt.png'},
-      {card: 'assets/burger_img.png',  match: 'assets/burger_txt.png'},
-      {card: 'assets/carrots_img.png', match: 'assets/carrots_txt.png'},
-      {card: 'assets/chicken_img.png', match: 'assets/chicken_txt.png'},
-      {card: 'assets/fish_img.png',    match: 'assets/fish_txt.png'},
-      {card: 'assets/grapes_img.png',  match: 'assets/grapes_txt.png'},
-      {card: 'assets/milk_img.png',    match: 'assets/milk_txt.png'}
-   ]
-   });
+	widged.parser.run("#a-0", 'itemList',  {answerMarker: '=='});
 //-->
 //]]>
 </script>

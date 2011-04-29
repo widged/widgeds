@@ -82,10 +82,12 @@
          
          onDataChange: function(list) {
             this.gameData = {timeStart: null, answeredQty: 0, answerQty: list.length};
-            this.render(list);
+            this.itemList = list;
+            this.render();
          },
          
-         render: function(list) {
+         render: function() {
+            var list = this.itemList;
 
             this.container.html('');
             list.sort( function() { return Math.random() - .5 } );

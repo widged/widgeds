@@ -36,18 +36,8 @@
          cardWidth: 100,
          cardHeight: 100,
          columnQty: 4,
-         cardBackImage:     'assets/card_pattern.jpg',
-         cardMatchImage:    'assets/card_done.jpg',
-         cards: [
-            {card: 'assets/apple_img.png',   match: 'assets/apple_txt.png'},
-            {card: 'assets/banana_img.png',  match: 'assets/banana_txt.png'},
-            {card: 'assets/burger_img.png',  match: 'assets/burger_txt.png'},
-            {card: 'assets/carrots_img.png', match: 'assets/carrots_txt.png'},
-            {card: 'assets/chicken_img.png', match: 'assets/chicken_txt.png'},
-            {card: 'assets/fish_img.png',    match: 'assets/fish_txt.png'},
-            {card: 'assets/grapes_img.png',  match: 'assets/grapes_txt.png'},
-            {card: 'assets/milk_img.png',    match: 'assets/milk_txt.png'}
-         ]
+         cardBack:     '<img src="assets/card_pattern.png"/>',
+         cardMatch:    '<img src="assets/card_done.png"/>',
     };
     
 
@@ -96,12 +86,14 @@
          onDataChange: function(list) {
             list.sort(function(a,b){ return 0.5 - Math.random()});
             this.gameData = {listClicked: [], answeredQty: 0, answerQty: (list.length / 2)};
-            this.render(list);
+            this.itemList = list;
+            this.render();
          },
          
          render: function(list) {
-            var backImg    = this.options.cardBackImage;
-            var matchImg   = this.options.cardMatchImage;
+            var list = this.itemList;
+            var backHtml    = this.options.cardBack;
+            var doneHtml   = this.options.cardMatch;
             var cardWidth  = this.options.cardWidth + 3;
             var cardHeight = this.options.cardHeight+ 3;
             var colQty     = this.options.columnQty;
@@ -111,14 +103,29 @@
             var gameBox    = $('<div style="position:relative;height:' + (maxY + 20) + 'px" />');
             var script = this;
 
+             var pairItem, newList = [];
+             var card, match;
+             for(var i = 0; i < list.length; i++)
+             {
+                pairItem = list[i];
+                card = pairItem.html;
+                match = pairItem.options[0].html;
+                if(match == undefined) { match = card }
+                newList.push({html: card,  matchId: i});
+                newList.push({html: match, matchId: i});
+             }
+             newList.sort(function(a,b){ return 0.5 - Math.random()});
+             
+             var list = newList;
+
             for(var i = 0; i < list.length; i++)
             {
                cardItem  = list[i];
                var slotHtml = '<div style="position:absolute;left:' + posX + 'px;top:' + posY + 'px"/>';
                var slotEl = $(slotHtml);
-               slotEl.append('<img class="matched" style="position:absolute;" src="' + matchImg + '"/>');
-               slotEl.append('<img class="card"    style="position:absolute;" src="' + cardItem.img + '"/>');
-               slotEl.append('<img class="back"    style="position:absolute;" src="' + backImg + '"/>');
+               slotEl.append('<div class="matched" style="position:absolute;">' + doneHtml + '</div>');
+               slotEl.append('<div class="card" style="position:absolute;">' + cardItem.html + '</div>');
+               slotEl.append('<div class="back" style="position:absolute;">' + backHtml + '</div>');
                slotEl.data = {id: i, matchId: cardItem.matchId};
                slotEl.bind("click", {el: slotEl }, function(event){
                   script.cardClicked(event.data.el, event.data.matchId);
