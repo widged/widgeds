@@ -9,7 +9,7 @@
 */
 
 (function(){
-    var scoreboard = {
+    var plugin = {
        hookMap: {},
 
        hook: function (boardSel, widgedSel) {
@@ -46,6 +46,6 @@
     };
 
     if(!window.widged){window.widged={};}//We create a shortcut for our framework, we can call the methods by $$.method();
-   $.extend(true, window.widged, {scoreboard: scoreboard});
+   $.extend(true, window.widged, {scoreboard: plugin});
 })();
 

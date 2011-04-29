@@ -9,10 +9,10 @@
 */
 
 (function(){
-    var notification = {
+    var plugin = {};
 
 
     if(!window.widged){window.widged={};}//We create a shortcut for our framework, we can call the methods by $$.method();
-   $.extend(true, window.widged, {notification: notification});
+   $.extend(true, window.widged, {notification: plugin});
 })();
 

@@ -9,7 +9,7 @@
 */
 (function(){
    
-    var parser = {
+    var plugin = {
        init: function () {
           $(document).bind("parser.run", function(e, data){
              e.stopPropagation();
@@ -183,5 +183,5 @@
     };
    
    if(!window.widged){window.widged={};}//We create a shortcut for our framework, we can call the methods by $$.method();
-   $.extend(true, window.widged, {parser: parser});
+   $.extend(true, window.widged, {parser: plugin});
 })();

@@ -9,9 +9,9 @@
 */
 
 (function(){
-    var rating = {
+   var plugin = {};
 
     if(!window.widged){window.widged={};}//We create a shortcut for our framework, we can call the methods by $$.method();
-   $.extend(true, window.widged, {rating: rating});
+   $.extend(true, window.widged, {rating: plugin});
 })();
 
