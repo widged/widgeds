@@ -4,6 +4,8 @@ Widgeds - Educational Widgets / Learning Interactives
 Motivation
 ----------
 
+**IMPORTANT: This Library is on an EARLY ALPHA state, the API is constantly changing.
+
 Exercises that successfully promote interactivity, learner engagement, and learner control often rely on advanced technology like Java, JavaScript, or Flash that most lecturers do not have the time or the skills to master. What we propose is to identify or develop a limited number of exercise's types that rely on advanced technology but in which the content can be defined through the editing of an independent text file, without any knowledge of the technology behind the exercises (details and examples are provided in the accompanying documents). 
 
 Widgeds?

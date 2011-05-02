@@ -25,23 +25,23 @@
           {
                 case 'singleItem':
                    itemText = this.getItemText(eventTarget, settings);
-                   data = parser.parseItem(itemText, 0, settings);
+                   data = plugin.parseItem(itemText, 0, settings);
                    break;
                case 'itemList':
                   itemList = this.getItemList(eventTarget, settings);
-                  data = {list: parser.parseItemList(itemList, settings)};
+                  data = {list: plugin.parseItemList(itemList, settings)};
                   break;
                case 'inlineList':
                   itemText = this.getItemText(eventTarget, settings);
-                  data = {list: parser.parseInlineList(itemText, settings)};
+                  data = {list: plugin.parseInlineList(itemText, settings)};
                   break;
                case 'dataSeries':
                   itemList = this.getItemList(eventTarget, settings);
-                  data = {list: parser.parseDataSerie(itemList, settings)};
+                  data = {list: plugin.parseDataSerie(itemList, settings)};
                   break;
                case 'words':
                   itemText = this.getItemText(eventTarget, settings);
-                  data = {list: parser.parseWords(itemText, settings)};
+                  data = {list: plugin.parseWords(itemText, settings)};
                   break;
                default:
                   data = null;

@@ -14,11 +14,11 @@
 
        hook: function (boardSel, widgedSel) {
           var widgedEl = jQuery(widgedSel);
-          if(!scoreboard.hookMap[widgedEl]) { scoreboard.hookMap[widgedEl] = [] }; 
-          scoreboard.hookMap[widgedEl].push(boardSel); 
+          if(!plugin.hookMap[widgedEl]) { plugin.hookMap[widgedEl] = [] }; 
+          plugin.hookMap[widgedEl].push(boardSel); 
 
           widgedEl.bind("score.change", function(e, status){
-             scoreboard.updateFeedback(e.target, status);
+             plugin.updateFeedback(e.target, status);
           });
        },
        
@@ -26,7 +26,7 @@
           // when using this.hookMap, the object content is lost after the binding. 
           // coreboard.hookMap maintains the value over binding (static variable);
           var wgEl = jQuery(wgEl);
-          var boardList = scoreboard.hookMap[wgEl];
+          var boardList = plugin.hookMap[wgEl];
           for(var i = 0; i < boardList.length; i++) {
              var boardEl = jQuery(boardList[i]);
              
