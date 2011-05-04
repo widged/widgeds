@@ -15,8 +15,6 @@ Widgeds are modules for the [Exercist](https://github.com/widged/exercist/) proj
 
 Widged stands for a widget for education, with a widget defined as "portable chunk of code that can be installed and executed within any separate HTML-based web page by an end user without requiring additional compilation" (Wikipedia).
 
-For now, we provide example of activities written in javascript. Look at treasure chest for an activity rewritten as a jquery plugin.Extra information still needs to be added to transform them into widged modules.
-
 By default, unless specified otherwise, all content is under a dual MIT license and GPL license. 
 
 Check [widgeds@wikispaces](http://widgeds.wikispaces.com/) for live demos.
