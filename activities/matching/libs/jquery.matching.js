@@ -116,7 +116,7 @@
             answerBox.append('<div style="clear:both"/>');
             this.gameData.answerQty = answerList.length;
             list.sort( function() { return Math.random() - .5 } );
-            var script = this;
+            var that = this;
             var questionBox  = $('<div id="cardSlots"> </div>');
             for ( var i=0; i< list.length; i++ ) {
                item = list[i];
@@ -124,7 +124,7 @@
                    accept: '#cardPile div',
                    hoverClass: 'hovered',
                    drop: function(event, ui){
-                     script.handleCardDrop(event, ui, this);
+                     that.handleCardDrop(event, ui, this);
                    }
                  } );                
                  dropEl.appendTo( questionBox);
