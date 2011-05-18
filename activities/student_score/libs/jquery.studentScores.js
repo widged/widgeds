@@ -141,22 +141,6 @@
                itemEl.append($text);
                this.container.append(itemEl);
             }
-
-/*            for(var i in list)
-            {
-               itemEl = $('<div class="magnet" style="left: 10px; top: 10px;">' + item.html + '</div>');
-               itemEl.css({'border': '1px solid black', 'border-right': '2px solid black', 'border-bottom': '2px solid black', 'font-family': '"courier new",veranda,arial', 'float': 'left', 'padding': '0 3px 0 3px', 'background': 'white', 'cursor': 'pointer', 'position': 'absolute'});
-               itemEl.css({'left': Math.round(Math.random() * (barWidth-100)) + 20 + 'px'});
-               itemEl.css({'top': Math.round(Math.random() * (barHeight - 100)) + 20 + 'px'});
-               itemEl.draggable({
-                       containment: 'parent',
-                       stack:'.item',
-                       });
-               item.el = el;
-               itemEl.append(el);
-            }
-            */               
-            
          }
  
     });
