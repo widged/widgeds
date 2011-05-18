@@ -34,10 +34,11 @@
     // Default configuration properties.
     var defaults = {
          scoreList     : null,
-         legendWidth      : 60,                                 // Width of text'
-         barWidth         : 120,                                 // Width of the progressbar - don't forget to adjust your image too!!!                                    // Image to use in the progressbar. Can be a single image too: 'images/progressbg_green.gif'
-         barHeight        : 12,                                 // Height of the progressbar - don't forget to adjust your image too!!!
-         progressBackground  : 'assets/progressbar.gif',                  // boxImage : image around the progress bar
+         legendWidth      : 60,                
+         barWidth         : 120,               
+         barHeight        : 12,                
+         baseUrl          : '',
+         progressBackground  : 'assets/progressbar.gif',      
          progressImages      : {
                         0:   'assets/progressbg_red.gif',
                         30: 'assets/progressbg_orange.gif',
@@ -107,7 +108,7 @@
 
             var progressMax = barWidth / 100;
 
-            var percentValue, percentText, progressImages = this.options.progressImages, progressBackground = this.options.progressBackground;
+            var percentValue, percentText, progressImages = this.options.progressImages, progressBackground = this.options.progressBackground, baseUrl = this.options.baseUrl;
             for (col in scoreList)
             {
                itemEl = $('<div class="score"><div style="width:' + legendWidth + 'px;display:inline-block">' + col + '</div></div>');
@@ -130,8 +131,8 @@
                $bar.css({
                   'height': barHeight + "px",
                   'width': barWidth + "px",
-                  'src': progressBackground,
-                  'background-image': "url(" + progressImage + ")",
+                  'src': baseUrl + progressBackground,
+                  'background-image': "url(" + baseUrl + progressImage + ")",
                   'background-position': (barWidth * -1) + (percentValue * progressMax ) + 'px 50%',
                   'padding' : 0,
                   'margin' : 0
