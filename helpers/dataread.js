@@ -19,7 +19,7 @@
           });
        },
          
-         getName2: function(sheetKey, studentName, column)
+         getName: function(sheetKey, studentName, column)
          {
             var url;
             url = "http://spreadsheets.google.com/tq?key=" + sheetKey + "&tqx=version:0.6;responseHandler:widged.dataread.onSearchResult;reqId:0;out:json&tq=select%20" + column + "%20where%20A%20=%20'Lisa+Shipe'";
@@ -60,10 +60,9 @@
 })();
 /*
 
-//            url = "http://spreadsheets.google.com/tq?key=0ArNMycobpXr3ckJybUNHVDZ0cEU0SjZvb0prVDhGS2c&tqx=version:0.6;responseHandler:widged.dataread.onSearchResult;reqId:0;out:json&tq=select%20*%20where%20B%20like%20'test%25"
-//          url = "http://spreadsheets.google.com/a/learning-digital.com/tq?key=0AowayyeQN842dHJpUzlCZy1pV2N3Q1kwb1hsdzlxNWc&tqx=;responseHandler:widged.dataread.onSearchResult;reqId:0out:json&tq=select+*+where+A+%3D+'Lisa+Shipe'";
+// url = "http://spreadsheets.google.com/tq?key=0ArNMycobpXr3ckJybUNHVDZ0cEU0SjZvb0prVDhGS2c&tqx=version:0.6;responseHandler:widged.dataread.onSearchResult;reqId:0;out:json&tq=select%20*%20where%20B%20like%20'test%25"
+// url = "http://spreadsheets.google.com/a/learning-digital.com/tq?key=0AowayyeQN842dHJpUzlCZy1pV2N3Q1kwb1hsdzlxNWc&tqx=;responseHandler:widged.dataread.onSearchResult;reqId:0out:json&tq=select+*+where+A+%3D+'Lisa+Shipe'";
 // http://spreadsheets.google.com/tq?key=0ArNMycobpXr3ckJybUNHVDZ0cEU0SjZvb0prVDhGS2c&tqx=version:0.6;responseHandler:sscallback_sRxZW1u2IxUZsY3hPlKU;reqId:0;out:json&tq=select%20*%20where%20B%20like%20'test%25               
-
 get: function(sheet)
 {
    $.ajax({
@@ -74,7 +73,6 @@ get: function(sheet)
    });
    return false;
 },
-
 getName: function(sheet, name)
 {
    
