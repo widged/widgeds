@@ -15,6 +15,8 @@ Widgeds are modules for the [Exercist](https://github.com/widged/exercist/) proj
 
 Widged stands for a widget for education, with a widget defined as "portable chunk of code that can be installed and executed within any separate HTML-based web page by an end user without requiring additional compilation" (Wikipedia).
 
+Most widgeds are written as jQuery plugins. [JQuery](http://jquery.com) is a javascript library known for the huge amount of plugins available for download, which can be used to decrease the development time of a site and avoid having to re-invent the wheel where plugins could be re-used. A modular architecture is adopted whereby components are loosely coupled to one another. A scoreboard component exists as a standalone helper that can be added to any widged on demand.
+
 By default, unless specified otherwise, all content is under a dual MIT license and GPL license. 
 
 Check [widgeds@wikispaces](http://widgeds.wikispaces.com/) for live demos.

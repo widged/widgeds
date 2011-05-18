@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<head>
+  <title>Word Magnets Widged</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+
+<h3>Scores read in a Google Spreadsheet</h3>
+<div id="a-0" class="wg-scores"></div>
+
+<h3>Scores defined locally</h3>
+<div id="a-1" class="wg-scores"></div>
+  
+<script type="text/javascript" src="../../helpers/dataread.js"></script>
+<script type="text/javascript" src="libs/jquery.studentScores.js"></script>
+<script type="text/javascript">
+   var activity = jQuery("#a-0");
+   activity.bind("readResult", function(e, data){ activity.trigger("dataChange", data) });
+   widged.dataread.init(activity);
+   widged.dataread.getName2('0AowayyeQN842dHJpUzlCZy1pV2N3Q1kwb1hsdzlxNWc', 'Lisa Shipe', 'D,E,F');
+	
+    //make the magnets draggable and constrained to the fridge (their parent)
+    jQuery('#a-0').wgStudentScores({
+      legendWidth      : 80,                                 // Width of bar legend'
+      barWidth         : 120,                                 // Width of the progressbar - don't forget to adjust your image too!!!                                    // Image to use in the progressbar. Can be a single image too: 'images/progressbg_green.gif'
+      barHeight        : 12                                 // Height of the progressbar - don't forget to adjust your image too!!!
+	 });
+
+    //make the magnets draggable and constrained to the fridge (their parent)
+    jQuery('#a-1').wgStudentScores({
+		scoreList:{'Math': 34, 'Geography': 4, 'History': 90,'French': 56},
+      legendWidth      : 80,                                 // Width of bar legend'
+      barWidth         : 120,                                 // Width of the progressbar - don't forget to adjust your image too!!!                                    // Image to use in the progressbar. Can be a single image too: 'images/progressbg_green.gif'
+      barHeight        : 12                                 // Height of the progressbar - don't forget to adjust your image too!!!
+		});
+	
+</script>
+</body>
+</html>
