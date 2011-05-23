@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<head>
+  <title>Sortable List Widged</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js" ></script>
+</head>
+<body>
+
+	<div class="demo">
+	<ul id="sortable">
+	<li class="ui-state-default"><span class="icon-arrow">.</span>Item 1</li>
+	<li class="ui-state-default"><span class="icon-arrow">.</span>Item 2</li>
+	<li class="ui-state-default"><span class="icon-arrow">.</span>Item 3</li>
+	<li class="ui-state-default"><span class="icon-arrow">.</span>Item 4</li>
+	<li class="ui-state-default"><span class="icon-arrow">.</span>Item 5</li>
+	<li class="ui-state-default"><span class="icon-arrow">.</span>Item 6</li>
+	<li class="ui-state-default"><span class="icon-arrow">.</span>Item 7</li>
+	</ul>
+	</div>
+
+	<script type="text/javascript">
+	//<![CDATA[
+	                jQuery( "#sortable" ).sortable();
+	                jQuery( "#sortable" ).disableSelection();
+	                jQuery( "#sortable" ).css({
+	                      'list-style-type': 'none',
+	                     'margin': 0, 'padding': 0,
+	                    'width': '60%'
+	                });
+	                jQuery( "#sortable>li" ).css({
+	                     'margin': '0 3px 3px 3px', 
+	                     'padding': '0.4em',
+	                     'padding-left': '1.5em',
+	                     'font-size': '1.4em',
+	                     'height': '18px',
+	                     'border': '1px solid #FFE180',
+	                     'background-color': '#FFF7C2'
+
+	                });
+	                jQuery( "#sortable>li>span" ).css({
+	                     'position': 'absolute',
+	                     'margin-left': '-1.3em'
+	                });
+	                jQuery( "#sortable>li>span.icon-arrow" ).css({
+	                     'background-image': 'url(assets/222222_256x240_icons_icons.png)',
+	                     'background-position': '-128px -48px',
+	                     'color': '#FFF7C2',
+	                     'margin-top': '2px',
+	                     'width': '16px', 
+	                     'height': '16px' 
+	                });
+	//]]>
+	</script>
+	</body>
+</html>
+

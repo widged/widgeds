@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Random Content Generator - Powered by jQuery (featuring Chuck Norris)</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    
+    
+</head>
+<body>
+	
+        <div id="a-0" style="margin-left: 100px;margin-top: 100px;line-height: 1.5em">
+      	{{Little=small}} Jack Horner<br/>
+			{{Sat=convene}} in a {{corner=intersection}}<br/>
+			{{Eating=gobbling}} his {{pie=creampuffs, fruit tarts}}<br/>
+			He {{stuck=cemented}} in his thumb<br/>
+			And {{pulled=yanked}} out a {{plum=apricot}}<br/>
+			And {{said=explained, uttered}}, "What a {{good=wonderful, cheeky}} boy am I!"<br/>
+        </div>
+
+		<script type="text/javascript" src="../../helpers/parser.js"></script>
+	    <script type="text/javascript" src="js/jquery.tooltip.js"></script>
+	    <script type="text/javascript">
+   	   var activity = jQuery("#a-0");
+	      activity.bind("parseResult", function(e, data){ activity.trigger("dataChange", data) });
+			activity.wgTooltip({speed: 150, delay: 300, linkColor: "#006CC9"});
+         widged.parser.run("#a-0", 'inlineList', {trim: false});
+		</script>
+
+</body>
+</html>
+<!--
+<p><span class="tTip" title="small">Little</span> Jack Horner</p>
+
+-->

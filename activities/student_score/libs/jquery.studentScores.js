@@ -1,5 +1,5 @@
 /**
- * Word Magnets, Firdge Mangets with jQuery
+ * Student Scores, Scoreboard with jQuery
  * @version: 0.2 (2011/04/28)
  * @requires jQuery v1.4.2 or later 
  * @author Marielle Lange

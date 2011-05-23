@@ -145,7 +145,8 @@
           var item = {id: id, html: '', options: []};
           settings = jQuery.extend({answerMarker: "="}, settings);
           var arr = str.split(settings.answerMarker);
-          if(arr[0]) { item.html = this.trim(arr[0]); }
+          if(arr[0]) { item.html = arr[0]; }
+          if(settings.trim) { item.html = this.trim(item.html); }
           if(!arr[0] || !arr[1]) { return item }
           arr = String(arr[1]).split("#");
           if(arr[0]) { item.options = item.options.concat(this.parseItemOptions(arr[0], true, settings)) };
