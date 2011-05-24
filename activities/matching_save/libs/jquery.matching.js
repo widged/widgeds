@@ -154,6 +154,24 @@
                 ui.draggable.delay(250).animate({ opacity: 0}, 'slow');
                 this.broadcastScore();
               } 
+              
+              if(this.gameData.answeredQty == this.gameData.answerQty)
+              {
+                 this.container.trigger('complete',[
+                   {tried: this.gameData.answeredQty, correct: this.gameData.answerQty, progress: 100, time: this.gameData.timeElapsed, errorList: ""}]
+                );
+/*
+{ user: playerName, 
+  url: "http://xxx.com",
+  id: "a-0", title: "sortItems", 
+   tried: 10, correct:  Math.round(Math.random() * 10), progress: 100,
+         time: "00:00:04",
+         errorList: "x=4"
+      }
+);
+
+*/                  
+              }
            },
          
            // ##############################################
@@ -161,7 +179,8 @@
            // ##############################################
            broadcastScore: function() {
               var msElapsed = (new Date).getTime() - this.gameData.timeStart;
-              this.container.trigger('score.change',[{answerQty: this.gameData.answerQty, answeredQty: this.gameData.answeredQty, timeElapsed: msElapsed}]);
+              this.gameData.timeElapsed = msElapsed;
+              this.container.trigger('score.change',[{answerQty: this.gameData.answerQty, answeredQty: this.gameData.answeredQty, timeElapsed: this.gameData.timeElapsed}]);
            }
            // ##############################################
            //    broadcasting >>>

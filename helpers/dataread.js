@@ -1,5 +1,5 @@
 /*
- Parser functions for widgeds
+ Google Spreadsheet Reader functions for widgeds
 
  Created: Marielle Lange, 2011
  Distributed under the MIT (http://www.opensource.org/licenses/mit-license.php)
@@ -12,18 +12,17 @@
    var $ = jQuery;
    var eventTarget;
     var plugin = {
-       init: function (eventTarget) {
-          plugin.eventTarget = eventTarget;
-          $(document).bind("spreadsheet_read", function(e, data){
-             e.stopPropagation();
-             plugin.eventTarget = eventTarget;
-          });
-       },
          
-         getName: function(sheetKey, studentName, column)
+         getName: function(eventTarget, sheetKey, studentName, column)
          {
+            selector = (eventTarget.selector) ? eventTarget.selector : eventTarget;
             var url;
-            url = "http://spreadsheets.google.com/tq?key=" + sheetKey + "&tqx=version:0.6;responseHandler:widged.dataread.onSearchResult;reqId:0;out:json&tq=select%20" + column + "%20where%20A%20=%20'Lisa+Shipe'";
+            var param = {
+              key: sheetKey,
+              tq: 'SELECT ' + column + ' WHERE A = "' + studentName + '" LIMIT 1',
+              tqx: "responseHandler:widged.dataread.onSearchResult;reqId:" + selector + ";out:json"
+            };
+            url = "http://spreadsheets.google.com/tq?" + $.param(param);
             $.ajax({
                'url': url,
                'data': null,
@@ -48,10 +47,11 @@
                item = cols[i]
                data[colNames[i].label] = item.v;
             }
+            eventTarget = $(res.reqId);
             if(error) {
-               jQuery(plugin.eventTarget).trigger('readError',error);
+               jQuery(eventTarget).trigger('readError',error);
             } else {
-               jQuery(plugin.eventTarget).trigger('readResult',data);
+               jQuery(eventTarget).trigger('readResult',data);
             }          
          }
     };

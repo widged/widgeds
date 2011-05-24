@@ -9,20 +9,21 @@
 </head>
 <body>
 
-  <div id="a-0" class="wg-dragDrop" style="width:300px;padding: 9px 0px;">
+  <div id="a-0" class="wg-dragDrop" style="width:300px;padding: 9px 0px;" title="matching">
 		<p class="item"><img src="assets/img1.png" width="100"/>==je suis rouge|j'ai de longues jambes</p>
-		<p class="item"><img src="assets/img2.png" width="100"/>==je porte des vetements|j'ai deux pattes</p>
-		<p class="item"><img src="assets/img3.png" width="100"/>==je suis vert|j'ai des jambes courtes</p>
 	</div>
 
-  <div id="a-0-scoreBox0" style="width:300px;background-color:#F9F9F9;border: 1px solid #999;margin: 6px 0px;padding:6px;">Feedback shows up here</div>
+  <div id="a-0-scoreBox" style="width:300px;background-color:#F9F9F9;border: 1px solid #999;margin: 6px 0px;padding:6px;">Score shows up here</div>
+  <div id="a-0-scoreSave" style="width:300px;background-color:#F9F9F9;border: 1px solid #999;margin: 6px 0px;padding:6px;">Save shows up here</div>
 
 <script type="text/javascript" src="../../helpers/parser.js"></script>
 <script type="text/javascript" src="../../helpers/scoreboard.js"></script>
+<script type="text/javascript" src="../../helpers/spreadsheet_save.js"></script>
 <script type="text/javascript" src="libs/jquery.matching.js"></script>
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
 <!--
+   var activity = jQuery("#a-0");
 
   jQuery(".wg-dragDrop").wgDragDrop(
       {
@@ -32,8 +33,11 @@
 			answerBorderColor: '#F492D4'
       }
     );
-	widged.scoreboard.hook("#a-0-scoreBox0", "#a-0");
+ 	widged.scoreboard.hook("#a-0-scoreBox", "#a-0");
+  	widged.spreadsheet_save.hook("#a-0-scoreSave", "#a-0");
 	widged.parser.run("#a-0", 'itemList',  {answerMarker: '=='});
+
+
 //-->
 //]]>
 </script>

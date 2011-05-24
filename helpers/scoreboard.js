@@ -13,11 +13,11 @@
        hookMap: {},
 
        hook: function (boardSel, widgedSel) {
-          var widgedEl = jQuery(widgedSel);
-          if(!plugin.hookMap[widgedEl]) { plugin.hookMap[widgedEl] = [] }; 
-          plugin.hookMap[widgedEl].push(boardSel); 
+          var $activity = jQuery(widgedSel);
+          if(!plugin.hookMap[$activity]) { plugin.hookMap[$activity] = [] }; 
+          plugin.hookMap[$activity].push(boardSel); 
 
-          widgedEl.bind("score.change", function(e, status){
+          $activity.bind("score.change", function(e, status){
              plugin.updateFeedback(e.target, status);
           });
        },
