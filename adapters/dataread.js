@@ -7,9 +7,8 @@
  Built on top of the widged library
  http://github.com/widged/widgeds
 */
-(function($){
+;(function($){
    
-   var $ = jQuery;
    var eventTarget;
     var plugin = {
          
@@ -49,16 +48,16 @@
             }
             eventTarget = $(res.reqId);
             if(error) {
-               jQuery(eventTarget).trigger('readError',error);
+               $(eventTarget).trigger('readError',error);
             } else {
-               jQuery(eventTarget).trigger('readResult',data);
+               $(eventTarget).trigger('readResult',data);
             }          
          }
     };
    
    if(!window.widged){window.widged={};}//We create a shortcut for our framework, we can call the methods by $$.method();
    $.extend(true, window.widged, {dataread: plugin});
-})();
+})(jQuery);
 /*
 
 // url = "http://spreadsheets.google.com/tq?key=0ArNMycobpXr3ckJybUNHVDZ0cEU0SjZvb0prVDhGS2c&tqx=version:0.6;responseHandler:widged.dataread.onSearchResult;reqId:0;out:json&tq=select%20*%20where%20B%20like%20'test%25"

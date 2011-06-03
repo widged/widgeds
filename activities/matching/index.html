@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<head>
+	<title>A jQuery Matching Game</title>
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+
+   <script type="text/javascript" src="../../adapters/parser.js"></script>
+   <script type="text/javascript" src="../../adapters/scoreboard.js"></script>
+   <script type="text/javascript" src="../../adapters/spreadsheet_save.js"></script>
+   <script type="text/javascript" src="libs/jquery.matching.js"></script>
+
+   <div class="wg-matching" id="a-0" style="width:300px;padding: 9px 0px;">
+   <p class="item">future simple=j'aurai</p>
+   <p class="item">present=j'ai|tu as</p>
+   <p class="item">imparfait=j'avais</p>
+   </div>
+   <script language="JavaScript" type="text/javascript">
+   //<![CDATA[
+   <!--
+     jQuery(".wg-matching#a-0").wgMatching(
+         {
+                           questionBackgroundColor: '#E6FFB3',
+                           questionBorderColor: '#C4E67F',
+                           answerBackgroundColor: '#F4CFE8',
+                           answerBorderColor: '#F492D4'
+         }
+       );
+    	widged.parser.run("#a-0", 'itemList',  {answerMarker: '='});
+   //-->
+   //]]>
+   </script>
+
+   <h2>Scores displayed to the user</h2>
+
+   <div class="wg-matching" id="a-1" style="width:300px;padding: 9px 0px;">
+      <p class="item"><img src="http://widged.com/widgeds/pix/dragdrop/img1.png" width="100" />==I am red|I have long legs</p>
+      <p class="item"><img src="http://widged.com/widgeds/pix/dragdrop/img2.png" width="100" />==I wear clothes|I walk on two legs</p>
+      <p class="item"><img src="http://widged.com/widgeds/pix/dragdrop/img3.png" width="100" />==I am green|I have short legs</p>
+   </div>
+   <div id="a-1-scoreBox" style="width:300px;background-color:#F9F9F9;border: 1px solid #999;margin: 6px 0px;padding:6px;">Score shows up here</div>
+   <script language="JavaScript" type="text/javascript">
+   //<![CDATA[
+   <!--
+     jQuery(".wg-matching#a-1").wgMatching(
+         {
+                           answerMarker: '==',
+                           questionBackgroundColor: '#CCEEFF',
+                           questionBorderColor: '#99DDFF',
+                           answerBackgroundColor: '#F4CFE8',
+                           answerBorderColor: '#F492D4'
+         }
+       );
+     	widged.scoreboard.hook("#a-1-scoreBox", "#a-1");
+    	widged.parser.run("#a-1", 'itemList',  {answerMarker: '=='});
+   //-->
+   //]]>
+   </script>
+   
+<h2>Scores saved to a google spreadsheet</h2>
+
+  <div id="a-2" class="wg-matching" style="width:300px;padding: 9px 0px;" title="matching">
+		<p class="item"><img src="assets/img1.png" width="100"/>==je suis rouge|j'ai de longues jambes</p>
+	</div>
+
+  <div id="a-2-scoreBox" style="width:300px;background-color:#F9F9F9;border: 1px solid #999;margin: 6px 0px;padding:6px;">Score shows up here</div>
+  <div id="a-2-scoreSave" style="width:300px;background-color:#F9F9F9;border: 1px solid #999;margin: 6px 0px;padding:6px;">Upon completion, save shows up here</div>
+
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+<!--
+   var activity = jQuery("#a-2");
+
+  jQuery(".wg-matching#a-2").wgMatching(
+      {
+			questionBackgroundColor: '#E6FFB3',
+			questionBorderColor: '#C4E67F',
+			answerBackgroundColor: '#F4CFE8',
+			answerBorderColor: '#F492D4'
+      }
+    );
+ 	widged.scoreboard.hook("#a-2-scoreBox", "#a-2");
+  	widged.spreadsheet_save.hook("#a-2-scoreSave", "#a-2");
+	widged.parser.run("#a-2", 'itemList',  {answerMarker: '=='});
+
+
+//-->
+//]]>
+</script>
+
+</body>
+</html>

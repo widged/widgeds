@@ -8,7 +8,7 @@
  http://github.com/widged/widgeds
 */
 
-(function(){
+;(function(){
    var plugin = {};
 
     if(!window.widged){window.widged={};}//We create a shortcut for our framework, we can call the methods by $$.method();

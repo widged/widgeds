@@ -320,10 +320,11 @@
            var el = $('<span/>');
            el.selectElement = selectEl;
            el.isCorrect = function() { 
-              var answer = this.selectElement.val();
+              var answer = "" + this.selectElement.val();
               for (var i in list)
               {
                  var opt = list[i];
+                 var val = opt.html
                  if(opt.html == answer && opt.correct == true)
                  {
                     return true;

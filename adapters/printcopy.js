@@ -7,7 +7,7 @@
  Built on top of the widged library
  http://github.com/widged/widgeds
 */
-(function(){
+;(function(){
    
    var plugin = {};
 

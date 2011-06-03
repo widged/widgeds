@@ -7,7 +7,7 @@
  Built on top of the widged library
  http://github.com/widged/widgeds
 */
-(function(){
+;(function($){
    
     var plugin = {
        init: function () {
@@ -19,7 +19,7 @@
        
        run: function(eventTarget, parserId, settings) {
           var itemList, itemText, data, error;
-          var eventTarget = jQuery(eventTarget);
+          var eventTarget = $(eventTarget);
 
           switch(parserId)
           {
@@ -123,7 +123,7 @@
 
        // ### element list
        parseItemList: function(itemList, parserSettings) {
-          var settings = jQuery.extend({answerMarker: '=', optionMarker: "#"}, parserSettings);
+          var settings = $.extend({answerMarker: '=', optionMarker: "#"}, parserSettings);
           var str, item, list = [];
           var wg = this;
           var itemIdx = 0;
@@ -143,7 +143,7 @@
         */
        parseItem: function(str, id, settings) {
           var item = {id: id, html: '', options: []};
-          settings = jQuery.extend({answerMarker: "="}, settings);
+          settings = $.extend({answerMarker: "="}, settings);
           var arr = str.split(settings.answerMarker);
           if(arr[0]) { item.html = arr[0]; }
           if(settings.trim) { item.html = this.trim(item.html); }
@@ -164,10 +164,11 @@
        parseItemOptions: function(str, isCorrect, settings) 
        {
           var arr = str.split("|");
-          var list = [];
+          var list = [], html;
           for(var i = 0; i < arr.length; i++)
           {
-             list.push({html: arr[i], correct: isCorrect});
+             html = (settings.trim) ? this.trim(arr[i]) : arr[i];
+             list.push({html: html, correct: isCorrect});
           }
           return list;
        },         
@@ -185,4 +186,4 @@
    
    if(!window.widged){window.widged={};}//We create a shortcut for our framework, we can call the methods by $$.method();
    $.extend(true, window.widged, {parser: plugin});
-})();
+})(jQuery);

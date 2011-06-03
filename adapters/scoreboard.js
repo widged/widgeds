@@ -8,12 +8,12 @@
  http://github.com/widged/widgeds
 */
 
-(function(){
+;(function($){
     var plugin = {
        hookMap: {},
 
        hook: function (boardSel, widgedSel) {
-          var $activity = jQuery(widgedSel);
+          var $activity = $(widgedSel);
           if(!plugin.hookMap[$activity]) { plugin.hookMap[$activity] = [] }; 
           plugin.hookMap[$activity].push(boardSel); 
 
@@ -25,10 +25,10 @@
        updateFeedback: function(wgEl, params) {
           // when using this.hookMap, the object content is lost after the binding. 
           // coreboard.hookMap maintains the value over binding (static variable);
-          var wgEl = jQuery(wgEl);
+          var wgEl = $(wgEl);
           var boardList = plugin.hookMap[wgEl];
           for(var i = 0; i < boardList.length; i++) {
-             var boardEl = jQuery(boardList[i]);
+             var boardEl = $(boardList[i]);
              
              var msg = 'Answered: ' + params.answeredQty + "/" + params.answerQty;
              if(params.answeredQty == params.answerQty)
@@ -40,12 +40,12 @@
                 msg += '&nbsp;&nbsp;&nbsp;Completion time: ' + formatted;
 
              }
-             jQuery(boardEl).html(msg);
+             $(boardEl).html(msg);
           };
        }
     };
 
     if(!window.widged){window.widged={};}//We create a shortcut for our framework, we can call the methods by $$.method();
    $.extend(true, window.widged, {scoreboard: plugin});
-})();
+})(jQuery);
 

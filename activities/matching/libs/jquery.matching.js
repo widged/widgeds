@@ -23,7 +23,7 @@
      * @return jQuery
      * @param o {Hash|String} A set of key/value pairs to set as configuration properties or a method name to call on a formerly created instance.
      */
-    $.fn.wgDragDrop = function(o) { 
+    $.fn.wgMatching = function(o) { 
        return this.each(function() {
            $(this).data('wg', new $wg(this, o));
         });

@@ -34,7 +34,7 @@ of their {{freedom#freeing|freed|free}} and when millions of poor children canno
 them to lead, we have not made change our friend.
 </div>
   
-<script type="text/javascript" src="../../helpers/parser.js"></script>
+<script type="text/javascript" src="../../adapters/parser.js"></script>
 <script type="text/javascript" src="libs/jquery.quiz.js"></script>
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
@@ -45,7 +45,7 @@ them to lead, we have not made change our friend.
 			mode: "option"
       }
     );
-	widged.parser.run("#a-0", 'itemList');
+	widged.parser.run("#a-0", 'itemList', {trim: true});
 
   jQuery(".wg-mcq#a-1").wgQuiz(
       {

@@ -8,12 +8,12 @@
  http://github.com/widged/widgeds
 */
 
-(function(){
+;(function($){
     var plugin = {
        hookMap: {},
 
-       hook: function (helperSel, activitySel) {
-          plugin.hookMap[activitySel] = helperSel; 
+       hook: function (adaptersel, activitySel) {
+          plugin.hookMap[activitySel] = adaptersel; 
           var $activity = $(activitySel);
           $activity.bind("complete", function(e, data){ plugin.spreadsheetWrite(activitySel, data) });
        },
@@ -35,7 +35,7 @@
                     url = $form.attr( 'action' );
 
             /* Send the data using post and put the results in a div */
-            var url = jQuery(location).attr('href');
+            var url = $(location).attr('href');
             $.extend(data,{url: url, user: playerName, id: $activity.attr('id'), title: $activity.attr('title') });
             $.post( "http://zend.widged.com/gdata/Zend/Spreadsheet_Leaderboard.php", data,   
                function( data ) { console.log("[post_result]",data); $form.append(' saved');
@@ -52,7 +52,7 @@
 
     if(!window.widged){window.widged={};}//We create a shortcut for our framework, we can call the methods by $$.method();
     $.extend(true, window.widged, {spreadsheet_save: plugin});
-})();
+})(jQuery);
 
 
 
