@@ -75,25 +75,26 @@
          * @return undefined
          */
          setup: function() {
-            this.itemList = [];
-            this.score = {answered: [], correctIndices: [], incorrectIndices: []};
-
             var wg = this;
-            this.container.bind("parseError", function(e, error){ alert(error.msg) });
-            this.container.bind("parseResult", function(e, data){ wg.onDataChange(data.list); });
+            this.container.bind("dataChange", function(e, data){ wg.onDataChange(data); });
+            this.render();
          },
 
-         onDataChange: function(list) {
-            this.gameData = {timeStart: null, answeredQty: 0, answerQty: list.length};
-            this.itemList = list;
+         onDataChange: function(data) {
+            $.extend(this.options, data || {})
             this.render();
          },
 
          render: function() {
+            if(!this.options.list) { return; }
             // Build the html
-            var list = this.itemList;
+            var list = this.options.list;
             var html = '';
             var el;
+
+            this.score = {answered: [], correctIndices: [], incorrectIndices: []};
+            this.gameData = {timeStart: null, answeredQty: 0, answerQty: list.length};
+
             this.container.html('');
             this.container.css({'line-height': 1.5});
             for(var i in list)
@@ -138,83 +139,17 @@
             this.container.append(el);
          },
          
-         parseSimpleList: function(str) {
-            var str, item, list = [];
-            var wg = this;
-            this.container.children('p').each(function(i) {
-               str = $(this).html();
-               list.push(wg.parseSimpleListItem(str));
-            });
-            return list;
-            
-         },
          
-         parseSimpleListItem: function(str) {
-            var arr, itemHTML, options, optionList;
-            arr = str.split("=");
-            itemHTML = arr[0].replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-            options = arr[1];
-            arr = options.split('|');
-            optionList = [];
-            for(var i = 0; i < arr.length; i++)
-            {
-               optionList.push({
-                  html: arr[i].replace(/^\s\s*/, '').replace(/\s\s*$/, ''),
-                  correct: (i == 0) ? true : false,
-               });
-            }
-            optionList.sort(function(a,b){ return 0.5 - Math.random()});
-            return {html: itemHTML, options: optionList};
-         },
-         
-         parseInlineList: function() {
-            var text = this.container.html();
-            var arr = text.split("}}");
-            var list = [], item = '';
-            for(var i = 0; i < arr.length; i++)
-            {
-               item = arr[i];
-               if(item == undefined) { continue; }
-               list.push(this.parseInlineListItem(item, "i_" + i));
-            }
-            return list;
-            
-         },
-
-         parseInlineListItem: function(str, id) {
-            var list;
-            var arr = str.split("{{");
-            item = "" + arr[0];
-            if(arr[1] != undefined)
-            {
-               list = [];
-               str = "" + arr[1];
-               arr = str.split("#");
-               list = this.addOptions(list, "" + arr[0], true); // correct ones
-               list = this.addOptions(list, "" + arr[1], false);  // distractors
-               list.sort(function(a,b){ return 0.5 - Math.random()});
-            }
-            return {html: item, id: id, options: list};
-         },
-         
-         addOptions: function(list, str, isCorrect) 
-         {
-            var arr = str.split("|");
-            for(var i = 0; i < arr.length; i++)
-            {
-               list.push({html: arr[i], correct: isCorrect});
-            }
-            return list;
-         },         
          // ################
          // Interactivity
          // ################
          onCheckClick: function() {
             var corrQty = 0;
             var totalQty = 0;
-            for(var i in this.itemList)
+            var list = this.options.list;
+            for(var i in list)
             {
-               var item = this.itemList[i];
+               var item = list[i];
                if(item.el == undefined) { continue; }
                if(item.el.isCorrect()) {
                   corrQty++;
@@ -237,7 +172,7 @@
            if(list == undefined) { return; }
            var selectHtml = '';
            var el = $('<div/>');
-           el.registerCorrect = function(isCorrect) { console.log(isCorrect); }
+           el.registerCorrect = function(isCorrect) {  }
            for (var o in list)
            {
               var opt = list[o];

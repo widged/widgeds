@@ -80,24 +80,26 @@
          * @return undefined
          */
          setup: function() {
-            this.controlBox;
-            this.currentItem = 0;
-            this.itemList = [];
-            this.score = {answered: [], correctIndices: [], incorrectIndices: []};
-
-            var str, item, list = [];
             var wg = this;
-            this.container.bind("parseError", function(e, error){ alert(error.msg) });
-            this.container.bind("parseResult", function(e, data){ wg.onDataChange(data.list); });
-         },
-
-         onDataChange: function(list) {
-            this.itemList = list;
+            this.container.bind("dataChange", function(e, data){ wg.onDataChange(data); });
             this.render();
          },
 
+         onDataChange: function(data) {
+            $.extend(this.options, data || {})
+            this.render();
+         },
+
+
          render: function() {
-            var list = this.itemList;
+            if(!this.options.list) { return; }
+            // Build the html
+            var list = this.options.list;
+
+            this.controlBox;
+            this.currentItem = 0;
+            this.score = {answered: [], correctIndices: [], incorrectIndices: []};
+
             this.gameData = {timeStart: null, answeredQty: 0, answerQty: list.length};
 
             var gameScreen = $('<div style="border-color:#000000;border-style:solid;margin:0px;padding:0px;font-family:Geneva,Arial"/>')
@@ -124,7 +126,7 @@
                racingBox.append(track);
             }
             var stepQty = this.options.minimumQuestionQty;
-            if(stepQty > this.itemList.length) { stepQty = this.itemList.length };
+            if(stepQty > list.length) { stepQty = list.length };
             var trackW = w - 3 - spriteW;
             this.distanceMax = (trackW);
             this.distanceStep = Math.round(this.distanceMax / stepQty);
@@ -189,18 +191,20 @@
 
               case 'start':
                   // :TODO: add some screen with 'get ready' state, for instance counting down from 3 to 1
+                  var list = this.options.list;
                   this.currentItem = 0;
                   this.score = {answered: [], correctIndices: [], incorrectIndices: []};
                   this.resetSprites(this.spriteColl);
-                  this.refreshQuestion(this.itemList[this.currentItem],  Math.round(this.controlBox.width() / 2));
+                  this.refreshQuestion(list[this.currentItem],  Math.round(this.controlBox.width() / 2));
                break;
 
               case 'correct':
               case 'incorrect':
+               var list = this.options.list;
                 this.currentItem++;
                 var isPreviousCorrect = value == 'correct';
                 this.moveSprites(this.spriteColl, this.distanceStep, isPreviousCorrect);
-                var item = this.itemList[this.currentItem];
+                var item = list[this.currentItem];
                 if(item != undefined && (this.spriteColl[0].left + 10) < this.distanceMax)
                 {
                    this.refreshQuestion(item,  Math.round(this.controlBox.width() / 2));

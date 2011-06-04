@@ -84,22 +84,19 @@
          * @return undefined
          */
          setup: function() {
-            // parse items in the activity division
             var wg = this;
-            this.scoreList = this.options.scoreList;
-            this.container.bind("dataError", function(e, error){ alert(error.msg) });
             this.container.bind("dataChange", function(e, data){ wg.onDataChange(data); });
             this.render();
          },
 
          onDataChange: function(data) {
-            this.scoreList = data;
+            $.extend(this.options, data || {})
             this.render();
          },
 
          render: function() {
             var html = '';
-            var scoreList = this.scoreList;
+            var scoreList = this.options.scoreList;
 
             this.container.html('');
             var barWidth = this.options.barWidth;

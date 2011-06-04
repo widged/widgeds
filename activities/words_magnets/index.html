@@ -20,6 +20,7 @@ put these words in the right order.
 		width: 300,
 		height: 150
     });
+  	jQuery("#a-0").bind("parseResult", function(e, data){ jQuery("#a-0").trigger("dataChange", {list: data.list});  });
 	widged.parser.run("#a-0", 'words');
 </script>
 </body>

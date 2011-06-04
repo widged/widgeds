@@ -38,8 +38,7 @@
             var url = $(location).attr('href');
             $.extend(data,{url: url, user: playerName, id: $activity.attr('id'), title: $activity.attr('title') });
             $.post( "http://zend.widged.com/gdata/Zend/Spreadsheet_Leaderboard.php", data,   
-               function( data ) { console.log("[post_result]",data); $form.append(' saved');
-                }
+               function( data ) { $form.append(' saved'); }
             );
           });
           

@@ -10,22 +10,20 @@
 ;(function($){
    
     var plugin = {
-       init: function () {
-          $(document).bind("parser.run", function(e, data){
-             e.stopPropagation();
-             parser.run(data.eventTarget, data);
-          });
-       },
-       
        run: function(eventTarget, parserId, settings) {
           var itemList, itemText, data, error;
           var eventTarget = $(eventTarget);
 
           switch(parserId)
           {
+                case 'questionAnswer':
+                  itemText = this.getItemText(eventTarget, settings);
+                  var item = plugin.parseItem(itemText, 0, settings);
+                  data = {question: item.html, answer: item.options[0].html}
+                  break;
                 case 'singleItem':
                    itemText = this.getItemText(eventTarget, settings);
-                   data = plugin.parseItem(itemText, 0, settings);
+                   data = {item: plugin.parseItem(itemText, 0, settings)};
                    break;
                case 'itemList':
                   itemList = this.getItemList(eventTarget, settings);

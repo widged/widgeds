@@ -8,17 +8,17 @@
 <body>
 
 <div class="wg-mcq" id="a-0">
-    <p class="item">UN + DEUX = 3 | 4 | 2 | 8</p>
-    <p class="item">8 + 4 = 12 | 16 | 14 | 24</p>
-    <p class="item">2 + 7 = 9 | 5 | 10 | 11</p>
+   <p class="item">UN + DEUX = 3</p>
+   <p class="item">8 + 4 = 12</p>
+   <p class="item">2 + 7 = 9</p>
 </div>
 
 <br /><br />
 
 <div class="wg-mcq" id="a-1">
-    <p class="item">UN + DEUX = 3 | 4 | 2 | 8</p>
-    <p class="item">8 + 4 = 12 | 16 | 14 | 24</p>
-    <p class="item">2 + 7 = 9 | 5 | 10 | 11</p>
+   <p class="item">I ate = j'ai mangé # je suis mangé | j'ai mange | j'ai manger</p>
+   <p class="item">I carried = j'ai porté # j'ai apporté | j'ai porte | j'ai reporté</p>
+   <p class="item">I answered = j'ai répondu # j'ai repondé | j'ai responsé | j'ai répondé</p>
 </div>
 
 <br /><br />
@@ -39,29 +39,15 @@ them to lead, we have not made change our friend.
 <script language="JavaScript" type="text/javascript">
 //<![CDATA[
 <!--
-  jQuery(".wg-mcq#a-0").wgQuiz(
-      {
-			itemRender: "block",
-			mode: "option"
-      }
-    );
-	widged.parser.run("#a-0", 'itemList', {trim: true});
 
-  jQuery(".wg-mcq#a-1").wgQuiz(
-      {
-          itemRender: "block",
-          mode: "list"
-      }
-    );
-	widged.parser.run("#a-1", 'itemList');
+jQuery("#a-0").bind("parseResult", function(e, data){ jQuery("#a-0").wgQuiz({ list: data.list, itemRender: "block", mode: "shortAnswer" }); });
+widged.parser.run("#a-0", 'itemList', {trim: true});
 
-  jQuery(".wg-gapfill#a-2").wgQuiz(
-      {
-			itemRender: "inline",
-			mode: "options"
-      }
-    );
-	widged.parser.run("#a-2", 'inlineList');
+jQuery("#a-1").bind("parseResult", function(e, data){ jQuery("#a-1").wgQuiz({ list: data.list, itemRender: "block", mode: "list" }); });
+widged.parser.run("#a-1", 'itemList', {trim: true});
+
+jQuery("#a-2").bind("parseResult", function(e, data){ jQuery("#a-2").wgQuiz({ list: data.list,itemRender: "inline", mode: "options" }); });
+widged.parser.run("#a-2", 'inlineList', {trim: true});
 
 //-->
 //]]>

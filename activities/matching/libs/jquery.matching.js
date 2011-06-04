@@ -76,18 +76,19 @@
          */
          setup: function() {
             var wg = this;
-            this.container.bind("parseError", function(e, error){ alert(error.msg) });
-            this.container.bind("parseResult", function(e, data){ wg.onDataChange(data.list); });
+            this.container.bind("dataChange", function(e, data){ wg.onDataChange(data); });
+            this.render();
          },
          
-         onDataChange: function(list) {
-            this.gameData = {timeStart: null, answeredQty: 0, answerQty: list.length};
-            this.itemList = list;
+         onDataChange: function(data) {
+            $.extend(this.options, data || {})
             this.render();
          },
          
          render: function() {
-            var list = this.itemList;
+            if(!this.options.list) { return; }
+            var list = this.options.list;
+            this.gameData = {timeStart: null, answeredQty: 0, answerQty: list.length};
 
             this.container.html('');
             list.sort( function() { return Math.random() - .5 } );

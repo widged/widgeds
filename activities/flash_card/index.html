@@ -10,7 +10,7 @@
 
 <div class="wg-cardflip" id="a-0">What is the capital of Canada?=Ottawa</div>
 <br/>
-<div class="wg-cardflip" id="a-1">What is the capital of the USA?=Washington</div>
+<div class="wg-cardflip" id="a-1"></div>
 
 <script type="text/javascript" src="libs/jquery.flip.min.js"></script>
 <script type="text/javascript" src="../../adapters/parser.js"></script>
@@ -20,15 +20,26 @@
 //<![CDATA[
 <!--
   jQuery(".wg-cardflip").wgCardFlip(
-      {
-			width: '210px',
-			height: '90px',
-			questionCardColor: '#FFF7C2',
-			answerCardColor: '#FFE180'
-      }
-    );
-	widged.parser.run("#a-0", 'singleItem');
-	widged.parser.run("#a-1", 'singleItem');
+        {
+  			width: '210px',
+  			height: '90px',
+  			questionCardColor: '#FFF7C2',
+  			answerCardColor: '#FFE180'
+        }
+      );
+	
+	jQuery("#a-0").bind("parseResult", function(e, data){ jQuery("#a-0").trigger("dataChange", {question: data.question, answer: data.answer});  });
+   widged.parser.run("#a-0", 'questionAnswer');
+
+	jQuery("#a-1").wgCardFlip({
+      question: 'What is the capital of the USA', 
+      answer: 'Washington',
+      width: '210px',
+      height: '90px',
+      questionCardColor: '#00F7C2',
+      answerCardColor: '#00E180'
+   });
+   
 //-->
 //]]>
 </script>

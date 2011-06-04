@@ -47,6 +47,7 @@
       }
     );
 	widged.scoreboard.hook("#a-0-scoreboard", "#a-0");
+	jQuery("#a-0").bind("parseResult", function(e, data){ jQuery("#a-0").trigger("dataChange", {list: data.list});  });
 	widged.parser.run("#a-0", 'itemList',  {answerMarker: '=='});
 //-->
 //]]>

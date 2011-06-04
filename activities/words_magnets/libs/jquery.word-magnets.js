@@ -74,20 +74,20 @@
          * @return undefined
          */
          setup: function() {
-            // parse items in the activity division
             var wg = this;
-            this.container.bind("parseError", function(e, error){ alert(error.msg) });
-            this.container.bind("parseResult", function(e, data){ wg.onDataChange(data.list); });
+            this.container.bind("dataChange", function(e, data){ wg.onDataChange(data); });
+            this.render();
          },
 
-         onDataChange: function(list) {
-            this.itemList = list;
+         onDataChange: function(data) {
+            $.extend(this.options, data || {})
             this.render();
          },
 
          render: function() {
 
-            var list = this.itemList;
+            if(!this.options.list) { return; }
+            var list = this.options.list;
             // Build the html
             var html = '';
             var el;

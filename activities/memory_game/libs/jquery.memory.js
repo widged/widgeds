@@ -79,19 +79,18 @@
          */
          setup: function() {
             var wg = this;
-            this.container.bind("parseError", function(e, error){ alert(error.msg) });
-            this.container.bind("parseResult", function(e, data){ wg.onDataChange(data.list); });
+            this.container.bind("dataChange", function(e, data){ wg.onDataChange(data); });
+            this.render();
          },
          
-         onDataChange: function(list) {
-            list.sort(function(a,b){ return 0.5 - Math.random()});
-            this.gameData = {listClicked: [], answeredQty: 0, answerQty: (list.length / 2)};
-            this.itemList = list;
+         onDataChange: function(data) {
+            $.extend(this.options, data || {})
             this.render();
          },
          
          render: function(list) {
-            var list = this.itemList;
+            if(!this.options.list) { return; }
+            var list = this.options.list;
             var backHtml    = this.options.cardBack;
             var doneHtml   = this.options.cardMatch;
             var cardWidth  = this.options.cardWidth + 3;
@@ -102,6 +101,8 @@
             var cardItem, posX = posY = 0;
             var gameBox    = $('<div style="position:relative;height:' + (maxY + 20) + 'px" />');
             var script = this;
+
+            this.gameData = {listClicked: [], answeredQty: 0, answerQty: list.length};
 
              var pairItem, newList = [];
              var card, match;

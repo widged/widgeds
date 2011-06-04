@@ -9,7 +9,13 @@
 */
 ;(function(){
    
-   var plugin = {};
+   var plugin = {
+      run: function(eventTarget, parserId, settings) {
+         var itemList, itemText, data, error;
+         var eventTarget = $(eventTarget);
+      
+      
+   };
 
    if(!window.widged){window.widged={};}//We create a shortcut for our framework, we can call the methods by $$.method();
    $.extend(true, window.widged, {printcopy: plugin});

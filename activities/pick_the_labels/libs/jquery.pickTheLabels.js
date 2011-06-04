@@ -193,7 +193,6 @@
          * @return undefined
          */
         reset: function() {
-           console.log("[reset]");
         },
 
         /**

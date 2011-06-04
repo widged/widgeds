@@ -74,18 +74,22 @@
          * @return undefined
          */
          setup: function() {
-            
-            this.container.css({'width':this.options.width,'height':this.options.height,'margin':'4px','position':'relative','cursor':'pointer'});
             var wg = this;
-            var text = this.container.html();
-            this.container.bind("parseResult", function(e,data){ wg.onDataChange(data); });
+            this.container.bind("dataChange", function(e, data){ wg.onDataChange(data); });
+            this.render();
          },
           
          onDataChange: function(data) {
-           this.render(data.html, data.options[0].html); 
+            $.extend(this.options, data || {})
+            this.render(); 
          },
          
-         render: function(question, answer) {
+         render: function() {
+            if(!this.options.question) { return; }
+            var question = this.options.question;
+            var answer = this.options.answer;
+            
+            this.container.css({'width':this.options.width,'height':this.options.height,'margin':'4px','position':'relative','cursor':'pointer'});
             this.clickToFlip = '<div style="position:absolute;bottom: 0px;width:100%;font-size:0.7em;text-align:center">click to flip</div>';
 
             var boxEl = $('<div/>');

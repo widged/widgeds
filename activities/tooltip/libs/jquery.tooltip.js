@@ -99,20 +99,21 @@
          * @return undefined
          */
          setup: function() {
-            this.itemList = [];
             var wg = this;
-            this.container.bind("dataError", function(e, error){ alert(error.msg) });
             this.container.bind("dataChange", function(e, data){ wg.onDataChange(data); });
-         },
-
-         onDataChange: function(data) {
-            this.itemList = data.list;
             this.render();
          },
 
+         onDataChange: function(data) {
+            $.extend(this.options, data || {})
+            this.render();
+         },
+
+
          render: function() {
+            if(!this.options.list) { return; }
             // Build the html
-            var list = this.itemList;
+            var list = this.options.list;
       		var tip = $('.tipPopup');
       		var tipInner = $('.tipPopup .tipMid');
       		var offset, tWidth, tHeight, tLeft, tTop;

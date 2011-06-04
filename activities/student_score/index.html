@@ -18,7 +18,7 @@
 <script type="text/javascript" src="libs/jquery.studentScores.js"></script>
 <script type="text/javascript">
    var activity = jQuery("#a-0");
-   activity.bind("readResult", function(e, data){ activity.trigger("dataChange", data) });
+   activity.bind("readResult", function(e, data){ activity.trigger("dataChange", {scoreList: data}) });
    widged.dataread.getName(activity, '0AowayyeQN842dHJpUzlCZy1pV2N3Q1kwb1hsdzlxNWc', 'Lisa Shipe', 'D,E,F');
 	
     jQuery('#a-0').wgStudentScores({
