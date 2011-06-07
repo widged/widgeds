@@ -10,10 +10,67 @@
 ;(function(){
    
    var plugin = {
-      run: function(eventTarget, parserId, settings) {
-         var itemList, itemText, data, error;
-         var eventTarget = $(eventTarget);
+      run: function(selector, typeId, data) {
+         this.printout = [];
+         this.printout[selector] = data;
+         $(selector).bind('click',function() { plugin.onClick(typeId, data) });
+      },
+   
+      onClick: function(typeId, data) {
+         var error = null;
+         switch(typeId)
+         {
+              case 'itemList':
+                 data = plugin.printedItemList(data);
+                 break;
+              default:
+                 data = null;
+                 error = {msg: 'content type unknown: ' + typeId};
+                 break;
+         }
+         /*
+         var $element = $(selector);
+         if(error) {
+            $element.trigger('printError',error);
+         } else {
+            $element.trigger('printResult',data);
+         } 
+         */         
+         
+      },
       
+      // ################
+      // ### Parsers
+      // ################
+
+      // ### element list
+      printedItemList: function(itemList, parserSettings) {
+         var list = itemList;
+         if(list == undefined) { return; }
+         var selectHtml = '';
+         var el = $('<div/>');
+         el.registerCorrect = function(isCorrect) {  }
+         for (var i in list) {
+            var item = list[i];
+            var itemEl = $('<div style="margin-left: 21px;padding-left:0px;">' + item.html + '<br/></div>');
+            
+            var optionList = item.options;
+            var optionHtml = "";
+            for (var o in optionList) {
+               var opt = optionList[o];
+               optionHtml += '<li>' + opt.html + '</li>';
+            }
+            itemEl.append("<ul>" + optionHtml + "</ul>");
+            el.append(itemEl);
+         }
+         
+        var thePopup = window.open( '', "Activity Printout", "menubar=0,location=0,height=700,width=700" );
+        var $page = $('<div style=""/>').appendTo(thePopup.document.body);
+        $page.append(el);
+//        thePopup.print();
+         return el;     
+      }
+
       
    };
 

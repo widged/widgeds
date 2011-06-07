@@ -10,67 +10,67 @@
 ;(function($){
    
     var plugin = {
-       run: function(eventTarget, parserId, settings) {
+       run: function(selector, typeId, settings) {
+          settings = $.extend({trim: true}, settings);
           var itemList, itemText, data, error;
-          var eventTarget = $(eventTarget);
-
-          switch(parserId)
+          var $element = $(selector);
+          switch(typeId)
           {
                 case 'questionAnswer':
-                  itemText = this.getItemText(eventTarget, settings);
+                  itemText = this.getItemText($element, settings);
                   var item = plugin.parseItem(itemText, 0, settings);
                   data = {question: item.html, answer: item.options[0].html}
                   break;
                 case 'singleItem':
-                   itemText = this.getItemText(eventTarget, settings);
+                   itemText = this.getItemText($element, settings);
                    data = {item: plugin.parseItem(itemText, 0, settings)};
                    break;
                case 'itemList':
-                  itemList = this.getItemList(eventTarget, settings);
+                  itemList = this.getItemList($element, settings);
                   data = {list: plugin.parseItemList(itemList, settings)};
                   break;
                case 'inlineList':
-                  itemText = this.getItemText(eventTarget, settings);
+                  itemText = this.getItemText($element, settings);
                   data = {list: plugin.parseInlineList(itemText, settings)};
                   break;
                case 'dataSeries':
-                  itemList = this.getItemList(eventTarget, settings);
+                  itemList = this.getItemList($element, settings);
                   data = {list: plugin.parseDataSerie(itemList, settings)};
                   break;
                case 'words':
-                  itemText = this.getItemText(eventTarget, settings);
+                  itemText = this.getItemText($element, settings);
                   data = {list: plugin.parseWords(itemText, settings)};
                   break;
                default:
                   data = null;
-                  error = {msg: 'parser not found: ' + parserId};
+                  error = {msg: 'parser not found: ' + typeId};
                   break;
           }
           if(error) {
-             $(eventTarget).trigger('parseError',error);
+             $element.trigger('parseError',error);
           } else {
-             $(eventTarget).trigger('parseResult',data);
+             $element.trigger('parseResult',data);
           }          
        },
        
-       getItemList: function(eventTarget, settings) {
+       getItemList: function($element, settings) {
           if(settings && settings.itemList) {
              return settings.itemList;
           }
 
           var list = [];
-          eventTarget.children('p').each(function(i) {
+          $element.children('p').each(function(i) {
               list.push($(this).html());
          });
          return list;
        },
 
-       getItemText: function(eventTarget, settings) {
+       getItemText: function($element, settings) {
           if(settings && settings.text) {
              return settings.text;
           }
 
-         return eventTarget.html();
+         return $element.html();
        },
 
        // ################
@@ -144,7 +144,7 @@
           settings = $.extend({answerMarker: "="}, settings);
           var arr = str.split(settings.answerMarker);
           if(arr[0]) { item.html = arr[0]; }
-          if(settings.trim) { item.html = this.trim(item.html); }
+          if(settings.trim == true) { item.html = this.trim(item.html); }
           if(!arr[0] || !arr[1]) { return item }
           arr = String(arr[1]).split("#");
           if(arr[0]) { item.options = item.options.concat(this.parseItemOptions(arr[0], true, settings)) };

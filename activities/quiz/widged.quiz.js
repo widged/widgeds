@@ -53,7 +53,7 @@
      */
     $wg = function(e, o) {
         this.options    = $.extend({}, defaults, o || {});
-        this.container   = $(e);
+        this.$container   = $(e);
         this.setup();
     };
     
@@ -76,7 +76,7 @@
          */
          setup: function() {
             var wg = this;
-            this.container.bind("dataChange", function(e, data){ wg.onDataChange(data); });
+            this.$container.bind("dataChange", function(e, data){ wg.onDataChange(data); });
             this.render();
          },
 
@@ -95,8 +95,8 @@
             this.score = {answered: [], correctIndices: [], incorrectIndices: []};
             this.gameData = {timeStart: null, answeredQty: 0, answerQty: list.length};
 
-            this.container.html('');
-            this.container.css({'line-height': 1.5});
+            this.$container.html('');
+            this.$container.css({'line-height': 1.5});
             for(var i in list)
             {
                var item = list[i];
@@ -126,7 +126,7 @@
                }
                item.el = el;
                itemEl.append(el);
-               this.container.append(itemEl);
+               this.$container.append(itemEl);
             }
             
             var buttonText = 'Check';
@@ -136,7 +136,7 @@
               { script: this }, // pass in data
               function(eventObject) {  eventObject.data.script.onCheckClick(); }
             );                 
-            this.container.append(el);
+            this.$container.append(el);
          },
          
          

@@ -89,6 +89,10 @@
             $.extend(this.options, data || {})
             this.render();
          },
+         
+         setData: function(data) {
+            console.log('[racingCar.setData]');
+         },
 
 
          render: function() {
