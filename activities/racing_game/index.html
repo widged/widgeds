@@ -33,15 +33,24 @@
     <p class="item">2 + 7 = 9 # 5 | 10 | 11</p>
     <p class="item">6 + 8 = 14 # 12 | 15 | 10</p>
   </div>
+  <div id="a-0-css" style="display:none;">
+ 		#a-0 {     
+ 			background-color: #FF0000; 
+ 		}  
+  </div>
+  <div id="a-0-notification" style="margin:3px 16px 3px 0px;padding:6px 6px; background-color: #F2F2F2;border: 1px solid #CCC;max-height: 160px;overflow: auto;"></div>
   <button id="a-0-printout">printout</button>
   
 <script type="text/javascript" src="../../adapters/parser.js"></script>
 <script type="text/javascript" src="../../adapters/printcopy.js"></script>
+<script type="text/javascript" src="../../adapters/notification.js"></script>
 <script type="text/javascript" src="widged.racingCar.js"></script>
 <script language="JavaScript" type="text/javascript">
 
 //<![CDATA[
 <!--
+//  jQuery('head').append('<style type="text/css">' + jQuery('#a-0-css').text() + '</style>'); 
+//  jQuery('head').append('<link rel="stylesheet" href="../../adapters/notification.css" type="text/css" />'); 
   jQuery(".wg-racingCar").wgRacingCar(
       {
      		minimumQuestionQty: 10,
@@ -56,7 +65,12 @@
  	jQuery("#a-0").bind("parseResult", function(e, data){ 
  	   jQuery("#a-0").trigger("dataChange", {list: data.list});  
    	widged.printcopy.run("#a-0-printout", "itemList", data.list);
+ 	   jQuery("#a-0").trigger("notify", {type: 0,msg: "game loaded"});  
+ 	   jQuery("#a-0").trigger("notify", {type: 1,msg: "success"});  
+ 	   jQuery("#a-0").trigger("notify", {type: 2,msg: "uh oh"});  
+   	
  	});
+	widged.notification.run("#a-0", 'itemList');
 	widged.parser.run("#a-0", 'itemList');
 //-->
 //]]>
