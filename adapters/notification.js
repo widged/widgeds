@@ -20,7 +20,6 @@
           hideEvent:"click"
        },
        showMessage: function(e, data) {
-         console.log("[showMessage]", e, data); 
          var sel = "#" + e.target.id + "-notification";
          var $box = $(sel);
          var $el = $("<div/>")
@@ -39,7 +38,7 @@
                $el.css({"background-color":"#FFD9DA","border-color":"#F05258"}); // red
                break;
             default:
-               $el.css({"background-color":"#FFFFFF","border-color":"#4C4C4C"}); // gray
+               $el.css({"background-color":"#FFFFFF","border-color":"#7F7F7F"}); // gray
                break;
          }
          $el.bind(plugin.settings["hideEvent"],function(){
