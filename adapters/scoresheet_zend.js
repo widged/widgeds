@@ -13,13 +13,13 @@
        hookMap: {},
 
        hook: function (adaptersel, activitySel) {
-          plugin.hookMap[activitySel] = adaptersel; 
+          plugin.hookMap[activitySel] = adaptersel;
           var $activity = $(activitySel);
-          $activity.bind("complete", function(e, data){ plugin.spreadsheetWrite(activitySel, data) });
+          $activity.bind("complete", function(e, data){ plugin.spreadsheetWrite(activitySel, data); });
        },
        
        spreadsheetWrite: function(activitySel, data) {
-          // when using this.hookMap, the object content is lost after the binding. 
+          // when using this.hookMap, the object content is lost after the binding.
           // coreboard.hookMap maintains the value over binding (static variable);
           var $helper = $(plugin.hookMap[activitySel]);
           var $activity = $(activitySel);
@@ -28,11 +28,10 @@
           $form.append('<input type="text" name="p" placeholder="player name..." /><input type="submit" value="Save" />');
           $form.submit(function(event) {
             /* stop form from submitting normally */
-            event.preventDefault(); 
+            event.preventDefault();
             /* get some values from elements on the page: */
                 var $form = $( this ),
-                    playerName = $form.find( 'input[name="p"]' ).val(),
-                    url = $form.attr( 'action' );
+                    playerName = $form.find( 'input[name="p"]' ).val();
 
             /* Send the data using post and put the results in a div */
             var url = $(location).attr('href');
@@ -50,7 +49,7 @@
     };
 
     if(!window.widged){window.widged={};}//We create a shortcut for our framework, we can call the methods by $$.method();
-    $.extend(true, window.widged, {spreadsheet_save: plugin});
+    $.extend(true, window.widged, {scoresheet_zend: plugin});
 })(jQuery);
 
 

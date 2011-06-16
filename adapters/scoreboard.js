@@ -14,7 +14,7 @@
 
        hook: function (boardSel, widgedSel) {
           var $activity = $(widgedSel);
-          if(!plugin.hookMap[$activity]) { plugin.hookMap[$activity] = [] }; 
+          if(!plugin.hookMap[$activity]) { plugin.hookMap[$activity] = []; }
           plugin.hookMap[$activity].push(boardSel); 
 
           $activity.bind("score.change", function(e, status){
@@ -22,11 +22,11 @@
           });
        },
        
-       updateFeedback: function(wgEl, params) {
+       updateFeedback: function(selector, params) {
           // when using this.hookMap, the object content is lost after the binding. 
           // coreboard.hookMap maintains the value over binding (static variable);
-          var wgEl = $(wgEl);
-          var boardList = plugin.hookMap[wgEl];
+          var $wgEl = $(selector);
+          var boardList = plugin.hookMap[$wgEl];
           for(var i = 0; i < boardList.length; i++) {
              var boardEl = $(boardList[i]);
              
@@ -35,13 +35,13 @@
              {
                 var s = Math.floor(params.timeElapsed / 1000);
           		// format time like hh:mm:ss
-          		var h = parseInt(s / 3600), m = parseInt((s - h * 3600) / 60); s = s % 60;
+          		var h = parseInt(s / 3600, 10), m = parseInt((s - h * 3600) / 60, 10); s = s % 60;
           		var formatted = (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
                 msg += '&nbsp;&nbsp;&nbsp;Completion time: ' + formatted;
 
              }
              $(boardEl).html(msg);
-          };
+          }
        }
     };
 

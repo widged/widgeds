@@ -19,7 +19,7 @@
                 case 'questionAnswer':
                   itemText = this.getItemText($element, settings);
                   var item = plugin.parseItem(itemText, 0, settings);
-                  data = {question: item.html, answer: item.options[0].html}
+                  data = {question: item.html, answer: item.options[0].html};
                   break;
                 case 'singleItem':
                    itemText = this.getItemText($element, settings);
@@ -86,7 +86,7 @@
              item = itemList[i];
              arr = item.split("=");
              list.push([parseInt(arr[1],10), arr[0]]);
-          };
+          }
           return list;
        },
        
@@ -129,7 +129,7 @@
              str = itemList[i];
              list.push(wg.parseItem(str, itemIdx, settings));
              itemIdx++;
-          };
+          }
           return list;
        },
 
@@ -145,11 +145,11 @@
           var arr = str.split(settings.answerMarker);
           if(arr[0]) { item.html = arr[0]; }
           if(settings.trim == true) { item.html = this.trim(item.html); }
-          if(!arr[0] || !arr[1]) { return item }
+          if(!arr[0] || !arr[1]) { return item; }
           arr = String(arr[1]).split("#");
-          if(arr[0]) { item.options = item.options.concat(this.parseItemOptions(arr[0], true, settings)) };
-          if(arr[1]) { item.options = item.options.concat(this.parseItemOptions(arr[1], false, settings)) };
-          item.options.sort(function(a,b){ return 0.5 - Math.random()});
+          if(arr[0]) { item.options = item.options.concat(this.parseItemOptions(arr[0], true, settings)); }
+          if(arr[1]) { item.options = item.options.concat(this.parseItemOptions(arr[1], false, settings)); }
+          item.options.sort(function(a,b){ return 0.5 - Math.random(); });
           return item;
        },
        

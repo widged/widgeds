@@ -11,7 +11,7 @@
 
    <script type="text/javascript" src="../../adapters/parser.js"></script>
    <script type="text/javascript" src="../../adapters/scoreboard.js"></script>
-   <script type="text/javascript" src="../../adapters/spreadsheet_save.js"></script>
+   <script type="text/javascript" src="../../adapters/scoresheet_zend.js"></script>
    <script type="text/javascript" src="widged.matching.js"></script>
 
    <div class="wg-matching" id="a-0" style="width:300px;padding: 9px 0px;">
@@ -74,7 +74,7 @@
       var activity = jQuery("#a-2");
 
       widged.scoreboard.hook("#a-2-scoreBox", "#a-2");
-      widged.spreadsheet_save.hook("#a-2-scoreSave", "#a-2");
+      widged.scoresheet_zend.hook("#a-2-scoreSave", "#a-2");
 
       jQuery("#a-2").bind("parseResult", function(e, data){ jQuery("#a-2").trigger("dataChange", {list: data.list});  });
       widged.parser.run("#a-2", 'itemList',  {answerMarker: '=='});
