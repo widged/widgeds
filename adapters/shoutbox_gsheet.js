@@ -9,17 +9,30 @@
 */
 ;(function(){
    
+   
    var plugin = {
-      run: function(selector) {
+      run: function(selector, config) {
+      	plugin.options = $.extend({}, plugin.defaults, config);
       	plugin.render(selector);
       },
-   
+      
+      defaults: {
+	   	form: {
+		   	"formkey": "dFNyT2pGaG84QUdCcF9rVE56LUYxWGc6MQ",
+		    "sheetkey": "0AowayyeQN842dFNyT2pGaG84QUdCcF9rVE56LUYxWGc",
+	   		"fields": {"alias": "entry.2.single", "text" : "entry.0.single"},
+	   	},
+	   	css: {'font-family': 'Verdana', 'font-size': '9px'}
+	   },
+
+  
 	render: function(selector) {
 		var $el = $(selector);
-		$el.append('name: <input type="alias" id="alias" size="16" />');
-		$el.append('text: <input type="text" id="txt" size="40" />');
-		$el.append($('<button id="send">send</button>').click(function () {
-			var text = $("#txt").val(); $("#txt").val("");
+		$el.css(plugin.options.css);
+		$el.append('name: <input type="text" id="alias" size="16" /> ');
+		$el.append('text: <input type="text" id="text" size="40" /> ');
+		$el.append($('<button id="send">send</button> ').click(function () {
+			var text = $("#text").val(); $("#text").val("");
 			var alias = $("#alias").val(); 
 			plugin.postData(alias, text);
 			plugin.reloadChatlog();
@@ -32,13 +45,14 @@
 	},
 	
 	postData: function(alias, text) {
-	    var param =     	{
-	    		"formkey": "dFNyT2pGaG84QUdCcF9rVE56LUYxWGc6MQ",
-	    		"entry.2.single": alias,
-	    		"entry.0.single": text,
+	    var param =   {
+	    		"formkey": plugin.options.form.formkey,
 	    		"pageNumber": 0,
 	    		"backupCache": ""
 	    	} 
+	    param[plugin.options.form.fields["alias"]] = alias;	
+	    param[plugin.options.form.fields["text"]] = text;
+	    console.log(text, param);	
 	
 		var jqxhr = $.get("https://spreadsheets.google.com/formResponse" + "?" + $.param(param), function() {
 			alert("success");
@@ -49,7 +63,7 @@
 	
 	reloadChatlog: function () {
 	  var param = {
-	    key: "0AowayyeQN842dFNyT2pGaG84QUdCcF9rVE56LUYxWGc",
+	    key: plugin.options.form.sheetkey,
 	    pub: 1,
 	    gid: 0,
 	    tq: "SELECT A, B, D ORDER BY A DESC LIMIT 32",

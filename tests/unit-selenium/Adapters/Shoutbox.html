@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<head>
+  <title>Shoutbox adapter</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="chatWindow"></div>
+   
+<script type="text/javascript" src="../../../adapters/shoutbox_gsheet.js"></script>
+<script language="JavaScript" type="text/javascript">
+	widged.shoutbox.run("#chatWindow", {
+	   	form: {
+		   	"formkey": "dFNyT2pGaG84QUdCcF9rVE56LUYxWGc6MQ",
+		    "sheetkey": "0AowayyeQN842dFNyT2pGaG84QUdCcF9rVE56LUYxWGc",
+	   		"fields": {alias: "entry.2.single", text : "entry.0.single"},
+	   	},
+	   	css: {'font-family': 'Helvetica', 'font-size': '14px'}
+	   });
+	
+</script>  
+</body>
+</html>
