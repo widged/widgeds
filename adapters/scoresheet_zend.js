@@ -10,19 +10,10 @@
 
 ;(function($){
     var plugin = {
-       hookMap: {},
 
-       hook: function (adaptersel, activitySel) {
-          plugin.hookMap[activitySel] = adaptersel;
-          var $activity = $(activitySel);
-          $activity.bind("complete", function(e, data){ plugin.spreadsheetWrite(activitySel, data); });
-       },
-       
-       spreadsheetWrite: function(activitySel, data) {
-          // when using this.hookMap, the object content is lost after the binding.
-          // coreboard.hookMap maintains the value over binding (static variable);
-          var $helper = $(plugin.hookMap[activitySel]);
-          var $activity = $(activitySel);
+       update: function(selector, data, uid) {
+          var $helper = $(selector);
+
           $form = $('<form action="/">');
           $form.prepend('Save data: ');
           $form.append('<input type="text" name="p" placeholder="player name..." /><input type="submit" value="Save" />');
@@ -35,7 +26,7 @@
 
             /* Send the data using post and put the results in a div */
             var url = $(location).attr('href');
-            $.extend(data,{url: url, user: playerName, id: $activity.attr('id'), title: $activity.attr('title') });
+            $.extend(data,{url: url, user: playerName, id: uid });
             $.post( "http://zend.widged.com/gdata/Zend/Spreadsheet_Leaderboard.php", data,   
                function( data ) { $form.append(' saved'); }
             );

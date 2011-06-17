@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<head>
+  <title>Leaderboard gsheet adapter</title>
+</head>
+<body>
+
+   <p>Drag and drop the two red magnets into the green box. Upon completion, you will get the opportunity to save your score.</p>
+
+   <script type="text/javascript" src="http://jsdo.it/lib/jquery-1.5.1.min/js"></script>
+   <script type="text/javascript" src="http://jsdo.it/lib/jquery-ui-1.8.1.min/js"></script>
+   <script type="text/javascript" src="http://jsdo.it/widged/activity-matching/js"></script>
+   <script type="text/javascript" src="http://jsdo.it/widged/adapter-parser/js"></script>
+   <script type="text/javascript" src="http://jsdo.it/widged/adapter-scoresheet_zend/js"></script>
+
+     <div id="a-2" class="wg-matching" style="width:300px;padding: 9px 0px;" title="matching">
+         <p class="item"><img src="http://widged.com/widgeds/pix/dragdrop/img1.png" width="100" />==I am red|I have long legs</p>
+     </div>
+
+     <div id="a-2-scoreSave" style="width:300px;background-color:#F9F9F9;border: 1px solid #999;margin: 6px 0px;padding:6px;">Upon completion, save shows up here</div>
+   <div>Scores are saved to this <a href="https://spreadsheets1.google.com/a/learning-digital.com/spreadsheet/pub?key=0AowayyeQN842dG5NNmVpejdWMnpVdnB6VGF5MDFYZEE&single=true&gid=0&output=html" target="_blank">google spreadsheet</a> via a Google Form.</div>
+
+
+      <script language="JavaScript" type="text/javascript">
+      //<![CDATA[
+      //<--
+         jQuery("#a-2").wgMatching();
+         jQuery("#a-2").bind("parseResult", function(e, data){ jQuery("#a-2").trigger("dataChange", {list: data.list});  });
+         widged.parser.run("#a-2", 'itemList',  {answerMarker: '=='});
+
+         jQuery("#a-2").bind("complete",    function(e, data) { widged.leaderboard_gsheet.update("#a-2-scoreSave", data) });
+         widged.leaderboard_gsheet.setup("#a-2-scoreSave", {uid: 'matching'});
+
+      //-->
+      //]]>
+      </script>
+
+
+   <br /><br />
+   To use the leaderboard, simply trigger this event at an appropriate time in your game / activity code:
+
+   <pre>jQuery([activitySelector]).trigger('complete',[{tried: [number] , correct: [number], progress: [number], time: [number], errorList: [text]}]);</pre>
+
+</body>
+</html>

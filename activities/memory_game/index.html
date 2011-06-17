@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
 <head>
   <title>Memory Game Widged</title>
-  <script type="text/javascript" src="../../../editors/jQuery/jquery-1.5.1.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 </head>
 <body>
   <h1>Memory Game</h1>
@@ -46,7 +46,7 @@
          cardMatch:    '<img src="assets/card_done.png"/>',
       }
     );
-	widged.scoreboard.hook("#a-0-scoreboard", "#a-0");
+   jQuery("#a-0").bind("scoreChange", function(e, data){ widged.scoreboard.update("#a-0-scoreboard", data)});
 	jQuery("#a-0").bind("parseResult", function(e, data){ jQuery("#a-0").trigger("dataChange", {list: data.list});  });
 	widged.parser.run("#a-0", 'itemList',  {answerMarker: '=='});
 //-->

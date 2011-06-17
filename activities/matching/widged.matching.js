@@ -181,7 +181,7 @@
            broadcastScore: function() {
               var msElapsed = (new Date).getTime() - this.gameData.timeStart;
               this.gameData.timeElapsed = msElapsed;
-              this.container.trigger('score.change',[{answerQty: this.gameData.answerQty, answeredQty: this.gameData.answeredQty, timeElapsed: this.gameData.timeElapsed}]);
+              this.container.trigger('scoreChange',[{answerQty: this.gameData.answerQty, answeredQty: this.gameData.answeredQty, timeElapsed: this.gameData.timeElapsed}]);
            }
            // ##############################################
            //    broadcasting >>>

@@ -10,38 +10,19 @@
 
 ;(function($){
     var plugin = {
-       hookMap: {},
 
-       hook: function (boardSel, widgedSel) {
-          var $activity = $(widgedSel);
-          if(!plugin.hookMap[$activity]) { plugin.hookMap[$activity] = []; }
-          plugin.hookMap[$activity].push(boardSel); 
-
-          $activity.bind("score.change", function(e, status){
-             plugin.updateFeedback(e.target, status);
-          });
-       },
-       
-       updateFeedback: function(selector, params) {
-          // when using this.hookMap, the object content is lost after the binding. 
-          // coreboard.hookMap maintains the value over binding (static variable);
-          var $wgEl = $(selector);
-          var boardList = plugin.hookMap[$wgEl];
-          for(var i = 0; i < boardList.length; i++) {
-             var boardEl = $(boardList[i]);
-             
-             var msg = 'Answered: ' + params.answeredQty + "/" + params.answerQty;
-             if(params.answeredQty == params.answerQty)
+       update: function(selector, data) {
+             var $boardEl = $(selector);
+             var msg = 'Answered: ' + data.answeredQty + "/" + data.answerQty;
+             if(data.answeredQty == data.answerQty)
              {
-                var s = Math.floor(params.timeElapsed / 1000);
+                var s = Math.floor(data.timeElapsed / 1000);
           		// format time like hh:mm:ss
           		var h = parseInt(s / 3600, 10), m = parseInt((s - h * 3600) / 60, 10); s = s % 60;
           		var formatted = (h < 10 ? '0' + h : h) + ':' + (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
                 msg += '&nbsp;&nbsp;&nbsp;Completion time: ' + formatted;
-
              }
-             $(boardEl).html(msg);
-          }
+             $boardEl.html(msg);
        }
     };
 

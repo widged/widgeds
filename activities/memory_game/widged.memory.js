@@ -180,7 +180,7 @@
 
          broadcastScore: function() {
             var msElapsed = (new Date).getTime() - this.gameData.timeStart;
-            this.container.trigger('score.change',[{board: this.options.scoreBoard ,answerQty: this.gameData.answerQty, answeredQty: this.gameData.answeredQty, timeElapsed: msElapsed}]);
+            this.container.trigger('scoreChange',[{board: this.options.scoreBoard ,answerQty: this.gameData.answerQty, answeredQty: this.gameData.answeredQty, timeElapsed: msElapsed}]);
          }
  
          // ##############################################
