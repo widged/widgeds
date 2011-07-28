@@ -7,7 +7,7 @@
  Built on top of the widged library
  http://github.com/widged/widgeds
 */
-;(function(){
+;(function($){
    
    
    var plugin = {
@@ -20,7 +20,7 @@
 	   	form: {
 		   	"formkey": "dFNyT2pGaG84QUdCcF9rVE56LUYxWGc6MQ",
 		    "sheetkey": "0AowayyeQN842dFNyT2pGaG84QUdCcF9rVE56LUYxWGc",
-	   		"fields": {"alias": "entry.2.single", "text" : "entry.0.single"},
+	   		"fields": {"alias": "entry.2.single", "text" : "entry.0.single"}
 	   	},
 	   	css: {'font-family': 'Verdana', 'font-size': '9px'}
 	   },
@@ -49,7 +49,7 @@
 	    		"formkey": plugin.options.form.formkey,
 	    		"pageNumber": 0,
 	    		"backupCache": ""
-	    	} 
+	    };
 	    param[plugin.options.form.fields["alias"]] = alias;	
 	    param[plugin.options.form.fields["text"]] = text;
 	    console.log(text, param);	
@@ -57,7 +57,7 @@
 		var jqxhr = $.get("https://spreadsheets.google.com/formResponse" + "?" + $.param(param), function() {
 			alert("success");
 		})
-		.complete(function(data) { plugin.reloadChatlog(); })
+		.complete(function(data) { plugin.reloadChatlog(); });
 	
 	},
 	
@@ -101,6 +101,6 @@
 
    if(!window.widged){window.widged={};}//We create a shortcut for our framework, we can call the methods by $$.method();
    $.extend(true, window.widged, {shoutbox: plugin});
-})();
+})(jQuery);
 
 	

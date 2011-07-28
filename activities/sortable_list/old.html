@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<head>
+  <title>Sortable List Widged</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js" ></script>
+</head>
+<body>
+
+  <table id="table-1" cellspacing="0" cellpadding="2">
+  <tr id="r3"><td>toru</td></tr>
+  <tr id="r8"><td>waru</td></tr>
+  <tr id="r4"><td>whā</td></tr>
+  <tr id="r5"><td>rimal</td></tr>
+  <tr id="r1"><td>kotahi</td></tr>
+  <tr id="r10"><td>tekau</td></tr>
+  <tr id="r6"><td>ono</td></tr>
+  <tr id="r2"><td>rua</td></tr>
+  <tr id="r7"><td>whitu</td></tr>
+  <tr id="r9"><td>iwa</td></tr>
+  </table>
+  <script src="http://widged.com/widgeds/v2/third_party/jquery.tablednd_0_5.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  //<![CDATA[
+  $(document).ready(function() {
+      // Initialise the table
+      $("#table-1").tableDnD({
+        onDrop: function(table, row) {
+                    var rows = table.tBodies[0].rows;
+                    var rowStr = "";
+                    for (var i=0; i<rows.length; i++) {
+                        rowStr += rows[i].id+" ";
+                    }
+                    if(rowStr == "r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 ") { alert('correct'); }
+
+        	    }
+      });
+  });
+  //]]>
+  </script>
+  
+	<div class="demo">
+	<ul id="sortable">
+	<li class="ui-state-default"><span class="icon-arrow">.</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non leo non eros dignissim feugiat nec at dolor. In justo eros, condimentum sed laoreet nec, mollis sit amet leo. Proin vel nisi augue. Integer ut nibh vitae velit dignissim commodo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at justo nunc, eu dignissim ante. Praesent blandit urna consequat eros molestie quis interdum lorem eleifend. </li>
+	<li class="ui-state-default"><span class="icon-arrow">.</span>Nulla a dolor risus, et ultrices nisl. Sed ac risus elit. Nullam in ligula justo, sit amet sodales lectus. Nam sed dapibus urna.</li>
+	<li class="ui-state-default"><span class="icon-arrow">.</span>Item 3</li>
+	<li class="ui-state-default"><span class="icon-arrow">.</span>Item 4</li>
+	<li class="ui-state-default"><span class="icon-arrow">.</span>Item 5</li>
+	<li class="ui-state-default"><span class="icon-arrow">.</span>Item 6</li>
+	<li class="ui-state-default"><span class="icon-arrow">.</span>Item 7</li>
+	</ul>
+	</div>
+
+	<script type="text/javascript">
+	//<![CDATA[
+	                jQuery( "#sortable" ).sortable();
+	                jQuery( "#sortable" ).disableSelection();
+	                jQuery( "#sortable" ).css({
+	                      'list-style-type': 'none',
+	                     'margin': 0, 'padding': 0,
+	                    'width': '60%'
+	                });
+	                jQuery( "#sortable>li" ).css({
+	                     'margin': '0 3px 3px 3px', 
+	                     'padding': '0.4em',
+	                     'padding-left': '1.5em',
+	                     'font-size': '1.4em',
+	                     'min-height': '18px',
+	                     'border': '1px solid #FFE180',
+	                     'background-color': '#FFF7C2'
+
+	                });
+	                jQuery( "#sortable>li>span" ).css({
+	                     'position': 'absolute',
+	                     'margin-left': '-1.3em'
+	                });
+	                jQuery( "#sortable>li>span.icon-arrow" ).css({
+	                     'background-image': 'url(assets/222222_256x240_icons_icons.png)',
+	                     'background-position': '-128px -48px',
+	                     'color': '#FFF7C2',
+	                     'margin-top': '2px',
+	                     'width': '16px', 
+	                     'height': '16px' 
+	                });
+	//]]>
+	</script>
+	</body>
+</html>
+

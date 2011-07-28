@@ -13,14 +13,17 @@
    var plugin = {
       configMap: {},
       setup: function (selector, config) {
-        plugin.configMap[selector] = $.extend({}, plugin.defaults, config);
+        var options = $.extend({}, plugin.defaults, config);
+        if(options.form.fields == undefined) { options.form.fields = plugin.defaults.form.fields; }
+        console.log("[options]", options);
+        plugin.configMap[selector] = options;
         plugin.render(selector);
       },
 
       defaults: {
 	   	form: {
 		   	"formkey": "dG5NNmVpejdWMnpVdnB6VGF5MDFYZEE6MQ",
-		    "sheetkey": "0AowayyeQN842dG5NNmVpejdWMnpVdnB6VGF5MDFYZEE",
+		      "sheetkey": "0AowayyeQN842dG5NNmVpejdWMnpVdnB6VGF5MDFYZEE",
 	   		"fields": {
                "userUid":         "entry.0.single",
                "activityUrl":     "entry.1.single",
@@ -80,7 +83,7 @@
 		param[options.form.fields["errorList"]]       = data.errorList;
 	
 		var jqxhr = $.get("https://spreadsheets.google.com/formResponse" + "?" + $.param(param), function() {
-			alert("success");
+			// alert("success");
 		})
 		.complete(function(data) { plugin.reloadBoard(selector); });
 	

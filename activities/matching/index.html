@@ -94,8 +94,6 @@
 			widged.parser.run("#a-1", 'itemList', { answerMarker: '==' });
 
 			// Activity #2
-			var activity = jQuery("#a-2");
-
 			jQuery("#a-2").bind("parseResult", function(e, data) { jQuery("#a-2").trigger("dataChange", { list: data.list }); });
 			jQuery("#a-2").bind("scoreChange", function(e, data) { widged.scoreboard.update("#a-2-scoreBox", data) });
 			jQuery("#a-2").bind("complete",    function(e, data) { widged.leaderboard_gsheet.update("#a-2-scoreSave", data) });
