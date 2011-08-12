@@ -1,0 +1,5 @@
+This is the timeline system for DigitalNZ searches (http://digitalnz.org).
+
+It uses a series of API calls to populate the Simile timeline (http://www.simile-widgets.org/timeline/).
+
+More complete README coming soon.

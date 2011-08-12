@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jFlickrFeed Plugin</title>
+		<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--> 
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script src="jflickrfeed.min.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<h1>jFlickrFeed Plugin</h1>
+			
+			
+<ul id="basicuse" class="thumbs"></ul>
+
+<script language="JavaScript" type="text/javascript">
+
+      $(document).ready(function(){
+
+        $('head').append('<link rel="stylesheet" href="style.css" type="text/css" />');
+      	$('#basicuse').jflickrfeed({
+      		limit: 14,
+      		qstrings: {
+      			id: '37304598@N02'
+      		},
+      		itemTemplate: '<li><a href="{{image_b}}"><img src="{{image_s}}" alt="{{title}}" /></a></li>'
+      	});
+
+      });
+</script>			
+</div>
+	</body>
+</html>
